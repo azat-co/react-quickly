@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="react.js"></script>
+    <script src="JSXTransformer.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/jsx">
+      var Content = React.createClass({
+        componentDidMount: function(e){
+          console.log(React.findDOMNode(this))
+        },
+        render: function() {
+          return (
+            <div/>
+          );
+        }
+      })
+
+      React.render(
+        <Content />,
+        document.getElementById('content')
+      );
+    </script>
+  </body>
+</html>
