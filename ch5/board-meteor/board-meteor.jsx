@@ -8,8 +8,11 @@ var Messages = new Meteor.Collection("messages")
 var MessageBoard = React.createClass({
   mixins:[ReactMeteor.Mixin],
   getMeteorState: function(){
+    var name = ''
+    if (Session.get('name')) name = Session.get('name')
     return {
-      messages: Messages.find({}).fetch().reverse()
+      messages: Messages.find({}).fetch().reverse(),
+      name: name
     }
   },
   startMeteorSubscriptions: function() {
@@ -17,13 +20,44 @@ var MessageBoard = React.createClass({
   },
   addMessage: function(message){
     var messages = this.state.messages
+    Session.set('name', message.name)
     Messages.insert(message)
   },
   render: function(){
     return (
       <div>
-        <NewMessage messages={this.state.messages} addMessageCb={this.addMessage} />
+        <NewMessage messages={this.state.messages} addMessageCb={this.addMessage} username={this.state.name}/>
         <MessageList messages={this.state.messages} />
+      </div>
+    )
+  }
+})
+
+
+var NewMessage = React.createClass({
+  addMessage: function(){
+    var fD = React.findDOMNode
+    this.props.addMessageCb({
+      name: fD(this.refs.name).value,
+      message: fD(this.refs.message).value
+    })
+    // fD(this.refs.name).value = ''
+    fD(this.refs.message).value = ''
+  },
+  keyup: function (e) {
+    if (e.keyCode == 13) return this.addMessage()
+  },
+  render: function(){
+    console.log(this.props.username)
+    return (
+      <div className="row-fluid" id="new-message">
+        <div className="span12">
+          <form className="well form-inline" onKeyUp={this.keyup}>
+            <input type="text" name="username" className="input-small" placeholder="Azat" ref="name" defaultValue={this.props.username}/>
+            <input type="text" name="message" className="input-small" placeholder="Hello!" ref="message" />
+            <a id="send" className="btn btn-primary" onClick={this.addMessage}>POST</a>
+          </form>
+        </div>
       </div>
     )
   }
@@ -61,33 +95,6 @@ var MessageList = React.createClass({
 })
 
 
-var NewMessage = React.createClass({
-  addMessage: function(){
-    var fD = React.findDOMNode
-    this.props.addMessageCb({
-      name: fD(this.refs.name).value,
-      message: fD(this.refs.message).value
-    })
-    fD(this.refs.name).value = ''
-    fD(this.refs.message).value = ''
-  },
-  keyup: function (e) {
-    if (e.keyCode == 13) return this.addMessage()
-  },
-  render: function(){
-    return (
-      <div className="row-fluid" id="new-message">
-        <div className="span12">
-          <form className="well form-inline" onKeyUp={this.keyup}>
-            <input type="text" name="username" className="input-small" placeholder="Azat" ref="name"/>
-            <input type="text" name="message" className="input-small" placeholder="Hello!" ref="message" />
-            <a id="send" className="btn btn-primary" onClick={this.addMessage}>POST</a>
-          </form>
-        </div>
-      </div>
-    )
-  }
-})
 
 
 if (Meteor.isClient) {
