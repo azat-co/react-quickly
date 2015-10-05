@@ -12,12 +12,11 @@ var Content = React.createClass({
         <h1>Changing the State</h1>
         <p>This value is random: {this.state.a}</p>
       </div>
-    );
+    )
   }
 })
 
 React.render(
   <Content />,
   document.getElementById('content')
-);
-
+)

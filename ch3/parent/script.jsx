@@ -22,7 +22,7 @@ var Content = React.createClass({
         <br/>
         <Counter value={this.state.counter}/>
       </div>
-    );
+    )
   }
 })
 

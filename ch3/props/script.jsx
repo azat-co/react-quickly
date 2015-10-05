@@ -15,7 +15,7 @@ var Content = React.createClass({
       <div>
         <ClickCounterButton counter={this.state.counter} handler={this.click}/>
       </div>
-    );
+    )
   }
 })
 

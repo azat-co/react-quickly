@@ -10,7 +10,7 @@ var Content = React.createClass({
       <div>
         <button onClick={this.click}>Don't click me {this.state.counter} times! </button>
       </div>
-    );
+    )
   }
 })
 
@@ -18,4 +18,3 @@ React.render(
   <Content />,
   document.getElementById('content')
 );
-
