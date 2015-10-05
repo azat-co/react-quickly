@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script data-require="react@*" data-semver="0.13.3" src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/javascript">
+      var h1 = React.createElement('h1', null, 'Hello world!')
+      React.render(
+        h1,
+        document.getElementById('example')
+      );
+      // React.render(
+      //   React.createElement('h1', null, 'Hello world!'),
+      //   document.getElementById('example')
+      // );
+      //
+      // var h1 = React.createElement('h1', null, 'Hello world!')
+      // React.render(
+      //   React.createElement('div', null, h1, h1),
+      //   document.getElementById('example')
+      // );
+    </script>
+  </body>
+</html>
