@@ -21,6 +21,6 @@ var Content = React.createClass({
 })
 
 React.render(
-  <Content />,
+  <Book />,
   document.getElementById('content')
 )

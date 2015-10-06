@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="react.js"></script>
+    <script src="JSXTransformer.js"></script>
+    <link href="bootstrap.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/jsx">
+      var prompt = 'Please enter your email to win $1,000,000.'
+      var Content = React.createClass({
+        submit: function(e){
+          var emailAddress = this.refs.emailAddress
+          var comments = this.refs.comments
+          debugger
+          console.log(React.findDOMNode(emailAddress).value)
+          console.log(React.findDOMNode(comments).value)
+        },
+        render: function() {
+          return (
+            <div className="well">
+              <p>{prompt}</p>
+              <div className="form-group">
+                Email: <input ref="emailAddress" className="form-control" type="text" placeholder="hi@azat.co"/>
+              </div>
+              <div className="form-group">
+                Comments: <textarea ref="comments" className="form-control"  placeholder="I like your website!"/>
+              </div>
+              <div className="form-group">
+                <a className="btn btn-primary" value="Submit" onClick={this.submit}>Submit</a>
+              </div>
+            </div>
+          )
+        }
+      })
+
+      React.render(
+        <Content />,
+        document.getElementById('content')
+      )
+    </script>
+  </body>
+</html>

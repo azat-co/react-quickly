@@ -1,6 +1,6 @@
 var Button = React.createClass({
   getDefaultProps: function () {
-    return {buttonLabel: 'lorem ipsum'}
+    return {buttonLabel: 'Submit'}
   },
   render: function(){
     return <button >{this.props.buttonLabel}</button>
@@ -15,11 +15,11 @@ var Content = React.createClass({
         <Button />
         <Button />
       </div>
-    );
+    )
   }
 })
 
 React.render(
   <Content />,
   document.getElementById('content')
-);
+)

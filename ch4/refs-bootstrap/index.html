@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="react.js"></script>
+    <script src="JSXTransformer.js"></script>
+    <link href="bootstrap.css" type="text/css" rel="stylesheet"/>
+    <script src="bower_components/react-bootstrap/react-bootstrap.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/jsx">
+      var Button =  ReactBootstrap.Button,
+        Input = ReactBootstrap.Input,
+        Well = ReactBootstrap.Well
+      var prompt = 'Please enter your email to win $1,000,000.'
+      var Content = React.createClass({
+        submit: function(e){
+          var emailAddressNode = React.findDOMNode(this.refs.emailAddress)
+          var comments = React.findDOMNode(this.refs.comments)
+          debugger
+          console.log(this.refs.emailAddress.getValue())
+          console.log(this.refs.comments.getValue())
+          // window.emailAddressNode.getAttribute('type')
+          // window.emailAddressNode.classList
+          // window.emailAddressNode.childNodes
+        },
+        render: function() {
+          return (
+            <Well>
+              <p>{prompt}</p>
+              <div>
+                Email: <Input ref="emailAddress" type="text" placeholder="hi@azat.co"/>
+              </div>
+              <div>
+                Comments: <Input type="textarea" ref="comments"  placeholder="I like your website!"/>
+              </div>
+              <div>
+                <Button bsStyle="primary" onClick={this.submit}>Submit</Button>
+              </div>
+            </Well>
+          )
+        }
+      })
+
+      React.render(
+        <Content />,
+        document.getElementById('content')
+      )
+    </script>
+  </body>
+</html>
