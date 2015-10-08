@@ -1,25 +1,24 @@
-
-
-
-var ToolTip = React.createClass({
+var Tooltip = React.createClass({
   getInitialState: function() {
     return {
       opacity: false
     }
   },
   toggle: function(){
-    var n = this.getDOMNode()
+    console.log(this.state.opacity)
+    var tooltipNode = this.getDOMNode()
     this.setState({
       opacity: !this.state.opacity,
-      top: n.offsetTop,
-      left: n.offsetLeft
+      top: tooltipNode.offsetTop,
+      left: tooltipNode.offsetLeft
     })
   },
   render: function () {
     var style = {
+      zIndex: (this.state.opacity) ? 1000 : -1000,
       opacity: +this.state.opacity,
-      top: this.state.top +20,
-      left: this.state.left
+      top: this.state.top + 20,
+      left: this.state.left -30
     }
     return (
         <div style={{display: 'inline'}}>
@@ -40,22 +39,9 @@ var ToolTip = React.createClass({
 })
 
 React.render(<p>
-  <ToolTip text="Master Express.js—The Node.js Framework For Your Web Development">Pro Express.js</ToolTip> was published in 2014. It was one of the first books on v4.x. And it was my second book published with Apress
-    after <ToolTip text="Practical Node.js: Building Real-World Scalable Web Apps">Practical Node.js</ToolTip>.
-
-    <ToolTip text="Master Express.js—The Node.js Framework For Your Web Development">Pro Express.js</ToolTip> was published in 2014. It was one of the first books on v4.x. And it was my second book published with Apress
-      after <ToolTip text="Practical Node.js: Building Real-World Scalable Web Apps">Practical Node.js</ToolTip>.
-
-
-      <ToolTip text="Master Express.js—The Node.js Framework For Your Web Development">Pro Express.js</ToolTip> was published in 2014. It was one of the first books on v4.x. And it was my second book published with Apress
-        after <ToolTip text="Practical Node.js: Building Real-World Scalable Web Apps">Practical Node.js</ToolTip>.
-
-
-        <ToolTip text="Master Express.js—The Node.js Framework For Your Web Development">Pro Express.js</ToolTip> was published in 2014. It was one of the first books on v4.x. And it was my second book published with Apress
-          after <ToolTip text="Practical Node.js: Building Real-World Scalable Web Apps">Practical Node.js</ToolTip>.
-
-
-          <ToolTip text="Master Express.js—The Node.js Framework For Your Web Development">Pro Express.js</ToolTip> was published in 2014. It was one of the first books on v4.x. And it was my second book published with Apress
-            after <ToolTip text="Practical Node.js: Building Real-World Scalable Web Apps">Practical Node.js</ToolTip>.
+  <Tooltip text="Master Express.js—The Node.js Framework For Your Web Development">Pro Express.js</Tooltip> was published in 2014. It was one of the first books on v4.x. And it was my second book published with Apress
+    after <Tooltip text="Practical Node.js: Building Real-World Scalable Web Apps">Practical Node.js</Tooltip>.
+    ...
+    The main focus of this post is to compare the four Node.js/Io.js frameworks: <Tooltip text="HTTP API server">Hapi</Tooltip>, <Tooltip text="Release the Kraken!">Kraken</Tooltip>, <Tooltip text="Sail away">Sails.js</Tooltip> and <Tooltip text="IBM of frameworks">Loopback</Tooltip>. There are many other frameworks to consider, but I had to draw the line somewhere.
   </p>,
   document.getElementById('tooltip'))
