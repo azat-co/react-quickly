@@ -22,7 +22,6 @@ var Password = React.createClass({
   },
   render: function(){
     var _this = this
-
     var criteria = Object.keys(this.props).map(function(key){
       if (_this.props[key]) {
         var obj = {}
