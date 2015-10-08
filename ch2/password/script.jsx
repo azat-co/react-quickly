@@ -47,6 +47,14 @@ var Password = React.createClass({
       pattern: /(.{6,})/
     }
   },
+  generate: function(){
+    var _this = this
+    // (function(){g=function(){c='!@#$%0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';p='';for(i=0;i<8;i++){p+=c.charAt(Math.floor(Math.random()*62));}return p;};p=g();while(!/[A-Z]/.test(p)||!/[0-9]/.test(p)||!/[a-z]/.test(p)){p=g();}return p;})()
+
+     this.setState({visible: true, password: Math.random().toString(36).slice(-8)}, function(){
+       _this.checkStrength({target: {value: _this.state.password}})
+     })
+  },
   render: function(){
     var _this = this
     var criteria = Object.keys(this.props).map(function(key){
@@ -64,11 +72,18 @@ var Password = React.createClass({
         <PasswordInput name="password" onChange={this.checkStrength} value={this.state.password}  visible={this.state.visible}/>
         <PasswordVisibility checked={this.state.visible} onChange={this.toggleVisibility}/>
         <PasswordInfo criteria={criteria} strength={this.state.strength}/>
+        <PasswordGenerate onClick={this.generate}>Generate</PasswordGenerate>
         <button className={'btn btn-primary' + ((this.state.ok)? '': ' disabled')}>Save</button>
       </div>
     )
 }})
-
+var PasswordGenerate = React.createClass({
+  render: function(){
+    return (
+      <button {...this.props} className="btn">{this.props.children}</button>
+    )
+  }
+})
 var PasswordInput = React.createClass({
     render: function(){
       return(
@@ -93,9 +108,8 @@ var PasswordInfo = React.createClass({
         <h4>Password Strength</h4>
         <ul>
           {this.props.criteria.map(function(value, item, list){
-            // debugger
             if (_this.props.strength[value.key])
-              return <li><strike>{value.value}</strike></li>
+              return <strike>{value.value}</strike></li>
             else
               return <li>{value.value}</li>
           })}
