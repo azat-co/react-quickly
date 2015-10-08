@@ -32,7 +32,6 @@ var Password = React.createClass({
         return obj
       }
     })
-    // debugger
     return (
       <div className="well form-group col-md-6">
         <label forHtml="password">Password</label>
