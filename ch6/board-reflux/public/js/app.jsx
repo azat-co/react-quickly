@@ -95,20 +95,21 @@ var messagesStore = Reflux.createStore({
     init: function() {
       this.messages = []
     },
+    getInitialState: function(){
+      return [{_id: 1, name: 'Azat', message: 'hi'}]
+    },
     onLoadMessages: function() {
       $.ajax(url, {}).done(function(data) {
         this.messages = data
         this.trigger(data)
-        // console.log(data)
       }.bind(this))
     },
     onAddMessage: function(message){
       var _this = this
       $.post( url, message, function(data) {
         if(!data){
-          return console.error('Failed to save');
+          return console.error('Failed to save')
         }
-        // console.log(data, this.state)
         _this.messages.unshift(data)
         _this.trigger(_this.messages)
       })
@@ -116,18 +117,9 @@ var messagesStore = Reflux.createStore({
 })
 
 var MessageBoard = React.createClass({
-  getInitialState: function(){
-    Actions.loadMessages()
-    return {messages: [{_id: 1, name: 'Azat', message: 'hi'}]}
-  },
+  mixins: [Reflux.connect(messagesStore,'messages')],
   componentWillMount: function(){
-    this.unsubscribe =  messagesStore.listen(this.updateMessages)
-  },
-  componentWillUnmount: function() {
-    return this.unsubscribe()
-  },
-  updateMessages: function(messages) {
-    this.setState({messages: messages})
+    Actions.loadMessages()
   },
   render: function(){
     return (
