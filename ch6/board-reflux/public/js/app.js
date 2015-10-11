@@ -1,26 +1,79 @@
-var Header = React.createClass({displayName: "Header",
+
+
+var url = 'http://localhost:3000/messages'
+
+var Actions = Reflux.createActions([
+  'loadMessages',
+  'addMessage'
+])
+
+var messagesStore = Reflux.createStore({
+    listenables: [Actions],
+    init: function() {
+      this.messages = []
+    },
+    getInitialState: function(){
+      return [{_id: 1, name: 'Azat', message: 'hi'}]
+    },
+    onLoadMessages: function() {
+      $.ajax(url, {}).done(function(data) {
+        this.messages = data
+        this.trigger(data)
+      }.bind(this))
+    },
+    onAddMessage: function(message){
+      var _this = this
+      $.post( url, message, function(data) {
+        if(!data){
+          return console.error('Failed to save')
+        }
+        _this.messages.unshift(data)
+        _this.trigger(_this.messages)
+      })
+    }
+})
+var Chat = React.createClass({displayName: "Chat",
+  mixins: [Reflux.connect(messagesStore,'messages')],
+  componentWillMount: function(){
+    Actions.loadMessages()
+  },
   render: function(){
     return (
-      React.createElement("h1", null, "Message Board")
+      React.createElement("div", null, 
+        React.createElement(NewMessage, {messages: this.state.messages, addMessageCb: Actions.addMessage}), 
+        React.createElement(MessageList, {messages: this.state.messages})
+      )
     )
   }
 })
 
-var Footer = React.createClass({displayName: "Footer",
+var NewMessage = React.createClass({displayName: "NewMessage",
+  addMessage: function(){
+    var fD = React.findDOMNode
+    this.props.addMessageCb({
+      name: fD(this.refs.name).value,
+      message: fD(this.refs.message).value
+    })
+    fD(this.refs.name).value = ''
+    fD(this.refs.message).value = ''
+  },
+  keyup: function (e) {
+    if (e.keyCode == 13) return this.addMessage()
+  },
   render: function(){
     return (
-      React.createElement("div", null, 
-        React.createElement("hr", null), 
-        React.createElement("div", {className: "row-fluid"}, 
-          React.createElement("div", {className: "span12"}, 
-            React.createElement("div", null, "The React.js Course by Azat (", React.createElement("a", {href: "http://twitter.com/azat_co", target: "_blank"}, "@azat_co"), ")")
+      React.createElement("div", {className: "row-fluid", id: "new-message"}, 
+        React.createElement("div", {className: "span12"}, 
+          React.createElement("form", {className: "well form-inline", onKeyUp: this.keyup}, 
+            React.createElement("input", {type: "text", name: "username", className: "input-small", placeholder: "Azat", ref: "name"}), 
+            React.createElement("input", {type: "text", name: "message", className: "input-small", placeholder: "Hello!", ref: "message"}), 
+            React.createElement("a", {id: "send", className: "btn btn-primary", onClick: this.addMessage}, "POST")
           )
         )
       )
     )
   }
 })
-
 
 var MessageList = React.createClass({displayName: "MessageList",
   render: function(){
@@ -55,82 +108,33 @@ var MessageList = React.createClass({displayName: "MessageList",
   }
 })
 
-
-var NewMessage = React.createClass({displayName: "NewMessage",
-  addMessage: function(){
-    var fD = React.findDOMNode
-    this.props.addMessageCb({
-      name: fD(this.refs.name).value,
-      message: fD(this.refs.message).value
-    })
-    fD(this.refs.name).value = ''
-    fD(this.refs.message).value = ''
-  },
-  keyup: function (e) {
-    if (e.keyCode == 13) return this.addMessage()
-  },
+var Header = React.createClass({displayName: "Header",
   render: function(){
     return (
-      React.createElement("div", {className: "row-fluid", id: "new-message"}, 
-        React.createElement("div", {className: "span12"}, 
-          React.createElement("form", {className: "well form-inline", onKeyUp: this.keyup}, 
-            React.createElement("input", {type: "text", name: "username", className: "input-small", placeholder: "Azat", ref: "name"}), 
-            React.createElement("input", {type: "text", name: "message", className: "input-small", placeholder: "Hello!", ref: "message"}), 
-            React.createElement("a", {id: "send", className: "btn btn-primary", onClick: this.addMessage}, "POST")
+      React.createElement("h1", null, "Chat")
+    )
+  }
+})
+
+var Footer = React.createClass({displayName: "Footer",
+  render: function(){
+    return (
+      React.createElement("div", null, 
+        React.createElement("hr", null), 
+        React.createElement("div", {className: "row-fluid"}, 
+          React.createElement("div", {className: "span12"}, 
+            React.createElement("div", null, "The React.js Course by Azat (", React.createElement("a", {href: "http://twitter.com/azat_co", target: "_blank"}, "@azat_co"), ")")
           )
         )
       )
     )
   }
 })
-var url = 'http://localhost:3000/messages'
 
-var Actions = Reflux.createActions([
-  'loadMessages',
-  'addMessage'
-])
 
-var messagesStore = Reflux.createStore({
-    listenables: [Actions],
-    init: function() {
-      this.messages = []
-    },
-    getInitialState: function(){
-      return [{_id: 1, name: 'Azat', message: 'hi'}]
-    },
-    onLoadMessages: function() {
-      $.ajax(url, {}).done(function(data) {
-        this.messages = data
-        this.trigger(data)
-      }.bind(this))
-    },
-    onAddMessage: function(message){
-      var _this = this
-      $.post( url, message, function(data) {
-        if(!data){
-          return console.error('Failed to save')
-        }
-        _this.messages.unshift(data)
-        _this.trigger(_this.messages)
-      })
-    }
-})
 
-var MessageBoard = React.createClass({displayName: "MessageBoard",
-  mixins: [Reflux.connect(messagesStore,'messages')],
-  componentWillMount: function(){
-    Actions.loadMessages()
-  },
-  render: function(){
-    return (
-      React.createElement("div", null, 
-        React.createElement(NewMessage, {messages: this.state.messages, addMessageCb: Actions.addMessage}), 
-        React.createElement(MessageList, {messages: this.state.messages})
-      )
-    )
-  }
-})
+
 
 React.render(React.createElement(Header, null), document.getElementById('header'))
 React.render(React.createElement(Footer, null), document.getElementById('footer'))
-React.render(React.createElement(MessageBoard, null), document.getElementById('message-board'))
+React.render(React.createElement(Chat, null), document.getElementById('message-board'))
