@@ -83,54 +83,56 @@ var NewMessage = React.createClass({displayName: "NewMessage",
     )
   }
 })
+var url = 'http://localhost:3000/messages'
 
-var loadMessages = Reflux.createAction()
+var Actions = Reflux.createActions([
+  'loadMessages',
+  'addMessage'
+])
+
 var messagesStore = Reflux.createStore({
+    listenables: [Actions],
     init: function() {
-      this.listenTo(loadMessages, this.loadMessagesCallback)
+      this.messages = []
     },
-    loadMessagesCallback: function() {
-      var url = 'http://localhost:3000/messages'
+    onLoadMessages: function() {
       $.ajax(url, {}).done(function(data) {
+        this.messages = data
         this.trigger(data)
         // console.log(data)
       }.bind(this))
+    },
+    onAddMessage: function(message){
+      var _this = this
+      $.post( url, message, function(data) {
+        if(!data){
+          return console.error('Failed to save');
+        }
+        // console.log(data, this.state)
+        _this.messages.unshift(data)
+        _this.trigger(_this.messages)
+      })
     }
 })
 
 var MessageBoard = React.createClass({displayName: "MessageBoard",
-  mixins: [Reflux.ListenerMixin],
   getInitialState: function(){
-    loadMessages()
+    Actions.loadMessages()
     return {messages: [{_id: 1, name: 'Azat', message: 'hi'}]}
   },
   componentWillMount: function(){
-  },
-  componentDidMount: function(){
-    this.unsubscribe =  messagesStore.listen(this.messagesUpdated)
-  },
-  messagesUpdated: function(messages) {
-    this.setState({messages: messages})
+    this.unsubscribe =  messagesStore.listen(this.updateMessages)
   },
   componentWillUnmount: function() {
     return this.unsubscribe()
   },
-
-  addMessage: function(message){
-    var messages = this.state.messages
-    var _this = this
-    $.post( 'http://localhost:5000/messages', message, function(data) {
-      if(!data){
-        return console.error('Failed to save');
-      }
-      messages.unshift(data)
-      _this.setState({messages: messages})
-    });
+  updateMessages: function(messages) {
+    this.setState({messages: messages})
   },
   render: function(){
     return (
       React.createElement("div", null, 
-        React.createElement(NewMessage, {messages: this.state.messages, addMessageCb: this.addMessage}), 
+        React.createElement(NewMessage, {messages: this.state.messages, addMessageCb: Actions.addMessage}), 
         React.createElement(MessageList, {messages: this.state.messages})
       )
     )
