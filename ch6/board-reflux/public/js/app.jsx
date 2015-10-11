@@ -10,10 +10,10 @@ var Actions = Reflux.createActions([
 var messagesStore = Reflux.createStore({
     listenables: [Actions],
     init: function() {
-      this.messages = []
+      this.messages = [{_id: 1, name: 'Azat', message: 'hi'}]
     },
     getInitialState: function(){
-      return [{_id: 1, name: 'Azat', message: 'hi'}]
+      return this.messages
     },
     onLoadMessages: function() {
       $.ajax(url, {}).done(function(data) {
@@ -32,7 +32,7 @@ var messagesStore = Reflux.createStore({
       })
     }
 })
-var Chat = React.createClass({
+var MessageBoard = React.createClass({
   mixins: [Reflux.connect(messagesStore,'messages')],
   componentWillMount: function(){
     Actions.loadMessages()
@@ -46,6 +46,34 @@ var Chat = React.createClass({
     )
   }
 })
+
+// var MessageBoard = React.createClass({
+//   getInitialState: function(){
+//     return {messages: [{_id: 1, name: 'Azat', message: 'hi'}]}
+//   },
+//   onStatusChange: function(messages) {
+//     this.setState({
+//       messages: messages
+//     })
+//   },
+//   componentDidMount: function() {
+//     this.unsubscribe = messagesStore.listen(this.onStatusChange)
+//   },
+//   componentWillUnmount: function() {
+//     this.unsubscribe()
+//   },
+//   componentWillMount: function(){
+//     Actions.loadMessages()
+//   },
+//   render: function(){
+//     return (
+//       <div>
+//         <NewMessage messages={this.state.messages} addMessageCb={Actions.addMessage} />
+//         <MessageList messages={this.state.messages} />
+//       </div>
+//     )
+//   }
+// })
 
 var NewMessage = React.createClass({
   addMessage: function(){
@@ -111,7 +139,7 @@ var MessageList = React.createClass({
 var Header = React.createClass({
   render: function(){
     return (
-      <h1>Chat</h1>
+      <h1>Message Board</h1>
     )
   }
 })
@@ -137,4 +165,4 @@ var Footer = React.createClass({
 
 React.render(<Header />, document.getElementById('header'))
 React.render(<Footer />, document.getElementById('footer'))
-React.render(<Chat />, document.getElementById('chat'))
+React.render(<MessageBoard />, document.getElementById('message-board'))
