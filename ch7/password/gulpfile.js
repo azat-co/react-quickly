@@ -8,7 +8,7 @@ gulp.task('build', function () {
   return gulp.src('./*.jsx')
     .pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(concat('script.js'))
+    // .pipe(concat('script.js'))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('.'))
 })

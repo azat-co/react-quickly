@@ -9,8 +9,12 @@
   "author": "Azat Mardan",
   "license": "MIT",
   "devDependencies": {
-    "jest-cli": "^0.5.10"
+    "babel-jest": "^5.3.0",
+    "jest-cli": "^0.5.10",
+    "react": "^0.14.0",
+    "react-addons-test-utils": "^0.14.0"
   },
+  "jest": {"unmockedModulePathPatterns": ["react"]},
   "dependencies": {
     "gulp": "^3.9.0",
     "gulp-babel": "^5.2.1",
