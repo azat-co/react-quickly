@@ -1,5 +1,3 @@
-
-
 var Password = React.createClass({
   getInitialState: function(){
     return {strength: {}, password: '', visible: false, ok: false}
@@ -7,15 +5,14 @@ var Password = React.createClass({
   checkStrength: function(e){
     var _this = this
     var password = e.target.value
-    this.setState({ password: password });
+    this.setState({ password: password })
     var strength = {}
     Object.keys(this.props).forEach(function(key, index, list){
-      if (_this.props[key] && _this.criteria[key].pattern.test(password)) {
+      if (_this.props[key] && _this.rules[key].pattern.test(password)) {
         strength[key] = true
       }
     })
     this.setState({strength: strength}, function() {
-      console.log(_this.state.strength)
       if (Object.keys(_this.state.strength).length == Object.keys( _this.props).length) {
         _this.setState({ok: true})
       }
@@ -25,7 +22,7 @@ var Password = React.createClass({
     this.setState({visible: !this.state.visible}, function(){
     })
   },
-  criteria: {
+  rules: {
     upperCase: {
       message:  'Must have at least one upper-case character',
       pattern: /([A-Z]+)/
@@ -57,11 +54,11 @@ var Password = React.createClass({
   },
   render: function(){
     var _this = this
-    var criteria = Object.keys(this.props).map(function(key){
+    var rules = Object.keys(this.props).map(function(key){
       if (_this.props[key]) {
         var obj = {}
         obj.key = key
-        obj.value = _this.criteria[key]
+        obj.value = _this.rules[key]
         obj.isCompleted = true
         return obj
       }
@@ -71,7 +68,7 @@ var Password = React.createClass({
         <label forHtml="password">Password</label>
         <PasswordInput name="password" onChange={this.checkStrength} value={this.state.password}  visible={this.state.visible}/>
         <PasswordVisibility checked={this.state.visible} onChange={this.toggleVisibility}/>
-        <PasswordInfo criteria={criteria} strength={this.state.strength}/>
+        <PasswordInfo rules={rules} strength={this.state.strength}/>
         <PasswordGenerate onClick={this.generate}>Generate</PasswordGenerate>
         <button className={'btn btn-primary' + ((this.state.ok)? '': ' disabled')}>Save</button>
       </div>
@@ -107,9 +104,9 @@ var PasswordInfo = React.createClass({
       <div>
         <h4>Password Strength</h4>
         <ul>
-          {this.props.criteria.map(function(value, item, list){
+          {this.props.rules.map(function(value, item, list){
             if (_this.props.strength[value.key])
-              return <strike>{value.value}</strike></li>
+              return <li><strike>{value.value}</strike></li>
             else
               return <li>{value.value}</li>
           })}
