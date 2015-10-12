@@ -1,3 +1,25 @@
+var rules =  {
+  upperCase: {
+    message:  'Must have at least one upper-case character',
+    pattern: /([A-Z]+)/
+  },
+  lowerCase: {
+    message: 'Must have at least one lower-case character',
+    pattern: /([a-z]+)/
+  },
+  special:{
+    message: 'Must have at least one special character (#$@!&%...)',
+    pattern: /([\#\$\@\!\$\%]+)/
+  },
+  number: {
+    message: 'Must have at least one number',
+    pattern: /([0-9]+)/
+  },
+  'over6': {
+    message: 'Must be more than 6 characters',
+    pattern: /(.{6,})/
+  }
+}
 var Password = React.createClass({
   getInitialState: function(){
     return {strength: {}, password: '', visible: false, ok: false}
@@ -8,7 +30,7 @@ var Password = React.createClass({
     this.setState({ password: password })
     var strength = {}
     Object.keys(this.props).forEach(function(key, index, list){
-      if (_this.props[key] && _this.rules[key].pattern.test(password)) {
+      if (_this.props[key] && rules[key].pattern.test(password)) {
         strength[key] = true
       }
     })
@@ -22,28 +44,7 @@ var Password = React.createClass({
     this.setState({visible: !this.state.visible}, function(){
     })
   },
-  rules: {
-    upperCase: {
-      message:  'Must have at least one upper-case character',
-      pattern: /([A-Z]+)/
-    },
-    lowerCase: {
-      message: 'Must have at least one lower-case character',
-      pattern: /([a-z]+)/
-    },
-    special:{
-      message: 'Must have at least one special character (#$@!&%...)',
-      pattern: /([\#\$\@\!\$\%]+)/
-    },
-    number: {
-      message: 'Must have at least one number',
-      pattern: /([0-9]+)/
-    },
-    'over6': {
-      message: 'Must be more than 6 characters',
-      pattern: /(.{6,})/
-    }
-  },
+
   generate: function(){
     var _this = this
     // (function(){g=function(){c='!@#$%0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';p='';for(i=0;i<8;i++){p+=c.charAt(Math.floor(Math.random()*62));}return p;};p=g();while(!/[A-Z]/.test(p)||!/[0-9]/.test(p)||!/[a-z]/.test(p)){p=g();}return p;})()
@@ -54,11 +55,11 @@ var Password = React.createClass({
   },
   render: function(){
     var _this = this
-    var rules = Object.keys(this.props).map(function(key){
+    var processedRules = Object.keys(this.props).map(function(key){
       if (_this.props[key]) {
         var obj = {}
         obj.key = key
-        obj.value = _this.rules[key]
+        obj.rule = rules[key]
         obj.isCompleted = true
         return obj
       }
@@ -68,7 +69,7 @@ var Password = React.createClass({
         <label forHtml="password">Password</label>
         <PasswordInput name="password" onChange={this.checkStrength} value={this.state.password}  visible={this.state.visible}/>
         <PasswordVisibility checked={this.state.visible} onChange={this.toggleVisibility}/>
-        <PasswordInfo rules={rules} strength={this.state.strength}/>
+        <PasswordInfo rules={processedRules} strength={this.state.strength}/>
         <PasswordGenerate onClick={this.generate}>Generate</PasswordGenerate>
         <button className={'btn btn-primary' + ((this.state.ok)? '': ' disabled')}>Save</button>
       </div>
@@ -97,6 +98,7 @@ var PasswordVisibility = React.createClass({
       )
     }
 })
+
 var PasswordInfo = React.createClass({
   render: function () {
     var _this = this
@@ -104,11 +106,11 @@ var PasswordInfo = React.createClass({
       <div>
         <h4>Password Strength</h4>
         <ul>
-          {this.props.rules.map(function(value, item, list){
-            if (_this.props.strength[value.key])
-              return <li><strike>{value.value}</strike></li>
+          {this.props.rules.map(function(processedRule, index, list){
+            if (_this.props.strength[processedRule.key])
+              return <li key={processedRule.key}><strike>{processedRule.rule.message}</strike></li>
             else
-              return <li>{value.value}</li>
+              return <li key={processedRule.key}>{processedRule.rule.message}</li>
           })}
         </ul>
       </div>
@@ -116,7 +118,7 @@ var PasswordInfo = React.createClass({
   }
 })
 
-React.render(<Password
+ReactDOM.render(<Password
     upperCase={true}
     lowerCase={true}
     special={true}
