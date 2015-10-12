@@ -25,7 +25,6 @@ var Footer = React.createClass({
 var MessageList = React.createClass({
   render: function(){
     var messages = this.props.messages
-    // console.log(messages)
     if (!messages.length>0) return (
       <tr>
         <td colspan="2">No messages yet</td>
@@ -84,33 +83,31 @@ var NewMessage = React.createClass({
   }
 })
 
+var url = 'http://localhost:3000/messages'
+
 var MessageBoard = React.createClass({
   getInitialState: function(){
-    // return {messages: []}
     return {messages: [{_id: 1, name: 'Azat', message: 'hi'}]}
   },
   componentWillMount: function(){
-    var url = 'http://localhost:5000/messages'
     var _this = this
     $.getJSON(url, function(result){
-      // console.log(result)
       if(!result || !result || !result.length){
-        return;
+        return
       }
-      // console.log(result)
-      _this.setState({ messages: result });
-    });
+      _this.setState({ messages: result })
+    })
   },
   addMessage: function(message){
     var messages = this.state.messages
     var _this = this
-    $.post( 'http://localhost:5000/messages', message, function(data) {
+    $.post(url, message, function(data) {
       if(!data){
-        return console.error('Failed to save');
+        return console.error('Failed to save')
       }
       messages.unshift(data)
       _this.setState({messages: messages})
-    });
+    })
   },
   render: function(){
     return (

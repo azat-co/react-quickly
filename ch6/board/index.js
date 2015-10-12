@@ -34,22 +34,20 @@ mongodb.MongoClient.connect(url, function(err, db) {
   })
   app.post('/messages', function(req, res, next){
     console.log(req.body)
-    req.checkBody('message', 'Invalid message in body').notEmpty().isAlphanumeric();
-    req.checkBody('name', 'Invalid name in body').notEmpty().isAlphanumeric();
+    req.checkBody('message', 'Invalid message in body').notEmpty()
+    req.checkBody('name', 'Invalid name in body').notEmpty()
     var errors = req.validationErrors()
 
     if (errors) return next(errors)
     req.messages.insert(req.body, function (err, result) {
-      // console.log('***', result)
       if (err) return next(err)
       return res.json(result.ops[0])
     })
   })
 
-  // app.get('/', function(req, res, next){
+  app.get('*', function(req, res, next){
+        res.send('Server provides two endpoints GET /messages and POST /messages.\n Use Postman, curl or another client to make HTTP requests.')
+  })
 
-    // res.send('Server provides two endpoints GET /messages and POST /messages.')
-  // })
-
-  app.listen(5000)
+  app.listen(3000)
 })
