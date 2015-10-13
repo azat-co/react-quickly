@@ -1,8 +1,8 @@
-jest.dontMock('../generate-password.js')
+jest.dontMock('../js/generate-password.js')
 
 beforeEach(function(){
   var password
-  require('../generate-password')
+  require('../js/generate-password')
 })
 
 describe('method generatePassword', function(){

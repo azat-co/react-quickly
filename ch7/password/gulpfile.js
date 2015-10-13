@@ -10,7 +10,7 @@ gulp.task('build', function () {
     .pipe(babel())
     // .pipe(concat('script.js'))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('.'))
+    .pipe(gulp.dest('./js'))
 })
 gulp.task('watch', function() {
     gulp.watch('./*.jsx', ['build'])
