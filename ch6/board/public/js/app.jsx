@@ -92,7 +92,7 @@ var MessageBoard = React.createClass({
   componentWillMount: function(){
     var _this = this
     $.getJSON(url, function(result){
-      if(!result || !result || !result.length){
+      if(!result || !result.length){
         return
       }
       _this.setState({ messages: result })
