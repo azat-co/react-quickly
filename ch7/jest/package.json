@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest"
   },
-  "author": "",
+  "author": "Azat Mardan",
   "license": "ISC",
   "devDependencies": {
     "jest-cli": "^0.5.10"
