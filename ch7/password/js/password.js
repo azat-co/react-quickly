@@ -43,6 +43,8 @@ var Password = React.createClass({
     this.setState({ strength: strength }, function () {
       if (Object.keys(_this.state.strength).length == Object.keys(_this.props).length) {
         _this.setState({ ok: true });
+      } else {
+        _this.setState({ ok: false });
       }
     });
   },
@@ -57,16 +59,15 @@ var Password = React.createClass({
     });
   },
   render: function render() {
-    var _this = this;
-    var processedRules = Object.keys(this.props).map(function (key) {
-      if (_this.props[key]) {
-        var obj = {};
-        obj.key = key;
-        obj.rule = rules[key];
-        obj.isCompleted = true;
-        return obj;
+    var processedRules = Object.keys(this.props).map((function (key) {
+      if (this.props[key]) {
+        return {
+          key: key,
+          rule: rules[key],
+          isCompleted: this.state.strength[key] || false
+        };
       }
-    });
+    }).bind(this));
     return React.createElement(
       'div',
       { className: 'well form-group col-md-6' },
@@ -77,7 +78,7 @@ var Password = React.createClass({
       ),
       React.createElement(PasswordInput, { name: 'password', onChange: this.checkStrength, value: this.state.password, visible: this.state.visible }),
       React.createElement(PasswordVisibility, { checked: this.state.visible, onChange: this.toggleVisibility }),
-      React.createElement(PasswordInfo, { rules: processedRules, strength: this.state.strength }),
+      React.createElement(PasswordInfo, { rules: processedRules }),
       React.createElement(
         PasswordGenerate,
         { onClick: this.generate },
@@ -138,7 +139,7 @@ var PasswordInfo = React.createClass({
         'ul',
         null,
         this.props.rules.map(function (processedRule, index, list) {
-          if (_this.props.strength[processedRule.key]) return React.createElement(
+          if (processedRule.isCompleted) return React.createElement(
             'li',
             { key: processedRule.key },
             React.createElement(

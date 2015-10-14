@@ -9,7 +9,7 @@ var rules =  {
   },
   special:{
     message: 'Must have at least one special character (#$@!&%...)',
-    pattern: /([\#\$\@\!\$\%]+)/
+    pattern: /([\!\@\#\$\%\^\&\*\(\)\_\+\{\}\:\"\<\>\?\\|\[\]\/'\,\.\`\~]+)/
   },
   number: {
     message: 'Must have at least one number',
@@ -37,6 +37,8 @@ var Password = React.createClass({
     this.setState({strength: strength}, function() {
       if (Object.keys(_this.state.strength).length == Object.keys( _this.props).length) {
         _this.setState({ok: true})
+      } else {
+        _this.setState({ok: false})
       }
     })
   },
@@ -52,22 +54,21 @@ var Password = React.createClass({
      })
   },
   render: function(){
-    var _this = this
     var processedRules = Object.keys(this.props).map(function(key){
-      if (_this.props[key]) {
-        var obj = {}
-        obj.key = key
-        obj.rule = rules[key]
-        obj.isCompleted = true
-        return obj
+      if (this.props[key]) {
+        return {
+          key: key,
+          rule: rules[key],
+          isCompleted: this.state.strength[key] || false
+        }
       }
-    })
+    }.bind(this))
     return (
       <div className="well form-group col-md-6">
         <label forHtml="password">Password</label>
         <PasswordInput name="password" onChange={this.checkStrength} value={this.state.password}  visible={this.state.visible}/>
         <PasswordVisibility checked={this.state.visible} onChange={this.toggleVisibility}/>
-        <PasswordInfo rules={processedRules} strength={this.state.strength}/>
+        <PasswordInfo rules={processedRules}/>
         <PasswordGenerate onClick={this.generate}>Generate</PasswordGenerate>
         <button className={'btn btn-primary' + ((this.state.ok)? '': ' disabled')}>Save</button>
       </div>
@@ -105,7 +106,7 @@ var PasswordInfo = React.createClass({
         <h4>Password Strength</h4>
         <ul>
           {this.props.rules.map(function(processedRule, index, list){
-            if (_this.props.strength[processedRule.key])
+            if (processedRule.isCompleted)
               return <li key={processedRule.key}><strike>{processedRule.rule.message}</strike></li>
             else
               return <li key={processedRule.key}>{processedRule.rule.message}</li>
