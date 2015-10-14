@@ -13,7 +13,7 @@ var rules = {
   },
   special: {
     message: 'Must have at least one special character (#$@!&%...)',
-    pattern: /([\#\$\@\!\$\%]+)/
+    pattern: /([\!\@\#\$\%\^\&\*\(\)\_\+\{\}\:\"\<\>\?\\|\[\]\/'\,\.\`\~]+)/
   },
   number: {
     message: 'Must have at least one number',

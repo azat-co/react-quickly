@@ -8,7 +8,6 @@ describe('Password', function() {
     ReactDOM = require('../js/react-dom.js')
     var fD = ReactDOM.findDOMNode
     require('../js/generate-password.js')
-    generatePassword = window.generatePassword
     require('../js/password.js')
 
     var password = TestUtils.renderIntoDocument(
