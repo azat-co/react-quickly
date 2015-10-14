@@ -2,23 +2,22 @@
   "name": "password",
   "version": "1.0.0",
   "description": "",
-  "main": "JSXTransformer.js",
+  "main": "index.html",
   "scripts": {
     "test": "jest"
   },
   "author": "Azat Mardan",
   "license": "MIT",
   "devDependencies": {
-    "babel-jest": "^5.3.0",
-    "jest-cli": "^0.5.10",
-    "react": "^0.14.0",
-    "react-addons-test-utils": "^0.14.0"
+    "jest-cli": "0.5.10",
+    "react": "0.14.0",
+    "react-addons-test-utils": "0.14.0"
   },
   "dependencies": {
-    "gulp": "^3.9.0",
-    "gulp-babel": "^5.2.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-watch": "^4.3.5"
+    "gulp": "3.9.0",
+    "gulp-babel": "5.2.1",
+    "gulp-concat": "2.6.0",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-watch": "4.3.5"
   }
 }
