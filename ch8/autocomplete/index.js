@@ -51,12 +51,17 @@ mongodb.MongoClient.connect(url, function(err, db) {
   })
 
   app.get('/', function(req, res, next){
+    var url = 'http://localhost:3000/rooms'
     req.rooms.find({}, {sort: {_id: -1}}).toArray(function(err, rooms){
       if (err) return next(err)
-      if (rooms.length == 0) rooms = ['react', 'node', 'angular', 'backbone']
+      // if (rooms.length == 0) rooms = ['react', 'node', 'angular', 'backbone']
+      console.log(rooms)
       res.render('index', {
-        autocomplete: ReactDOMServer.renderToString(Autocomplete({options: rooms})),
-        props: '<script type="text/javascript">var rooms='+JSON.stringify(rooms)+'</script>'
+        autocomplete: ReactDOMServer.renderToString(Autocomplete({
+          options: rooms,
+          url: url
+        })),
+        props: '<script type="text/javascript">var rooms = ' + JSON.stringify(rooms) + ', url = "' + url + '"</script>'
       })
     })
   })

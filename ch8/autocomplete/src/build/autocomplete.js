@@ -1,36 +1,94 @@
-React = require('react')
-ReactDOM = require('react-dom')
-request = require('request')
+var React = require('react'),
+  ReactDOM = require('react-dom'),
+  request = require('request'),
+  Reflux = require('reflux')
 
-var url = 'http://localhost:3000/messages'
+var url = 'http://localhost:3000/options'
 var fD = ReactDOM.findDOMNode
 
+var Actions = Reflux.createActions([
+  'loadOptions',
+  'addOption',
+  'setUrl',
+  'setOptions'
+])
+
+var optionsStore = Reflux.createStore({
+    listenables: [Actions],
+    // init: function() {
+      // this.options = [{_id: 1, name: 'Azat', message: 'hi'}]
+    // },
+    // getInitialState: function(){
+      // return this.options
+    // },
+    onSetUrl: function(url){
+      this.url = url
+    },
+    onSetOptions: function(options){
+      this.options = options
+    },
+    onLoadOptions: function(options) {
+      this.options = options
+      request({url: this.url},function(error, response, body) {
+        if(error || !body){
+          return console.error('Failed to load')
+        }
+        body = JSON.parse(body)
+        this.options = body
+        this.trigger(body)
+      }.bind(this))
+    },
+    onAddOption: function(option, callback){
+      request({url: this.url, method: 'POST', json: {name: option}}, function(error, response, body) {
+        if(error || !body){
+          return console.error('Failed to save')
+        }
+        this.options.unshift(body)
+        callback(body)
+        this.trigger(this.options)
+      }.bind(this))
+    }
+})
+
 module.exports = React.createClass({displayName: "exports",
+  mixins: [Reflux.connect(optionsStore,'options')],
   getInitialState: function(){
-    return {options: this.props.options}
+    Actions.setUrl(this.props.url)
+    Actions.setOptions(this.props.options)
+    return {options: this.props.options,
+      filteredOptions: this.props.options,
+      currentOption: ''
+    }
+  },
+  componentWillMount: function(){
+    Actions.loadOptions(this.props.options)
   },
   filter: function(e){
     this.setState({
       currentOption: e.target.value,
-      options: (this.props.options.filter(function(option, index, list){
-        return (e.target.value === option.substr(0, e.target.value.length))
+      filteredOptions: (this.state.options.filter(function(option, index, list){
+        return (e.target.value === option.name.substr(0, e.target.value.length))
       }))
     }, function(){
-      console.log(this.state.options)
     })
   },
   addOption: function(e){
-    // this.props.
+    var currentOption = this.state.currentOption
+
+    Actions.addOption(this.state.currentOption, function(){
+      this.filter({target: {value: currentOption}})
+    }.bind(this))
   },
   render: function(){
+
     return (
       React.createElement("div", {className: "form-group"}, 
-        React.createElement("input", {type: "text", className: "form-control", onChange: this.filter}), 
-        this.state.options.map(function(option, index, list){
-          return React.createElement("div", {key: index}, React.createElement("a", {className: "btn  btn-default", href: "/#/{option}", target: "_blank"}, "#", option))
+        React.createElement("input", {type: "text", className: "form-control", onChange: this.filter, value: this.currentOption, placeholder: "React.js"}), 
+        this.state.filteredOptions.map(function(option, index, list){
+          return React.createElement("div", {key: option._id}, React.createElement("a", {className: "btn btn-default", href: '/#/'+option.name, target: "_blank"}, "#", option.name))
         }), 
-        function(){if (this.state.options.length == 0)
-          return React.createElement("a", {className: "btn btn-info", onClick: this.addOption, value: this.state.currentOption}, "Add #", this.state.currentOption)
+        function(){if (this.state.filteredOptions.length == 0 && this.state.currentOption!='')
+          return React.createElement("a", {className: "btn btn-info", onClick: this.addOption}, "Add #", this.state.currentOption)
         }.bind(this)()
       )
     )

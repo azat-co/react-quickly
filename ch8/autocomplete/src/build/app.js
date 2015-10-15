@@ -4,4 +4,4 @@ request = require('request')
 
 Autocomplete = require('./autocomplete.js')
 
-ReactDOM.render(React.createElement(Autocomplete, {options: rooms}), document.getElementById('autocomplete'))
+ReactDOM.render(React.createElement(Autocomplete, {options: rooms, url: url}), document.getElementById('autocomplete'))
