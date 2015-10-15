@@ -7,7 +7,7 @@ module.exports = Footer = React.createClass({displayName: "Footer",
         React.createElement("hr", null), 
         React.createElement("div", {className: "row-fluid"}, 
           React.createElement("div", {className: "span12"}, 
-            React.createElement("div", null, "The React.js Course by Azat (", React.createElement("a", {href: "http://twitter.com/azat_co", target: "_blank"}, "@azat_co"), ")")
+            React.createElement("div", null, "Core React.js by Azat (", React.createElement("a", {href: "http://twitter.com/azat_co", target: "_blank"}, "@azat_co"), ")")
           )
         )
       )
