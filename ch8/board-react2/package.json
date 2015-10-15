@@ -22,10 +22,13 @@
     "express-validator": "^2.13.0",
     "mongodb": "^2.0.36",
     "morgan": "^1.6.1",
-    "react": "^0.13.3"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "request": "^2.65.0"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
     "gulp-develop-server": "^0.4.3",
     "gulp-nodemon": "^2.0.3",
     "gulp-react": "^3.0.1",

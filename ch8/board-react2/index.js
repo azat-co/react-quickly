@@ -8,8 +8,10 @@ var express = require('express'),
   compression = require('compression'),
   exphbs  = require('express-handlebars'),
   url = 'mongodb://localhost:27017/board',
-  React = require('react/addons'),
-  components = require('./public/js/app.js'),
+  ReactDOM = require('react-dom'),
+  ReactDOMServer = require('react-dom/server'),
+  React = require('react'),
+  components = require('./src/build/components.js'),
   Header = React.createFactory(components.Header),
   Footer = React.createFactory(components.Footer)
   MessageBoard = React.createFactory(components.MessageBoard)
@@ -20,7 +22,7 @@ mongodb.MongoClient.connect(url, function(err, db) {
     process.exit(1)
   }
   app.use(compression())
-  app.use(logger('combined'))
+  app.use(logger('dev'))
   app.use(errorHandler())
   app.use(bodyParser.urlencoded({extended: true}))
   app.use(bodyParser.json())
@@ -42,8 +44,8 @@ mongodb.MongoClient.connect(url, function(err, db) {
   })
   app.post('/messages', function(req, res, next){
     console.log(req.body)
-    req.checkBody('message', 'Invalid message in body').notEmpty().isAlphanumeric();
-    req.checkBody('name', 'Invalid name in body').notEmpty().isAlphanumeric();
+    req.checkBody('message', 'Invalid message in body').notEmpty()
+    req.checkBody('name', 'Invalid name in body').notEmpty()
     var errors = req.validationErrors()
     if (errors) return next(errors)
     req.messages.insert(req.body, function (err, result) {
@@ -55,16 +57,15 @@ mongodb.MongoClient.connect(url, function(err, db) {
   app.get('/', function(req, res, next){
     req.messages.find({}, {sort: {_id: -1}}).toArray(function(err, docs){
       if (err) return next(err)
-      // docs=[]
       res.render('index', {
-        header: React.renderToString(Header()),
-        footer: React.renderToString(Footer()),
-        messageBoard: React.renderToString(MessageBoard({messages: docs})),
+        header: ReactDOMServer.renderToString(Header()),
+        footer: ReactDOMServer.renderToString(Footer()),
+        messageBoard: ReactDOMServer.renderToString(MessageBoard({messages: docs})),
         props: '<script type="text/javascript">var messages='+JSON.stringify(docs)+'</script>'
-        // messageBoard: React.renderToString(MessageBoard({messages: [{_id:1, name: 'azat', message: 'hey'}]}))
+        // messageBoard: ReactDOMServer.renderToString(MessageBoard({messages: [{_id:1, name: 'azat', message: 'hey'}]}))
       })
     })
   })
 
-  app.listen(5000)
+  app.listen(3000)
 })
