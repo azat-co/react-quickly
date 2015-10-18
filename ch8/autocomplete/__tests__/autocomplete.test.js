@@ -1,7 +1,7 @@
-// jest.dontMock('../js/password.js')
+// jest.dontMock('../src/build/autocomplete.js')
 jest.autoMockOff()
 
-describe('Password', function() {
+describe('Autocomplete', function() {
   it('changes after click', function(){
     var TestUtils = require('react-addons-test-utils')
     React = require('../js/react-with-addons.js')
@@ -10,7 +10,7 @@ describe('Password', function() {
     require('../js/generate-password.js')
     require('../js/password.js')
 
-    var password = TestUtils.renderIntoDocument(
+    var autocomplete = TestUtils.renderIntoDocument(
       React.createElement(Password, {
         upperCase: true,
         lowerCase: true,

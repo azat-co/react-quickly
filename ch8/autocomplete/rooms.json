@@ -1,1 +1,4 @@
-["react", "node", "angular", "backbone"]
+[ {"name": "react"},
+  {"name": "node"},
+  {"name": "angular"},
+  {"name": "backbone"}]
