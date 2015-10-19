@@ -4,7 +4,8 @@
   "description": "React.js autocomplete component with Express.js, and MongoDB example.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "gulp"
   },
   "keywords": [
     "react.js",
@@ -29,7 +30,6 @@
   },
   "devDependencies": {
     "jest-cli": "0.5.10",
-    "react": "0.14.0",
     "react-addons-test-utils": "0.14.0",
     "gulp": "^3.9.0",
     "gulp-browserify": "^0.5.1",

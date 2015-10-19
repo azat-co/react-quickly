@@ -3,7 +3,6 @@ var React = require('react'),
   request = require('request'),
   Reflux = require('reflux')
 
-var url = 'http://localhost:3000/options'
 var fD = ReactDOM.findDOMNode
 
 var Actions = Reflux.createActions([
@@ -83,12 +82,12 @@ module.exports = React.createClass({
 
     return (
       <div className="form-group">
-        <input type="text" className="form-control" onChange={this.filter} value={this.currentOption} placeholder="React.js"></input>
+        <input type="text" className="form-control option-name" onChange={this.filter} value={this.currentOption} placeholder="React.js"></input>
         {this.state.filteredOptions.map(function(option, index, list){
-          return <div key={option._id}><a className="btn btn-default" href={'/#/'+option.name} target="_blank">#{option.name}</a></div>
+          return <div key={option._id}><a className="btn btn-default option-list-item" href={'/#/'+option.name} target="_blank">#{option.name}</a></div>
         })}
         {function(){if (this.state.filteredOptions.length == 0 && this.state.currentOption!='')
-          return <a className="btn btn-info" onClick={this.addOption}>Add #{this.state.currentOption}</a>
+          return <a className="btn btn-info option-add" onClick={this.addOption}>Add #{this.state.currentOption}</a>
         }.bind(this)()}
       </div>
     )
