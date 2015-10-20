@@ -19,7 +19,6 @@ gulp.task('scripts', ['build'], function() {
     .pipe(gulp.dest('./public/js'))
 })
 
-
 gulp.task('watch', ['build', 'scripts'], function(done){
     gulp.watch('src/*.jsx', ['build','scripts'] )
 })
