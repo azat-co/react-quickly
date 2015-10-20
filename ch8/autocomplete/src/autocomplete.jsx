@@ -14,12 +14,6 @@ var Actions = Reflux.createActions([
 
 var optionsStore = Reflux.createStore({
     listenables: [Actions],
-    // init: function() {
-      // this.options = [{_id: 1, name: 'Azat', message: 'hi'}]
-    // },
-    // getInitialState: function(){
-      // return this.options
-    // },
     onSetUrl: function(url){
       this.url = url
     },
