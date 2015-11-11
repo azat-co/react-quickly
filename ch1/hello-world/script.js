@@ -4,11 +4,11 @@ var HelloWorld = React.createClass({
   }
 });
 
-React.render(
+ReactDOM.render(
   React.createElement(
-    'div', 
-    null, 
-    React.createElement(HelloWorld, null), 
+    'div',
+    null,
+    React.createElement(HelloWorld, null),
     React.createElement(HelloWorld, null),
     React.createElement(HelloWorld, null)
   ),

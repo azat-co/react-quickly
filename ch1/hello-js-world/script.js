@@ -4,11 +4,11 @@ var HelloWorld = React.createClass({
   }
 });
 
-React.render(
+ReactDOM.render(
   React.createElement(
-    'div', 
-    null, 
-    React.createElement(HelloWorld, {name: 'Ember.js'}), 
+    'div',
+    null,
+    React.createElement(HelloWorld, {name: 'Ember.js'}),
     React.createElement(HelloWorld, {name: 'Backbone.js'}),
     React.createElement(HelloWorld, {name:'Angular.js'})
   ),
