@@ -4,7 +4,10 @@ var Book = React.createClass({
   year: 2014,
   render: function(){
   return (
-    <div><i>{this.title}</i> ({this.publisher}, {this.year})</div>
+    <div>
+      <i>{this.title}</i>
+      ({this.publisher}, {this.year})
+    </div>
   )
   }
 })
@@ -20,7 +23,7 @@ var Content = React.createClass({
   }
 })
 
-React.render(
+ReactDOM.render(
   <Book />,
   document.getElementById('content')
 )
