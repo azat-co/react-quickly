@@ -9,7 +9,6 @@ var Tooltip = React.createClass({
     };
   },
   toggle: function toggle() {
-    console.log(this.state.opacity);
     var tooltipNode = ReactDOM.findDOMNode(this);
     this.setState({
       opacity: !this.state.opacity,
@@ -24,13 +23,6 @@ var Tooltip = React.createClass({
       top: (this.state.top || 0) + 20,
       left: (this.state.left || 0) - 30
     };
-    // var p= React.cloneElement(<div className="tooltip bottom" role="tooltip">
-    //   <div className="tooltip-arrow"></div>
-    //   <div className="tooltip-inner">
-    //     {this.props.text}
-    //   </div>
-    // </div>, {style:style})
-    // console.log(p)
     return React.createElement(
       'div',
       { style: { display: 'inline' } },

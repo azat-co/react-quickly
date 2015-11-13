@@ -5,7 +5,6 @@ var Tooltip = React.createClass({
     }
   },
   toggle: function(){
-    console.log(this.state.opacity)
     var tooltipNode = ReactDOM.findDOMNode(this)
     this.setState({
       opacity: !this.state.opacity,
@@ -20,13 +19,6 @@ var Tooltip = React.createClass({
       top: (this.state.top||0) + 20,
       left: (this.state.left||0) -30
     }
-    // var p= React.cloneElement(<div className="tooltip bottom" role="tooltip">
-    //   <div className="tooltip-arrow"></div>
-    //   <div className="tooltip-inner">
-    //     {this.props.text}
-    //   </div>
-    // </div>, {style:style})
-    // console.log(p)
     return (
         <div style={{display: 'inline'}}>
           <span style={{color: 'blue'}} onMouseEnter={this.toggle} onMouseOut={this.toggle}>
