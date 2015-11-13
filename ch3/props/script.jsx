@@ -1,8 +1,11 @@
 var ClickCounterButton = React.createClass({
   render: function() {
-    return <button onClick={this.props.handler}>Don't click me {this.props.counter} times! </button>
+    return <button onClick={this.props.handler}>
+      Don't click me {this.props.counter} times!
+    </button>
   }
 })
+
 var Content = React.createClass({
   getInitialState: function(){
     return {counter: 0}
@@ -19,7 +22,7 @@ var Content = React.createClass({
   }
 })
 
-React.render(
+ReactDOM.render(
   <Content />,
   document.getElementById('content')
 );
