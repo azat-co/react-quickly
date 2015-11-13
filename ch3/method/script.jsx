@@ -1,6 +1,6 @@
 var Content = React.createClass({
   getUrl: function(){
-    return 'http://corereact.com'
+    return 'http://webapplog.com'
   },
   render: function() {
     return (
@@ -11,7 +11,7 @@ var Content = React.createClass({
   }
 })
 
-React.render(
+ReactDOM.render(
   <Content />,
   document.getElementById('content')
 );
