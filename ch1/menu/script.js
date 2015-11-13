@@ -1,10 +1,17 @@
 var Menu = React.createClass({
   render: function(){
-    var menus = ['Home', 'About', 'Services', 'Portfolio', 'Contact us']
+    var menus = ['Home',
+      'About',
+      'Services',
+      'Portfolio',
+      'Contact us']
     return React.createElement('div',
       null,
       menus.map(function(v,i){
-        return React.createElement('div', {key: v}, React.createElement(Link, {label: v}))
+        return React.createElement('div',
+          {key: i},
+          React.createElement(Link, {label: v})
+        )
       })
     )
 }})
@@ -16,12 +23,15 @@ var Link = React.createClass({
         .toLowerCase()
         .trim()
         .replace(' ', '-')
-    return React.createElement(
-      'a',
-      {href: url},
-      this.props.label,
+    return React.createElement('div',
+      null,
+      React.createElement(
+        'a',
+        {href: url},
+        this.props.label
+      ),
       React.createElement('br')
-    )
+      )
   }
 })
 

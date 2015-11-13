@@ -8,7 +8,7 @@ var Menu = React.createClass({
     return (
       <div>
         {menus.map(function(v,i){
-          return <Link label={v}/>
+          return <div key={i}><Link label={v}/></div>
         })}
       </div>
     )
@@ -21,11 +21,13 @@ var Link = React.createClass({
         .toLowerCase()
         .trim()
         .replace(' ', '-')
-    return <a href={url}>
+    return <div>
+      <a href={url}>
       {this.props.label}
+      </a>
       <br/>
-    </a>
+    </div>
   }
 })
 
-React.render(<Menu />, document.getElementById('menu'))
+ReactDOM.render(<Menu />, document.getElementById('menu'))

@@ -1,5 +1,9 @@
 window.isLoggedIn =true
 var Menu = React.createClass({
+  getLoginLogout: function(){
+    if (window.isLoggedIn) return <a href='/logout'>Log out</a>
+    else return <a href='/login'>Log in</a>
+  },
   render: function(){
     var menus = ['Home',
         'About',
@@ -14,9 +18,9 @@ var Menu = React.createClass({
       loginLogoutLink = <a href="/login">Log in</a>
     }
     return (
-      <div>
+      <div >
         {menus.map(function(v,i){
-          return <Link label={v}/>
+          return <div key={i}><Link label={v}/></div>
         })}
         <div>Status: {window.isLoggedIn ? 'Logged in' : 'Logged out'}</div>
         <div>{loginLogoutLink}</div>
@@ -25,6 +29,7 @@ var Menu = React.createClass({
           else return <a href='/login'>Log in</a>
           }()}
         </div>
+        <div>{this.getLoginLogout()}</div>
       </div>
     )
 }})
@@ -36,11 +41,13 @@ var Link = React.createClass({
         .toLowerCase()
         .trim()
         .replace(' ', '-')
-    return <a href={url}>
+    return <div>
+      <a href={url}>
       {this.props.label}
+      </a>
       <br/>
-    </a>
+    </div>
   }
 })
 
-React.render(<Menu />, document.getElementById('menu'))
+ReactDOM.render(<Menu />, document.getElementById('menu'))
