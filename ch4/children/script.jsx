@@ -1,7 +1,7 @@
 var Content = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="content">
         {this.props.children}
       </div>
     )
@@ -9,9 +9,14 @@ var Content = React.createClass({
 })
 
 React.render(
-  <Content>
-    <h1>React.js</h1>
-    <p>Rocks</p>
-  </Content>,
+  <div>
+    <Content>
+      <h1>React.js</h1>
+      <p>Rocks</p>
+    </Content>
+    <Content>
+      <span>&copy;</span>
+    </Content>
+  </div>,
   document.getElementById('content')
-);
+)

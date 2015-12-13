@@ -43,7 +43,7 @@ var Content = React.createClass({
         <Logo />
         <br />
         <br />
-        <iframe id="frame" src=''/>
+        <iframe id="frame" src=""/>
       </div>
     );
   }
