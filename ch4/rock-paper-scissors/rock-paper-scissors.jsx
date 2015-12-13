@@ -38,11 +38,16 @@ if (Meteor.isClient) {
       return (
         <div>
           <h1>Welcome to Rock-paper-scissors!</h1>
-          <p>Make your move</p>
+          <p>Make your move!&nbsp;
           <button className="btn btn-default" onClick={this.makeMove} data-answer-index='0'>Rock</button>
           <button className="btn btn-default"  onClick={this.makeMove} data-answer-index='1'>Paper</button>
           <button className="btn btn-default"  onClick={this.makeMove} data-answer-index='2'>Scissors</button>
-          <img src="/rock-paper-scissors.svg" width="300"/>
+          </p>
+          <figure>
+            <img src="/rock-paper-scissors.svg" width="300"/>
+            <figcaption>Rules</figcaption>
+          </figure>
+
           {(!this.state.answer)? '': <div><h2>Result</h2><p>You selected {choices[this.state.answer]}.<br/>
             Opponent selected {choices[this.state.opponentAnswer]}. <br/>
             Outcome: {this.state.outcome}</p></div> }
