@@ -8,7 +8,7 @@ var Content = React.createClass({
   }
 })
 
-React.render(
+ReactDOM.render(
   <div>
     <Content>
       <h1>React.js</h1>
