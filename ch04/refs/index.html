@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="react.js"></script>
-    <script src="JSXTransformer.js"></script>
+    <script src="react-0.14.3.js"></script>
+    <script src="react-dom-0.14.3.js"></script>
+    <script src="JSXTransformer-0.13.3.js"></script>
     <link href="bootstrap.css" type="text/css" rel="stylesheet"/>
   </head>
   <body>
@@ -13,9 +14,8 @@
         submit: function(e){
           var emailAddress = this.refs.emailAddress
           var comments = this.refs.comments
-          debugger
-          console.log(React.findDOMNode(emailAddress).value)
-          console.log(React.findDOMNode(comments).value)
+          console.log(ReactDOM.findDOMNode(emailAddress).value)
+          console.log(ReactDOM.findDOMNode(comments).value)
         },
         render: function() {
           return (
@@ -35,7 +35,7 @@
         }
       })
 
-      React.render(
+      ReactDOM.render(
         <Content />,
         document.getElementById('content')
       )

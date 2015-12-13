@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="react.js"></script>
-    <script src="JSXTransformer.js"></script>
+    <script src="react-0.14.3.js"></script>
+    <script src="react-dom-0.14.3.js"></script>
+    <script src="JSXTransformer-0.13.3.js"></script>
     <link href="bootstrap.css" type="text/css" rel="stylesheet"/>
     <script src="bower_components/react-bootstrap/react-bootstrap.js"></script>
   </head>
@@ -15,9 +16,8 @@
       var prompt = 'Please enter your email to win $1,000,000.'
       var Content = React.createClass({
         submit: function(e){
-          var emailAddressNode = React.findDOMNode(this.refs.emailAddress)
-          var comments = React.findDOMNode(this.refs.comments)
-          debugger
+          var emailAddressNode = ReactDOM.findDOMNode(this.refs.emailAddress)
+          var comments = ReactDOM.findDOMNode(this.refs.comments)
           console.log(this.refs.emailAddress.getValue())
           console.log(this.refs.comments.getValue())
           // window.emailAddressNode.getAttribute('type')
@@ -42,7 +42,7 @@
         }
       })
 
-      React.render(
+      ReactDOM.render(
         <Content />,
         document.getElementById('content')
       )
