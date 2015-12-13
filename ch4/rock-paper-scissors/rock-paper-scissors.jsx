@@ -21,7 +21,7 @@ if (Meteor.isClient) {
     },
     makeMove: function(e){
       var opponentAnswer = Math.floor(Math.random()*3)
-      var answer =e.target.getAttribute('data-answer-index')
+      var answer = e.target.getAttribute('data-answer-index')
       var outcome = rps.compare(answer, opponentAnswer, choices)
       this.setState({opponentAnswer: opponentAnswer,
         answer: answer,
@@ -34,32 +34,37 @@ if (Meteor.isClient) {
         outcome: outcome})
     },
     render: function() {
+      var winCount = 0
       return (
         <div>
           <h1>Welcome to Rock-paper-scissors!</h1>
-          <img src="/rock-paper-scissors.svg"/>
           <p>Make your move</p>
-          <button onClick={this.makeMove} data-answer-index='0'>Rock</button>
-          <button onClick={this.makeMove} data-answer-index='1'>Paper</button>
-          <button onClick={this.makeMove} data-answer-index='2'>Scissors</button>
-          {(!this.state.answer)? '': <p>You selected {choices[this.state.answer]}.<br/>
+          <button className="btn btn-default" onClick={this.makeMove} data-answer-index='0'>Rock</button>
+          <button className="btn btn-default"  onClick={this.makeMove} data-answer-index='1'>Paper</button>
+          <button className="btn btn-default"  onClick={this.makeMove} data-answer-index='2'>Scissors</button>
+          <img src="/rock-paper-scissors.svg" width="300"/>
+          {(!this.state.answer)? '': <div><h2>Result</h2><p>You selected {choices[this.state.answer]}.<br/>
             Opponent selected {choices[this.state.opponentAnswer]}. <br/>
-            Outcome: {this.state.outcome}</p> }
-            <div>{this.data.games.map(function(value, index){
-              if (value.outcome.indexOf('lose')>-1)
+            Outcome: {this.state.outcome}</p></div> }
+            {(this.data.games.length<1) ? '' : <h2>History</h2>}
+            {(this.data.games.length<1) ? '' : <p>Recent games first</p>}
+            <table><tbody>{this.data.games.map(function(value, index){
+              if (value.outcome.indexOf('lose')>-1) {
                 var style = {color: 'red'}
-              else
+              }
+              else {
+                winCount++
                 var style = {color: 'blue'}
-              console.log(value)
-              return <p
+              }
+              return <tr><td
                 key={value._id}
                 style={style}>
-                  {choices[value.answer]} (you)  vs. {choices[value.opponentAnswer]}—
+                  {index+1}: {choices[value.answer]} (you)  vs. {choices[value.opponentAnswer]}—
                   {value.outcome}
-              </p>
-              })}</div>
+              </td></tr>
+          })}</tbody></table>
+        <h2>Total wins: {winCount} which is {Math.round(winCount/this.data.games.length*10000)/100}%.</h2>
         </div>
-
       )
     }
   })
