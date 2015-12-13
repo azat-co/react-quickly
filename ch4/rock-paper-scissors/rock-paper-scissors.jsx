@@ -3,13 +3,18 @@ var choices = ['rock',
   'scissors'
 ]
 
-var Games = new Meteor.Collection("games")
+var Games = new Mongo.Collection('games')
 
 if (Meteor.isClient) {
 
   var MessagesList = React.createClass({
-    mixins: [ReactMeteor.Mixin],
-    getMeteorState: function() {
+    mixins: [ReactMeteorData],
+    getInitialState: function(){
+      return {
+        answer: ''
+      }
+    },
+    getMeteorData: function() {
       return {
         games: Games.find({createdBy: Meteor.userId}).fetch().reverse()
       }
@@ -40,7 +45,7 @@ if (Meteor.isClient) {
           {(!this.state.answer)? '': <p>You selected {choices[this.state.answer]}.<br/>
             Opponent selected {choices[this.state.opponentAnswer]}. <br/>
             Outcome: {this.state.outcome}</p> }
-            <div>{this.state.games.map(function(value, index){
+            <div>{this.data.games.map(function(value, index){
               if (value.outcome.indexOf('lose')>-1)
                 var style = {color: 'red'}
               else
@@ -58,8 +63,9 @@ if (Meteor.isClient) {
       )
     }
   })
+  // Meteor.subscribe('games')
   Meteor.startup(function() {
-    React.render(<MessagesList />, document.body);
+    ReactDOM.render(<MessagesList />, document.getElementById('content'))
   })
 
 }
