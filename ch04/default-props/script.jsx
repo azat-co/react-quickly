@@ -19,7 +19,7 @@ var Content = React.createClass({
   }
 })
 
-React.render(
+ReactDOM.render(
   <Content />,
   document.getElementById('content')
 )
