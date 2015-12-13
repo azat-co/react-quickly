@@ -9,7 +9,7 @@ var RunMixin = {
     var iframe = document.getElementById('frame').src = 'http://reactjs.com'
   },
   componentDidMount: function(){
-    console.log(React.findDOMNode(this))
+    console.log(ReactDOM.findDOMNode(this))
   }
 }
 var Button = React.createClass({
@@ -45,11 +45,11 @@ var Content = React.createClass({
         <br />
         <iframe id="frame" src=""/>
       </div>
-    );
+    )
   }
 })
 
-React.render(
+ReactDOM.render(
   <Content />,
   document.getElementById('content')
-);
+)
