@@ -1,3 +1,3 @@
 # react
 
-Super secret repo
+<https://www.manning.com/books/react-quickly>
