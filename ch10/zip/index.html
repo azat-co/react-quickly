@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.js"></script>
+    <script src="jquery.js"></script>
+    <script src="jquery.ziptastic.js"></script>
+    <link href="bootstrap.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="col-md-3"></div>
+      <div id="content" class="col-md-6"></div>
+      <div class="col-md-3"></div>
+    </div>
+
+    <script type="text/babel">
+      var Content = React.createClass({
+        getInitialState: function(){
+          return {
+            stateName: '',
+            city: '',
+            zip: ''
+          }
+        },
+        resolveZip: function(event){
+          var zipNode = this.refs.zip
+          $.ziptastic(zipNode.value, function(country, stateName, stateCode, city, zip) {
+            this.setState({
+              city: city,
+              stateName: stateName
+            })
+          }.bind(this))
+        },
+        handleTyping: function(event){
+          if (event.target.value.length === 5) {
+            this.resolveZip()
+          }
+          this.setState({zip: event.target.value.replace(/[a-z]/ig, '').substr(0,5)})
+        },
+        render: function() {
+          return (
+            <div className="well">
+              <h1>Address Form</h1>
+              <div className="form-group">
+                Zip: <input ref="zip" className="form-control" type="text" placeholder="94103" onChange={this.handleTyping} value={this.state.zip}/>
+              </div>
+              <div className="form-group">
+                <a className="btn btn-primary" onClick={this.resolveZip}>Fill City and State</a>
+              </div>
+              <div className="form-group">
+                City: <input type="text" ref="city" className="form-control" disabled="true" value={this.state.city}/>
+              </div>
+              <div className="form-group">
+                State: <input type="text" ref="stateName" className="form-control" disabled="true" value={this.state.stateName}/>
+              </div>
+            </div>
+          )
+        }
+      })
+
+      ReactDOM.render(
+        <Content />,
+        document.getElementById('content')
+      )
+    </script>
+  </body>
+</html>
