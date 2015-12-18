@@ -19,7 +19,7 @@ if (Meteor.isClient) {
         games: Games.find({createdBy: Meteor.userId}).fetch().reverse()
       }
     },
-    makeMove: function(e){
+    makeMove: function(e) {
       var opponentAnswer = Math.floor(Math.random()*3)
       var answer = e.target.getAttribute('data-answer-index')
       var outcome = rps.compare(answer, opponentAnswer, choices)

@@ -2,7 +2,7 @@ var Button = React.createClass({
   getDefaultProps: function () {
     return {buttonLabel: 'Submit'}
   },
-  render: function(){
+  render: function() {
     return <button >{this.props.buttonLabel}</button>
   }
 })
