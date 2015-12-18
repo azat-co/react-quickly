@@ -16,25 +16,18 @@
     </div>
 
     <script type="text/babel">
-      var Content = React.createClass({
-        propTypes: {
-          heading: React.PropTypes.string,
-          action: React.PropTypes.string
-        },
-        getDefaultProps: function() {
-          return {
-            heading: 'Address Form',
-            action: 'Submit'
-          }
-        },
-        getInitialState: function() {
-          return {
+      class Content extends React.Component {
+        constructor (props) {
+          super(props)
+          this.resolveZip = this.resolveZip.bind(this)
+          this.handleTyping = this.handleTyping.bind(this)
+          this.state = {
             stateName: '',
             city: '',
             zip: ''
           }
-        },
-        resolveZip: function(event) {
+        }
+        resolveZip (event) {
           var zipNode = this.refs.zip
           $.ziptastic(zipNode.value, function(country, stateName, stateCode, city, zip) {
             this.setState({
@@ -42,14 +35,14 @@
               stateName: stateName
             })
           }.bind(this))
-        },
-        handleTyping: function(event){
+        }
+        handleTyping (event) {
           if (event.target.value.length === 5) {
             this.resolveZip()
           }
           this.setState({zip: event.target.value.replace(/[a-z]/ig, '').substr(0,5)})
-        },
-        render: function() {
+        }
+        render () {
           return (
             <div className="well">
               <h1>{this.props.heading}</h1>
@@ -68,8 +61,15 @@
             </div>
           )
         }
-      })
-
+      }
+      Content.propTypes = {
+       heading: React.PropTypes.string,
+       action: React.PropTypes.string
+      }
+      Content.defaultProps = {
+       heading: 'Address Form',
+       action: 'Submit'
+      }
       ReactDOM.render(
         <Content action="Fill City and State"/>,
         document.getElementById('content')
