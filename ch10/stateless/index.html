@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.js"></script>
+    <link href="bootstrap.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="container-fluid ">
+      <div class="col-md-3"></div>
+      <div id="content" class="col-md-6 well"></div>
+      <div class="col-md-3"></div>
+    </div>
+
+    <script type="text/babel">
+      function Link (props) {
+        return <a href={props.href} target="_blank" className="btn btn-primary">{props.text}</a>
+      }
+      ReactDOM.render(
+        <Link text='Buy React Quickly' href='https://www.manning.com/books/react-quickly'/>,
+        document.getElementById('content')
+      )
+    </script>
+
+  </body>
+</html>

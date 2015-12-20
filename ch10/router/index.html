@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.js"></script>
+    <script src="ReactRouter.js"></script>
+    <script src="History.js"></script>
+    <link href="bootstrap.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="container-fluid ">
+      <div class="col-md-3"></div>
+      <div id="content" class="col-md-6"></div>
+      <div class="col-md-3"></div>
+    </div>
+
+    <script type="text/babel">
+      var Router = window.ReactRouter.Router
+      var Route = window.ReactRouter.Route
+      var Link = window.ReactRouter.Link
+      var IndexLink = window.ReactRouter.IndexLink
+      // var history = window.History.createHistory()
+      var history = window.History.createHashHistory({
+        queryKey: false
+      })
+      // console.log(createHistory)
+      var About = function(){
+        return <div>About</div>
+      }
+      var Products = function(){
+        return <div>Products
+          <ol>
+            <li><Link to="/products/it">IT services</Link></li>
+          </ol>
+        </div>
+      }
+      var Product = function Product (props) {
+        return <h3>PRODUCT {props.params.id}</h3>
+      }
+      var Contact = function(){
+        return <div>Contact Us</div>
+      }
+      var App = React.createClass({
+        render() {
+          console.log()
+          return (
+            <div>
+              <h1>App</h1>
+              {/* change the <a>s to <Link>s */}
+              <div className="navbar navbar-default">
+                <ul className="nav nav-pills navbar-nav">
+                  <li className={(this.props.history.isActive('/about'))? 'active': ''}><Link to="/about" activeClassName="active">About</Link></li>
+                  <li className={(this.props.history.isActive('/products'))? 'active': ''}><Link to="/products" activeClassName="active">Products</Link></li>
+                  <li className={(this.props.history.isActive('/contact'))? 'active': ''}><Link to="/contact" activeClassName="active">Contact Us</Link></li>
+                </ul>
+              </div>
+              {/*
+                next we replace `<Child>` with `this.props.children`
+                the router will figure out the children for us
+              */}
+              {this.props.children}
+            </div>
+          )
+        }
+      })
+
+      ReactDOM.render((
+        <Router history={history}>
+          <Route path="/" component={App} >
+            <Route path="/about" component={About} />
+            <Route path="/products" component={Products}/>
+            <Route path="/products/:id" component={Product} />
+            <Route path="/contact" component={Contact} />
+          </Route>
+        </Router>
+      ), document.getElementById('content'))
+
+
+
+
+    </script>
+
+  </body>
+</html>
