@@ -19,7 +19,7 @@ const PRODUCTS = [
   { id: 3, src: 'images/reactquickly-cover.jpg', title: 'React Quickly', url: 'https://www.manning.com/books/react-quickly'}
 ]
 
-let CartItems = []
+let CartItems = {}
 
 const Modal = React.createClass({
   styles: {
@@ -54,22 +54,31 @@ const Copy = () => {
 }
 
 const Cart = React.createClass ({
-  handlerCheckout() {
-    CartItems.forEach((item, index, list)=>{
-      window.open(item.url)
-    })
-  },
   render() {
     return <div>
-      {(CartItems.length == 0) ? <p>Your cart is empty</p> : '' }
+      {(Object.keys(CartItems).length == 0) ? <p>Your cart is empty</p> : '' }
        <ul>
-        {CartItems.map((item, index, list)=>{
-          return <li key={index}>{item.title}</li>
+        {Object.keys(CartItems).map((item, index, list)=>{
+          return <li key={item}>{PRODUCTS[item].title} - {CartItems[item]}</li>
         })}
       </ul>
-      <button className="btn btn-primary" onClick={this.handlerCheckout}>Checkout</button>
+      <Link to="/checkout" className="btn btn-primary">Checkout</Link>
       <Link to="/" className="btn btn-info">Home</Link>
     </div>
+  }
+})
+const Checkout = React.createClass({
+  render() {
+    let count = 0
+    return <div><h1>Invoice</h1><table className="table table-bordered"><tbody>
+      {Object.keys(CartItems).map((item, index, list)=>{
+        count += CartItems[item]
+        return <tr key={item}>
+          <td>{PRODUCTS[item].title}</td>
+          <td>{CartItems[item]}</td>
+        </tr>
+      })}
+    </tbody></table><p>Total: {count}</p></div>
   }
 })
 
@@ -94,7 +103,7 @@ const App = React.createClass({
     )
 
     return (
-      <div>
+      <div className="well">
         <Heading/>
 
         <div>
@@ -156,7 +165,10 @@ const Product = React.createClass({
 })
 
 const handlerBuy = (id) => {
-  CartItems.push(PRODUCTS[id])
+  if (CartItems[id])
+    CartItems[id] += 1
+  else
+    CartItems[id] = 1
 }
 
 render((
@@ -166,5 +178,6 @@ render((
       <Route path="/products/:id" component={Product} handlerBuy={handlerBuy} />
       <Route path="/cart" component={Cart}/>
     </Route>
+    <Route path="/checkout" component={Checkout}/>
   </Router>
 ), document.getElementById('content'))
