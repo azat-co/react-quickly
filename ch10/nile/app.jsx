@@ -1,5 +1,4 @@
 import { createHashHistory, useBasename} from 'history'
-// let createHistory = hashHistory
 import React from 'react'
 import { render } from 'react-dom'
 // import { createHistory, useBasename } from 'history'
