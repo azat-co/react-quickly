@@ -101,20 +101,16 @@ const App = React.createClass({
       location.state.modal &&
       this.previousChildren
     )
-
     return (
       <div className="well">
         <Heading/>
-
         <div>
           {isModal ? this.previousChildren : this.props.children}
-
           {isModal && (
             <Modal isOpen={true} returnTo={location.state.returnTo}>
               {this.props.children}
             </Modal>
           )}
-
         </div>
       </div>
     )
