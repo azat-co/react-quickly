@@ -21,23 +21,20 @@ const PRODUCTS = [
 
 let CartItems = []
 
-class Modal extends React.Component{
-  constructor(props) {
-    super(props)
-    this.styles = {
-      position: 'fixed',
-      top: '20%',
-      right: '20%',
-      bottom: '20%',
-      left: '20%',
-      width: 450,
-      height: 400,
-      padding: 20,
-      boxShadow: '0px 0px 150px 130px rgba(0, 0, 0, 0.5)',
-      overflow: 'auto',
-      background: '#fff'
-    }
-  }
+const Modal = React.createClass({
+  styles: {
+    position: 'fixed',
+    top: '20%',
+    right: '20%',
+    bottom: '20%',
+    left: '20%',
+    width: 450,
+    height: 400,
+    padding: 20,
+    boxShadow: '0px 0px 150px 130px rgba(0, 0, 0, 0.5)',
+    overflow: 'auto',
+    background: '#fff'
+  },
   render() {
     return (
       <div style={this.styles}>
@@ -46,7 +43,7 @@ class Modal extends React.Component{
       </div>
     )
   }
-}
+})
 
 const Heading = () => {
   return <h1>Nile Book Store</h1>
@@ -115,7 +112,7 @@ const App = React.createClass({
   }
 })
 
-class Index extends React.Component {
+const Index = React.createClass ({
   render() {
     return (
       <div>
@@ -133,7 +130,7 @@ class Index extends React.Component {
       </div>
     )
   }
-}
+})
 
 
 
