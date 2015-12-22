@@ -99,9 +99,6 @@ var MessageList = React.createClass({
   }
 })
 
-
-
-
 if (Meteor.isClient) {
   Meteor.startup(function() {
     ReactDOM.render(<Chat />, document.getElementById('content'))
