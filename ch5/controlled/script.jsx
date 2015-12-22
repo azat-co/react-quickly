@@ -9,12 +9,12 @@ var Content = React.createClass({
     return <div>
       Account Number: <input type="text" onChange={this.change} placeholder="123456" value={this.state.value}/>
       <br/>
-      <span>{this.state.value.length>0?'You entered: ' + this.state.value: ''}</span>
+      <span>{this.state.value.length > 0 ? 'You entered: ' + this.state.value: ''}</span>
     </div>
   }
 })
 
-React.render(
+ReactDOM.render(
   <Content></Content>,
   document.getElementById('content')
 );

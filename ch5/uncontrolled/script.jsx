@@ -4,7 +4,7 @@ var Content = React.createClass({
   },
   change: function(e) {
     console.log(e.target.value)
-    console.log(React.findDOMNode(this.refs.textbox).value)
+    console.log(ReactDOM.findDOMNode(this.refs.textbox).value)
     this.setState({value: e.target.value})
   },
   render: function() {
@@ -15,7 +15,7 @@ var Content = React.createClass({
   }
 })
 
-React.render(
+ReactDOM.render(
   <Content></Content>,
   document.getElementById('content')
 );

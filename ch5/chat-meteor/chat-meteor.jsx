@@ -19,7 +19,6 @@ var Chat = React.createClass({
         <h1>Chat</h1>
         <p>This application uses React and Meteor. This example is for the React Quickly book.</p>
         <NewMessage
-          messages={this.state.messages}
           addMessageCb={this.addMessage}/>
         <MessageList messages={this.data.messages} />
       </div>
