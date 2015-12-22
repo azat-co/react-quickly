@@ -1,8 +1,11 @@
-var Messages = new Meteor.Collection("messages")
+var Messages = new Mongo.Collection('messages')
 
 var Chat = React.createClass({
-  mixins:[ReactMeteor.Mixin],
-  getMeteorState: function(){
+  mixins: [ReactMeteorData],
+  getInitialState: function(){
+    return {}
+  },
+  getMeteorData: function(){
     return {
       messages: Messages.find({}).fetch().reverse()
     }
@@ -14,11 +17,11 @@ var Chat = React.createClass({
     return (
       <div>
         <h1>Chat</h1>
-        <p>This application uses React and Meteor. This example is for the Core React book.</p>
+        <p>This application uses React and Meteor. This example is for the React Quickly book.</p>
         <NewMessage
           messages={this.state.messages}
           addMessageCb={this.addMessage}/>
-        <MessageList messages={this.state.messages} />
+        <MessageList messages={this.data.messages} />
       </div>
     )
   }
@@ -27,18 +30,17 @@ var Chat = React.createClass({
 
 var NewMessage = React.createClass({
   addMessage: function(){
-    var fD = React.findDOMNode
+    var fD = ReactDOM.findDOMNode
     this.props.addMessageCb({
       name: fD(this.refs.name).value,
       message: fD(this.refs.message).value
     })
     fD(this.refs.message).value = ''
   },
-  keyup: function (e) {
-    if (e.keyCode == 13) return this.addMessage()
+  keyup: function (event) {
+    if (event.keyCode == 13) return this.addMessage()
   },
   render: function(){
-    console.log(this.props.username)
     return (
       <div className="row-fluid" id="new-message">
         <div className="span12">
@@ -68,14 +70,13 @@ var NewMessage = React.createClass({
 })
 
 var MessageList = React.createClass({
-
   render: function(){
     var messages = this.props.messages
-    if (!messages || !messages.length>0) return (
-        <p>No messages yet</p>
+    if (!messages || !messages.length > 0) return (
+      <p>No messages yet</p>
     )
     return (
-      <table className="table ">
+      <table className="table">
         <caption>Messages</caption>
         <thead>
           <tr>
@@ -103,14 +104,13 @@ var MessageList = React.createClass({
 
 if (Meteor.isClient) {
   Meteor.startup(function() {
-    React.render(<Chat />, document.body)
+    ReactDOM.render(<Chat />, document.getElementById('content'))
   })
 }
 
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-
   })
 } else {
 
