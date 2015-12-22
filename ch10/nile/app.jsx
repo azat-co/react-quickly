@@ -1,6 +1,6 @@
 import { createHashHistory, useBasename} from 'history'
 import React from 'react'
-import { render } from 'react-dom'
+import ReactDOM from 'react-dom'
 // import { createHistory, useBasename } from 'history'
 import { Router, Route, IndexRoute, Link, IndexLink } from 'react-router'
 
@@ -85,8 +85,7 @@ const Checkout = React.createClass({
 const App = React.createClass({
 
   componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.location.key !== this.props.location.key &&
+    if (nextProps.location.key !== this.props.location.key &&
       nextProps.location.state &&
       nextProps.location.state.modal
     ) {
@@ -95,22 +94,21 @@ const App = React.createClass({
   },
 
   render() {
-    let { location } = this.props
-    let isModal = (
-      location.state &&
-      location.state.modal &&
+    let isModal = (this.props.location.state &&
+      this.props.location.state.modal &&
       this.previousChildren
     )
     return (
       <div className="well">
         <Heading/>
         <div>
-          {isModal ? this.previousChildren : this.props.children}
-          {isModal && (
-            <Modal isOpen={true} returnTo={location.state.returnTo}>
+          
+          {this.props.children}
+          {(isModal)?
+            <Modal isOpen={true} returnTo={this.props.location.state.returnTo}>
               {this.props.children}
-            </Modal>
-          )}
+            </Modal> : ''
+          }
         </div>
       </div>
     )
@@ -166,7 +164,7 @@ const handlerBuy = (id) => {
     CartItems[id] = 1
 }
 
-render((
+ReactDOM.render((
   <Router history={history}>
     <Route path="/" component={App}>
       <IndexRoute component={Index}/>
