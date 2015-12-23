@@ -7,7 +7,7 @@ var Games = new Mongo.Collection('games')
 
 if (Meteor.isClient) {
 
-  var MessagesList = React.createClass({
+  var App = React.createClass({
     mixins: [ReactMeteorData],
     getInitialState: function(){
       return {
@@ -75,7 +75,7 @@ if (Meteor.isClient) {
   })
   // Meteor.subscribe('games')
   Meteor.startup(function() {
-    ReactDOM.render(<MessagesList />, document.getElementById('content'))
+    ReactDOM.render(<App />, document.getElementById('content'))
   })
 
 }
