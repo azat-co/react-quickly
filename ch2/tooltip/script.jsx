@@ -20,18 +20,17 @@ var Tooltip = React.createClass({
       left: (this.state.left || 0) - 30
     }
     return (
-        <div style={{display: 'inline'}}>
-          <span style={{color: 'blue'}} onMouseEnter={this.toggle} onMouseOut={this.toggle}>
-            {this.props.children}
-          </span>
-          <div className="tooltip bottom" style={style} role="tooltip">
-            <div className="tooltip-arrow"></div>
-            <div className="tooltip-inner">
-              {this.props.text}
-            </div>
+      <div style={{display: 'inline'}}>
+        <span style={{color: 'blue'}} onMouseEnter={this.toggle} onMouseOut={this.toggle}>
+          {this.props.children}
+        </span>
+        <div className="tooltip bottom" style={style} role="tooltip">
+          <div className="tooltip-arrow"></div>
+          <div className="tooltip-inner">
+            {this.props.text}
           </div>
         </div>
-
+      </div>
     )
   }
 })
