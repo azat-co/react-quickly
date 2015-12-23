@@ -6,7 +6,6 @@ var choices = ['rock',
 var Games = new Mongo.Collection('games')
 
 if (Meteor.isClient) {
-
   var App = React.createClass({
     mixins: [ReactMeteorData],
     getInitialState: function(){
