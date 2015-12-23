@@ -49,36 +49,36 @@ if (Meteor.isClient) {
 
           {(!this.state.answer)? '': <div><h2>Result</h2><p>You selected {choices[this.state.answer]}.<br/>
             Opponent selected {choices[this.state.opponentAnswer]}. <br/>
-            Outcome: {this.state.outcome}</p></div> }
-            {(this.data.games.length<1) ? '' : <h2>History</h2>}
-            {(this.data.games.length<1) ? '' : <p>Recent games first</p>}
-            <table><tbody>{this.data.games.map(function(value, index){
-              if (value.outcome.indexOf('lose')>-1) {
-                var style = {color: 'red'}
-              }
-              else {
-                winCount++
-                var style = {color: 'blue'}
-              }
-              return <tr><td
-                key={value._id}
-                style={style}>
-                  {index+1}: {choices[value.answer]} (you)  vs. {choices[value.opponentAnswer]}—
-                  {value.outcome}
-              </td></tr>
-          })}</tbody></table>
+            Outcome: {this.state.outcome}</p></div>
+          }
+          {(this.data.games.length<1) ? '' : <h2>History</h2>}
+          {(this.data.games.length<1) ? '' : <p>Recent games first</p>}
+          <table><tbody>{this.data.games.map(function(value, index){
+            if (value.outcome.indexOf('lose')>-1) {
+              var style = {color: 'red'}
+            }
+            else {
+              winCount++
+              var style = {color: 'blue'}
+            }
+            return <tr><td
+              key={value._id}
+              style={style}>
+                {index+1}: {choices[value.answer]} (you)  vs. {choices[value.opponentAnswer]}—
+                {value.outcome}
+            </td></tr>
+        })}</tbody></table>
         <h2>Total wins: {winCount} which is {Math.round(winCount/this.data.games.length*10000)/100}%.</h2>
         </div>
       )
     }
   })
-  // Meteor.subscribe('games')
+
   Meteor.startup(function() {
     ReactDOM.render(<App />, document.getElementById('content'))
   })
 
 }
-
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
