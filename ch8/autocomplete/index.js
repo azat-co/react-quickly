@@ -11,7 +11,8 @@ var express = require('express'),
   ReactDOM = require('react-dom'),
   ReactDOMServer = require('react-dom/server'),
   React = require('react'),
-  Autocomplete  = React.createFactory(require('./src/build/autocomplete.js'))
+  Autocomplete  = React.createFactory(require('./src/build/autocomplete.js')),
+  port = 3000
 
 
 mongodb.MongoClient.connect(url, function(err, db) {
@@ -51,7 +52,7 @@ mongodb.MongoClient.connect(url, function(err, db) {
   })
 
   app.get('/', function(req, res, next){
-    var url = 'http://localhost:3000/rooms'
+    var url = 'http://localhost:' + port + '/rooms'
     req.rooms.find({}, {sort: {_id: -1}}).toArray(function(err, rooms){
       if (err) return next(err)
       res.render('index', {
@@ -59,10 +60,12 @@ mongodb.MongoClient.connect(url, function(err, db) {
           options: rooms,
           url: url
         })),
-        props: '<script type="text/javascript">var rooms = ' + JSON.stringify(rooms) + ', url = "' + url + '"</script>'
+        props: '<script type="text/javascript">var rooms = '
+          + JSON.stringify(rooms)
+          + ', url = "' + url + '"</script>'
       })
     })
   })
 
-  app.listen(3000)
+  app.listen(port)
 })

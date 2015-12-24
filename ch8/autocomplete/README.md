@@ -8,5 +8,11 @@ $ gulp
 To test:
 
 ```
-npm test
+$ npm test
+```
+
+To seed data:
+
+```
+$ npm run seed
 ```
