@@ -1,3 +1,5 @@
+# Message Board with Express, React and jQuery
+
 To run the project:
 
 ```
