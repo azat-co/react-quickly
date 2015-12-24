@@ -1,10 +1,16 @@
 # Message Board with Express, React and jQuery
 
+You need to have MongoDB running on localhost:27017 (default).
+
 To run the project:
 
 ```
-$ npm install -g gulp
-$ gulp
+$ npm install
+$ npm start
 ```
 
-* Dependencies (node_modules) are included.
+Run in dev mode (with reload):
+
+```
+$ npm run dev
+```
