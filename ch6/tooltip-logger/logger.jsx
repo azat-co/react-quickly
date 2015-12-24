@@ -5,7 +5,7 @@
     },
     componentDidMount: function(e){
       console.log('componentDidMount is triggered')
-      console.log('DOM node: ', React.findDOMNode(this))
+      console.log('DOM node: ', ReactDOM.findDOMNode(this))
     },
     componentWillReceiveProps: function(newProps){
       console.log('componentWillReceiveProps is triggered')

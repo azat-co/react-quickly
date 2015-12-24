@@ -2,6 +2,7 @@
 <html>
   <head>
     <script src="react.js"></script>
+    <script src="react-dom.js"></script>
     <script src="reflux.js"></script>
     <script src="JSXTransformer.js"></script>
     <link href="bootstrap.css" type="text/css" rel="stylesheet"/>
@@ -18,8 +19,7 @@
           var _this = this
           setTimeout(function(){
             _this.trigger([{name: 'Azat', message: 'React rocks!'}])
-          })
-
+          }, 1000)
         }
       })
       var Content = React.createClass({
@@ -35,13 +35,17 @@
         render: function() {
           return (
             <div className="well">
-              <p>{(this.state && this.state.messages.length)? this.state.messages[0]['name'] + ': ' + this.state.messages[0]['message']:''}</p>
+              <p>
+                {(this.state && this.state.messages.length) ?
+                  this.state.messages[0]['name'] + ': '
+                  + this.state.messages[0]['message'] : ''}
+              </p>
             </div>
           )
         }
       })
 
-      React.render(
+      ReactDOM.render(
         <Content />,
         document.getElementById('content')
       )
