@@ -31,14 +31,16 @@ var messagesStore = Reflux.createStore({
     }
 })
 var MessageBoard = React.createClass({displayName: "MessageBoard",
-  mixins: [Reflux.connect(messagesStore,'messages')],
+  mixins: [Reflux.connect(messagesStore, 'messages')],
   componentWillMount: function(){
     Actions.loadMessages()
   },
   render: function(){
     return (
       React.createElement("div", null, 
-        React.createElement(NewMessage, {messages: this.state.messages, addMessageCb: Actions.addMessage}), 
+        React.createElement(NewMessage, {
+          messages: this.state.messages, 
+          addMessageCb: Actions.addMessage}), 
         React.createElement(MessageList, {messages: this.state.messages})
       )
     )
@@ -87,27 +89,26 @@ var NewMessage = React.createClass({displayName: "NewMessage",
 var MessageList = React.createClass({displayName: "MessageList",
   render: function(){
     var messages = this.props.messages
-    // console.log(messages)
-    if (!messages.length>0) return (
-      React.createElement("tr", null, 
-        React.createElement("td", {colspan: "2"}, "No messages yet")
+    if (!messages.length > 0) return (
+      React.createElement("p", null, 
+        "No messages yet"
       )
     )
     return (
-      React.createElement("table", {className: "table "}, 
+      React.createElement("table", {className: "table table-bordered"}, 
         React.createElement("caption", null, "Messages"), 
         React.createElement("thead", null, 
           React.createElement("tr", null, 
-            React.createElement("th", {className: "span2"}, "Name"), 
-            React.createElement("th", {className: "span10"}, "Message")
+            React.createElement("th", {className: "col-md-2"}, "Name"), 
+            React.createElement("th", {className: "col-md-10"}, "Message")
           )
         ), 
         React.createElement("tbody", null, 
           messages.map(function(message){
             return (
               React.createElement("tr", {key: message._id}, 
-                React.createElement("td", {className: "span2"}, message.name), 
-                React.createElement("td", {className: "span10"}, message.message)
+                React.createElement("td", {className: "col-md-2"}, message.name), 
+                React.createElement("td", {className: "col-md-10"}, message.message)
               )
             )
           })

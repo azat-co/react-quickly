@@ -6,6 +6,11 @@ To run the project:
 
 ```
 $ npm install
-$ npm install -g gulp
-$ gulp
+$ npm start
+```
+
+Run in dev mode (with reload):
+
+```
+$ npm run dev
 ```

@@ -31,14 +31,16 @@ var messagesStore = Reflux.createStore({
     }
 })
 var MessageBoard = React.createClass({
-  mixins: [Reflux.connect(messagesStore,'messages')],
+  mixins: [Reflux.connect(messagesStore, 'messages')],
   componentWillMount: function(){
     Actions.loadMessages()
   },
   render: function(){
     return (
       <div>
-        <NewMessage messages={this.state.messages} addMessageCb={Actions.addMessage} />
+        <NewMessage
+          messages={this.state.messages}
+          addMessageCb={Actions.addMessage} />
         <MessageList messages={this.state.messages} />
       </div>
     )
@@ -87,27 +89,26 @@ var NewMessage = React.createClass({
 var MessageList = React.createClass({
   render: function(){
     var messages = this.props.messages
-    // console.log(messages)
-    if (!messages.length>0) return (
-      <tr>
-        <td colspan="2">No messages yet</td>
-      </tr>
+    if (!messages.length > 0) return (
+      <p>
+        No messages yet
+      </p>
     )
     return (
-      <table className="table ">
+      <table className="table table-bordered">
         <caption>Messages</caption>
         <thead>
           <tr>
-            <th className="span2">Name</th>
-            <th className="span10">Message</th>
+            <th className="col-md-2">Name</th>
+            <th className="col-md-10">Message</th>
           </tr>
         </thead>
         <tbody>
           {messages.map(function(message){
             return (
               <tr key={message._id}>
-                <td className="span2">{message.name}</td>
-                <td className="span10">{message.message}</td>
+                <td className="col-md-2">{message.name}</td>
+                <td className="col-md-10">{message.message}</td>
               </tr>
             )
           })}
