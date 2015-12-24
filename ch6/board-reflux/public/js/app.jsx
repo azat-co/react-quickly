@@ -1,5 +1,3 @@
-
-
 var url = 'http://localhost:3000/messages'
 
 var Actions = Reflux.createActions([
@@ -47,37 +45,9 @@ var MessageBoard = React.createClass({
   }
 })
 
-// var MessageBoard = React.createClass({
-//   getInitialState: function(){
-//     return {messages: [{_id: 1, name: 'Azat', message: 'hi'}]}
-//   },
-//   onStatusChange: function(messages) {
-//     this.setState({
-//       messages: messages
-//     })
-//   },
-//   componentDidMount: function() {
-//     this.unsubscribe = messagesStore.listen(this.onStatusChange)
-//   },
-//   componentWillUnmount: function() {
-//     this.unsubscribe()
-//   },
-//   componentWillMount: function(){
-//     Actions.loadMessages()
-//   },
-//   render: function(){
-//     return (
-//       <div>
-//         <NewMessage messages={this.state.messages} addMessageCb={Actions.addMessage} />
-//         <MessageList messages={this.state.messages} />
-//       </div>
-//     )
-//   }
-// })
-
 var NewMessage = React.createClass({
   addMessage: function(){
-    var fD = React.findDOMNode
+    var fD = ReactDOM.findDOMNode
     this.props.addMessageCb({
       name: fD(this.refs.name).value,
       message: fD(this.refs.message).value
@@ -93,9 +63,20 @@ var NewMessage = React.createClass({
       <div className="row-fluid" id="new-message">
         <div className="span12">
           <form className="well form-inline" onKeyUp={this.keyup}>
-            <input type="text" name="username" className="input-small" placeholder="Azat" ref="name"/>
-            <input type="text" name="message" className="input-small" placeholder="Hello!" ref="message" />
-            <a id="send" className="btn btn-primary" onClick={this.addMessage}>POST</a>
+            <input
+              type="text"
+              name="username"
+              className="input-small"
+              placeholder="Azat"
+              ref="name"/>
+            <input type="text"
+              name="message"
+              className="input-small"
+              placeholder="Hello!"
+              ref="message" />
+            <a id="send"
+              className="btn btn-primary"
+              onClick={this.addMessage}>POST</a>
           </form>
         </div>
       </div>
@@ -151,7 +132,9 @@ var Footer = React.createClass({
         <hr />
         <div className="row-fluid">
           <div className="span12">
-            <div>The React.js Course by Azat (<a href="http://twitter.com/azat_co" target="_blank">@azat_co</a>)</div>
+            <div>React Quickly by Azat (
+                <a href="http://twitter.com/azat_co" target="_blank">@azat_co</a>)
+            </div>
           </div>
         </div>
       </div>
@@ -160,9 +143,6 @@ var Footer = React.createClass({
 })
 
 
-
-
-
-React.render(<Header />, document.getElementById('header'))
-React.render(<Footer />, document.getElementById('footer'))
-React.render(<MessageBoard />, document.getElementById('message-board'))
+ReactDOM.render(<Header />, document.getElementById('header'))
+ReactDOM.render(<Footer />, document.getElementById('footer'))
+ReactDOM.render(<MessageBoard />, document.getElementById('message-board'))
