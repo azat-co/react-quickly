@@ -46,7 +46,7 @@ mongodb.MongoClient.connect(url, function(err, db) {
   })
 
   app.get('*', function(req, res, next){
-        res.send('Server provides two endpoints GET /messages and POST /messages.\n Use Postman, curl or another client to make HTTP requests.')
+    res.send('Server provides two endpoints GET /messages and POST /messages.\n Use Postman, curl or another client to make HTTP requests.')
   })
 
   app.listen(3000)

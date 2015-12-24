@@ -6,6 +6,7 @@ var Header = React.createClass({
   }
 })
 
+
 var Footer = React.createClass({
   render: function(){
     return (
@@ -13,7 +14,13 @@ var Footer = React.createClass({
         <hr />
         <div className="row-fluid">
           <div className="span12">
-            <div>The React.js Course by Azat (<a href="http://twitter.com/azat_co" target="_blank">@azat_co</a>)</div>
+            <div>
+              React Quickly by Azat (
+                <a href="http://twitter.com/azat_co" target="_blank">
+                  @azat_co
+                </a>
+              )
+            </div>
           </div>
         </div>
       </div>
@@ -25,7 +32,7 @@ var Footer = React.createClass({
 var MessageList = React.createClass({
   render: function(){
     var messages = this.props.messages
-    if (!messages.length>0) return (
+    if (!messages.length > 0) return (
       <tr>
         <td colspan="2">No messages yet</td>
       </tr>
@@ -57,7 +64,7 @@ var MessageList = React.createClass({
 
 var NewMessage = React.createClass({
   addMessage: function(){
-    var fD = React.findDOMNode
+    var fD = ReactDOM.findDOMNode
     this.props.addMessageCb({
       name: fD(this.refs.name).value,
       message: fD(this.refs.message).value
@@ -73,9 +80,21 @@ var NewMessage = React.createClass({
       <div className="row-fluid" id="new-message">
         <div className="span12">
           <form className="well form-inline" onKeyUp={this.keyup}>
-            <input type="text" name="username" className="input-small" placeholder="Azat" ref="name"/>
-            <input type="text" name="message" className="input-small" placeholder="Hello!" ref="message" />
-            <a id="send" className="btn btn-primary" onClick={this.addMessage}>POST</a>
+            <input type="text"
+              name="username"
+              className="input-small"
+              placeholder="Azat"
+              ref="name"/>
+            <input type="text"
+              name="message"
+              className="input-small"
+              placeholder="Hello!"
+              ref="message" />
+            <a id="send"
+              className="btn btn-primary"
+              onClick={this.addMessage}>
+              POST
+            </a>
           </form>
         </div>
       </div>
@@ -95,7 +114,7 @@ var MessageBoard = React.createClass({
       if(!result || !result.length){
         return
       }
-      _this.setState({ messages: result })
+      _this.setState({messages: result})
     })
   },
   addMessage: function(message){
@@ -119,6 +138,6 @@ var MessageBoard = React.createClass({
   }
 })
 
-React.render(<Header />, document.getElementById('header'))
-React.render(<Footer />, document.getElementById('footer'))
-React.render(<MessageBoard />, document.getElementById('message-board'))
+ReactDOM.render(<Header />, document.getElementById('header'))
+ReactDOM.render(<Footer />, document.getElementById('footer'))
+ReactDOM.render(<MessageBoard />, document.getElementById('message-board'))

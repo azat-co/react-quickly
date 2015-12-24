@@ -6,6 +6,7 @@ var Header = React.createClass({displayName: "Header",
   }
 })
 
+
 var Footer = React.createClass({displayName: "Footer",
   render: function(){
     return (
@@ -13,7 +14,13 @@ var Footer = React.createClass({displayName: "Footer",
         React.createElement("hr", null), 
         React.createElement("div", {className: "row-fluid"}, 
           React.createElement("div", {className: "span12"}, 
-            React.createElement("div", null, "The React.js Course by Azat (", React.createElement("a", {href: "http://twitter.com/azat_co", target: "_blank"}, "@azat_co"), ")")
+            React.createElement("div", null, 
+              "React Quickly by Azat (", 
+                React.createElement("a", {href: "http://twitter.com/azat_co", target: "_blank"}, 
+                  "@azat_co"
+                ), 
+              ")"
+            )
           )
         )
       )
@@ -25,7 +32,7 @@ var Footer = React.createClass({displayName: "Footer",
 var MessageList = React.createClass({displayName: "MessageList",
   render: function(){
     var messages = this.props.messages
-    if (!messages.length>0) return (
+    if (!messages.length > 0) return (
       React.createElement("tr", null, 
         React.createElement("td", {colspan: "2"}, "No messages yet")
       )
@@ -57,7 +64,7 @@ var MessageList = React.createClass({displayName: "MessageList",
 
 var NewMessage = React.createClass({displayName: "NewMessage",
   addMessage: function(){
-    var fD = React.findDOMNode
+    var fD = ReactDOM.findDOMNode
     this.props.addMessageCb({
       name: fD(this.refs.name).value,
       message: fD(this.refs.message).value
@@ -73,9 +80,21 @@ var NewMessage = React.createClass({displayName: "NewMessage",
       React.createElement("div", {className: "row-fluid", id: "new-message"}, 
         React.createElement("div", {className: "span12"}, 
           React.createElement("form", {className: "well form-inline", onKeyUp: this.keyup}, 
-            React.createElement("input", {type: "text", name: "username", className: "input-small", placeholder: "Azat", ref: "name"}), 
-            React.createElement("input", {type: "text", name: "message", className: "input-small", placeholder: "Hello!", ref: "message"}), 
-            React.createElement("a", {id: "send", className: "btn btn-primary", onClick: this.addMessage}, "POST")
+            React.createElement("input", {type: "text", 
+              name: "username", 
+              className: "input-small", 
+              placeholder: "Azat", 
+              ref: "name"}), 
+            React.createElement("input", {type: "text", 
+              name: "message", 
+              className: "input-small", 
+              placeholder: "Hello!", 
+              ref: "message"}), 
+            React.createElement("a", {id: "send", 
+              className: "btn btn-primary", 
+              onClick: this.addMessage}, 
+              "POST"
+            )
           )
         )
       )
@@ -92,10 +111,10 @@ var MessageBoard = React.createClass({displayName: "MessageBoard",
   componentWillMount: function(){
     var _this = this
     $.getJSON(url, function(result){
-      if(!result || !result || !result.length){
+      if(!result || !result.length){
         return
       }
-      _this.setState({ messages: result })
+      _this.setState({messages: result})
     })
   },
   addMessage: function(message){
@@ -119,6 +138,6 @@ var MessageBoard = React.createClass({displayName: "MessageBoard",
   }
 })
 
-React.render(React.createElement(Header, null), document.getElementById('header'))
-React.render(React.createElement(Footer, null), document.getElementById('footer'))
-React.render(React.createElement(MessageBoard, null), document.getElementById('message-board'))
+ReactDOM.render(React.createElement(Header, null), document.getElementById('header'))
+ReactDOM.render(React.createElement(Footer, null), document.getElementById('footer'))
+ReactDOM.render(React.createElement(MessageBoard, null), document.getElementById('message-board'))
