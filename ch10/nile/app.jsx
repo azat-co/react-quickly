@@ -1,15 +1,10 @@
 import { createHashHistory, useBasename} from 'history'
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import { createHistory, useBasename } from 'history'
 import { Router, Route, IndexRoute, Link, IndexLink } from 'react-router'
 
 const history = createHashHistory({
-  // queryKey: false
 })
-// const history = useBasename(createHistory)({
-//   basename: '/pinterest'
-// })
 
 const PRODUCTS = [
   { id: 0, src: 'images/proexpress-cover.jpg', title: 'Pro Express.js', url: 'http://amzn.to/1D6qiqk' },
@@ -102,7 +97,7 @@ const App = React.createClass({
       <div className="well">
         <Heading/>
         <div>
-          
+
           {this.props.children}
           {(isModal)?
             <Modal isOpen={true} returnTo={this.props.location.state.returnTo}>
