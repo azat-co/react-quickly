@@ -2,9 +2,9 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
-'use strict';
+'use strict'
 
-var React = require('react-native');
+var React = require('react-native')
 
 var {
   AppRegistry,
@@ -13,7 +13,7 @@ var {
   View,
   NavigatorIOS,
   ListView
-} = React;
+} = React
 
 var Weather = React.createClass({
   render: function() {
@@ -30,9 +30,9 @@ var Weather = React.createClass({
           Cmd+D or shake for dev menu
         </Text>
       </View>
-    );
+    )
   }
-});
+})
 
 var styles = StyleSheet.create({
   navigatorContainer: {
@@ -54,10 +54,11 @@ var styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-});
+})
 
 const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
-  openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast'
+  // openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
+  openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
 
 const App = React.createClass({
   getInitialState(){
@@ -81,8 +82,8 @@ const App = React.createClass({
         })
       })
       .catch((error) => {
-        console.warn(error);
-      });
+        console.warn(error)
+      })
   },
   render() {
     return (
@@ -102,4 +103,4 @@ const App = React.createClass({
 const Forecast = require('./forecast.ios')
 const Search = require('./search.ios.js')
 
-AppRegistry.registerComponent('weather', () => App);
+AppRegistry.registerComponent('weather', () => App)
