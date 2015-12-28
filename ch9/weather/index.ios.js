@@ -5,12 +5,14 @@
 'use strict';
 
 var React = require('react-native');
+
 var {
   AppRegistry,
   StyleSheet,
   Text,
   View,
-  NavigatorIOS
+  NavigatorIOS,
+  ListView
 } = React;
 
 var Weather = React.createClass({
@@ -54,13 +56,42 @@ var styles = StyleSheet.create({
   },
 });
 
+const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
+  openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast'
+
 const App = React.createClass({
+  getInitialState(){
+    return {isForecast: false}
+  },
+  search(cityName) {
+    // debugger
+    console.log(cityName, this)
+    fetch(`${openWeatherUrl}/?appid=${openWeatherAppId}&q=${cityName}&units=metric`, {
+      method: 'GET'
+    }).then((response) => response.json())
+      .then((response) => {
+        console.log(response)
+        let dataSource = new ListView.DataSource({
+          rowHasChanged: (row1, row2) => row1 !== row2
+        })
+        this.refs.navigator.push({
+          title: 'Forecast for ' + response.city.name,
+          component: Forecast,
+          passProps: {forecastData: dataSource.cloneWithRows(response.list)}
+        })
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  },
   render() {
     return (
-      <NavigatorIOS
+      <NavigatorIOS ref='navigator'
         initialRoute={{
+
           component: Search,
           title: 'Search',
+          passProps: {search: this.search}
         }}
         style={styles.navigatorContainer}
       />
@@ -68,6 +99,7 @@ const App = React.createClass({
   }
 })
 
+const Forecast = require('./forecast.ios')
 const Search = require('./search.ios.js')
 
 AppRegistry.registerComponent('weather', () => App);

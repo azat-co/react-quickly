@@ -2,28 +2,31 @@
 
 var React = require('react-native');
 var {
-  AppRegistry,
   StyleSheet,
   Text,
+  TextInput,
   View,
   NavigatorIOS
 } = React;
 
 
 module.exports = React.createClass({
+  search(event) {
+    this.props.search(event.nativeEvent.text)
+  },
   render: function() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Hi
+          Welcome to Weather App, React Quickly example
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+          Enter your city name:
         </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <TextInput
+          placeholder="San Francisco" returnKeyType="search"
+          enablesReturnKeyAutomatically={true}
+          onEndEditing={this.search} style={styles.textInput}/>
       </View>
     );
   }
@@ -49,4 +52,13 @@ var styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  textInput: {
+    borderColor: '#8E8E93',
+    borderWidth: 0.5,
+    backgroundColor: '#fff',
+    height: 40,
+    marginLeft: 60,
+    marginRight: 60,
+    padding: 8,
+  }
 });
