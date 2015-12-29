@@ -11,9 +11,11 @@ var {
   StyleSheet,
   Text,
   View,
-  NavigatorIOS,
+  Navigator,
   ListView,
-  AsyncStorage
+  AsyncStorage,
+  TouchableOpacity,
+  PixelRatio
 } = React
 
 var Weather = React.createClass({
@@ -55,6 +57,50 @@ var styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  messageText: {
+    fontSize: 17,
+    fontWeight: '500',
+    padding: 15,
+    marginTop: 50,
+    marginLeft: 15,
+  },
+  button: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomColor: '#CDCDCD',
+  },
+  buttonText: {
+    fontSize: 17,
+    fontWeight: '500',
+  },
+  navBar: {
+    backgroundColor: 'white',
+  },
+  navBarText: {
+    fontSize: 16,
+    marginVertical: 10,
+  },
+  navBarTitleText: {
+    color: 'blue',
+    fontWeight: '500',
+    marginVertical: 9,
+  },
+  navBarLeftButton: {
+    paddingLeft: 10,
+  },
+  navBarRightButton: {
+    paddingRight: 10,
+  },
+  navBarButtonText: {
+    color: 'black'
+  },
+  scene: {
+    flex: 1,
+    paddingTop: 20,
+    backgroundColor: '#EAEAEA',
+  },
+
 })
 
 const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
@@ -66,11 +112,6 @@ const App = React.createClass({
     AsyncStorage.getItem('cityName').then((value) => {
       console.log('yo', value)
       if (value) this.setState({'cityName': value})
-      this.refs.navigator.replacePreviousAndPop({
-        component: Search,
-        title: 'Search',
-        passProps: {search: this.search, cityName: this.state.cityName}
-      })
     }).done()
     return {isForecast: false, cityName: ''}
   },
@@ -83,32 +124,111 @@ const App = React.createClass({
         let dataSource = new ListView.DataSource({
           rowHasChanged: (row1, row2) => row1 !== row2
         })
+
         this.refs.navigator.push({
-          title: 'Forecast for ' + response.city.name,
+          name: 'Forecast',
           component: Forecast,
-          passProps: {forecastData: dataSource.cloneWithRows(response.list)}
+          passProps: {forecastData: dataSource.cloneWithRows(response.list) }
         })
+
       })
       .catch((error) => {
         console.warn(error)
       })
   },
-  getRecentChats(){
-    return this.state.cityName
-  },
   render() {
     return (
-      <NavigatorIOS ref='navigator'
-        initialRoute={{
-          component: Search,
-          title: 'Search',
-          passProps: {search: this.search, cityName: this.state.cityName}
-        }}
-        style={styles.navigatorContainer}
+      <Navigator
+        initialRoute={{name: 'Search', index: 0}}
+        ref='navigator'
+        navigationBar={
+          <Navigator.NavigationBar
+            routeMapper={NavigationBarRouteMapper}
+            style={styles.navBar}
+          />
+        }
+        renderScene={(route, navigator) => {
+          console.log(route)
+          if (route.name == 'Forecast') return React.createElement(route.component, route.passProps)
+          return <Search
+            search={this.search}
+            cityName={this.state.cityName}
+            name={route.name}
+            onForward={() => {
+              var nextIndex = route.index + 1;
+              navigator.push({
+                name: 'Forecast',
+                index: nextIndex,
+              });
+            }}
+            onBack={() => {
+              if (route.index > 0) {
+                navigator.pop();
+              }
+            }}
+          />
+        }
+        }
       />
     )
   }
 })
+
+class NavButton extends React.Component {
+  render() {
+    return (
+      <TouchableHighlight
+        style={styles.button}
+        underlayColor="#B5B5B5"
+        onPress={this.props.onPress}>
+        <Text style={styles.buttonText}>{this.props.text}</Text>
+      </TouchableHighlight>
+    );
+  }
+}
+
+var NavigationBarRouteMapper = {
+
+  LeftButton: function(route, navigator, index, navState) {
+    if (index === 0) {
+      return null;
+    }
+
+    var previousRoute = navState.routeStack[index - 1];
+    return (
+      <TouchableOpacity
+        onPress={() => navigator.pop()}
+        style={styles.navBarLeftButton}>
+        <Text style={[styles.navBarText, styles.navBarButtonText, ]}>
+          {'<'} {previousRoute.name}
+        </Text>
+      </TouchableOpacity>
+    );
+  },
+
+  RightButton: function(route, navigator, index, navState) {
+    return (
+      <TouchableOpacity
+        onPress={() => navigator.push(newRandomRoute())}
+        style={styles.navBarRightButton}>
+        {//<Text style={[styles.navBarText, styles.navBarButtonText]}>
+        //   Next
+        // </Text>
+      }
+      </TouchableOpacity>
+    );
+  },
+
+  Title: function(route, navigator, index, navState) {
+    return (
+      <Text style={[styles.navBarText, styles.navBarTitleText]}>
+        {route.name}
+      </Text>
+    );
+  },
+
+};
+
 
 const Forecast = require('./forecast.ios')
 const Search = require('./search.ios.js')

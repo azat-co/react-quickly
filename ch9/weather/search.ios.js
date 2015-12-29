@@ -14,19 +14,17 @@ var {
 
 module.exports = React.createClass({
   getInitialState() {
-    return ({isRemember: false, cityName: this.props.cityName || ''})
+    return ({isRemember: false})
   },
   search(event) {
-    this.setState({cityName: event.nativeEvent.text}, ()=>{
-      this.props.search(this.state.cityName, this.state.isRemember)
-    })
+    this.props.search(this.props.cityName, this.state.isRemember)
   },
   toggleRemember() {
     console.log('toggle', this.state.isRemember)
     this.setState({ isRemember: !this.state.isRemember})
   },
   render: function() {
-    console.log('search:', this.props.isRemember, this.props)
+    console.log('search:', this.props.cityName, this.props)
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -36,7 +34,9 @@ module.exports = React.createClass({
           Enter your city name:
         </Text>
         <TextInput
-          placeholder="San Francisco" value={this.state.cityName} returnKeyType="search"
+          placeholder="San Francisco"
+          value={this.props.cityName}
+          returnKeyType="search"
           enablesReturnKeyAutomatically={true}
           onEndEditing={this.search} style={styles.textInput}/>
         <Text>Remember?</Text><Switch onValueChange={this.toggleRemember} value={this.state.isRemember}></Switch>
