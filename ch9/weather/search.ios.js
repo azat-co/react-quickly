@@ -6,15 +6,27 @@ var {
   Text,
   TextInput,
   View,
-  NavigatorIOS
-} = React;
+  NavigatorIOS,
+  Switch,
+  TouchableHighlight
+} = React
 
 
 module.exports = React.createClass({
+  getInitialState() {
+    return ({isRemember: false, cityName: this.props.cityName || ''})
+  },
   search(event) {
-    this.props.search(event.nativeEvent.text)
+    this.setState({cityName: event.nativeEvent.text}, ()=>{
+      this.props.search(this.state.cityName, this.state.isRemember)
+    })
+  },
+  toggleRemember() {
+    console.log('toggle', this.state.isRemember)
+    this.setState({ isRemember: !this.state.isRemember})
   },
   render: function() {
+    console.log('search:', this.props.isRemember, this.props)
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -24,13 +36,15 @@ module.exports = React.createClass({
           Enter your city name:
         </Text>
         <TextInput
-          placeholder="San Francisco" returnKeyType="search"
+          placeholder="San Francisco" value={this.state.cityName} returnKeyType="search"
           enablesReturnKeyAutomatically={true}
           onEndEditing={this.search} style={styles.textInput}/>
+        <Text>Remember?</Text><Switch onValueChange={this.toggleRemember} value={this.state.isRemember}></Switch>
+        <TouchableHighlight onPress={this.search}><Text style={styles.button}>Search</Text></TouchableHighlight>
       </View>
-    );
+    )
   }
-});
+})
 
 var styles = StyleSheet.create({
   navigatorContainer: {
@@ -60,5 +74,15 @@ var styles = StyleSheet.create({
     marginLeft: 60,
     marginRight: 60,
     padding: 8,
+  },
+  button: {
+    color: '#111',
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: 'blue',
+    padding: 10,
+  	borderRadius: 20,
+    fontWeight: '600',
+    marginTop: 30
   }
-});
+})

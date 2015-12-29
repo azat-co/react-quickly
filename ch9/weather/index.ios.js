@@ -12,7 +12,8 @@ var {
   Text,
   View,
   NavigatorIOS,
-  ListView
+  ListView,
+  AsyncStorage
 } = React
 
 var Weather = React.createClass({
@@ -57,21 +58,28 @@ var styles = StyleSheet.create({
 })
 
 const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
-  // openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
-  openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
+  openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
+  // openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
 
 const App = React.createClass({
   getInitialState(){
-    return {isForecast: false}
+    AsyncStorage.getItem('cityName').then((value) => {
+      console.log('yo', value)
+      if (value) this.setState({'cityName': value})
+      this.refs.navigator.replacePreviousAndPop({
+        component: Search,
+        title: 'Search',
+        passProps: {search: this.search, cityName: this.state.cityName}
+      })
+    }).done()
+    return {isForecast: false, cityName: ''}
   },
-  search(cityName) {
-    // debugger
-    console.log(cityName, this)
+  search(cityName, isRemember) {
     fetch(`${openWeatherUrl}/?appid=${openWeatherAppId}&q=${cityName}&units=metric`, {
       method: 'GET'
     }).then((response) => response.json())
       .then((response) => {
-        console.log(response)
+        if (isRemember) AsyncStorage.setItem('cityName', cityName)
         let dataSource = new ListView.DataSource({
           rowHasChanged: (row1, row2) => row1 !== row2
         })
@@ -85,14 +93,16 @@ const App = React.createClass({
         console.warn(error)
       })
   },
+  getRecentChats(){
+    return this.state.cityName
+  },
   render() {
     return (
       <NavigatorIOS ref='navigator'
         initialRoute={{
-
           component: Search,
           title: 'Search',
-          passProps: {search: this.search}
+          passProps: {search: this.search, cityName: this.state.cityName}
         }}
         style={styles.navigatorContainer}
       />
