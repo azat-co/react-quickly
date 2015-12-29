@@ -12,31 +12,35 @@ var {
   ListView
 } = React
 const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
-  // openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
-  openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
+  openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
+  // openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
 
 const Forecast = require('./forecast.ios')
 module.exports = React.createClass({
   getInitialState() {
     this.props.storage.getFromStorage('cityName', (cityName) => {
-      if (cityName) this.setState({cityName: cityName})
+      if (cityName) this.setState({cityName: cityName, isRemember: true})
     })
     return ({isRemember: false, cityName: ''})
   },
   toggleRemember() {
     console.log('toggle', this.state.isRemember)
     this.setState({ isRemember: !this.state.isRemember}, ()=>{
-      // if (this.state.isRemember) AsyncStorage.setItem('cityName', this.state.cityName)
+      if (!this.state.isRemember) this.props.storage.removeItem('cityName')
     })
   },
+  handleCityName(cityName) {
+    this.setState({ cityName: cityName})
+  },
   search(event) {
-    let cityName = event.nativeEvent.text,
+    let cityName = this.state.cityName,
       isRemember = this.state.isRemember
+    if (!cityName) return false
     fetch(`${openWeatherUrl}/?appid=${openWeatherAppId}&q=${cityName}&units=metric`, {
       method: 'GET'
     }).then((response) => response.json())
       .then((response) => {
-        if (isRemember) AsyncStorage.setItem('cityName', cityName)
+        if (isRemember) this.props.storage.setInStorage('cityName', cityName)
         let dataSource = new ListView.DataSource({
           rowHasChanged: (row1, row2) => row1 !== row2
         })
@@ -44,7 +48,10 @@ module.exports = React.createClass({
         this.props.navigator.push({
           name: 'Forecast',
           component: Forecast,
-          passProps: {forecastData: dataSource.cloneWithRows(response.list) }
+          passProps: {
+            forecastData: dataSource.cloneWithRows(response.list),
+            forecastRaw: response
+          }
         })
 
       })
@@ -52,11 +59,6 @@ module.exports = React.createClass({
         console.warn(error)
       })
   },
-  // search(event) {
-
-    // console.log(this.props.isRemember)
-    // this.props.search(this.props.cityName, this.props.isRemember)
-  // },
   render: function() {
     console.log('search:', this.props.cityName, this.props)
     return (
@@ -72,6 +74,7 @@ module.exports = React.createClass({
           value={this.state.cityName}
           returnKeyType="search"
           enablesReturnKeyAutomatically={true}
+          onChangeText={this.handleCityName}
           onEndEditing={this.search} style={styles.textInput}/>
         <Text>Remember?</Text><Switch onValueChange={this.toggleRemember} value={this.state.isRemember}></Switch>
         <TouchableHighlight onPress={this.search}><Text style={styles.button}>Search</Text></TouchableHighlight>

@@ -28,7 +28,10 @@ const ForecastRow = (forecast)=> {
 module.exports = React.createClass({
   render: function() {
     return (
-      <ScrollView style={styles.scroll}><ListView dataSource={this.props.forecastData} renderRow={ForecastRow} style={styles.listView}/></ScrollView>
+      <ScrollView style={styles.scroll}>
+        <Text style={styles.text}>{this.props.forecastRaw.city.name}</Text>
+        <ListView dataSource={this.props.forecastData} renderRow={ForecastRow} style={styles.listView}/>
+      </ScrollView>
     );
   }
 });
@@ -44,6 +47,7 @@ var styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   listView: {
+    marginTop: 10,
   },
   row: {
     flex: 1,
@@ -51,14 +55,20 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#5AC8FA',
-    paddingRight: 20,
-    marginTop: 1,
+    paddingRight: 10,
+    paddingLeft: 10,
+    marginTop: 1
   },
   rightContainer: {
     flex: 1
   },
   scroll: {
-    flex: 1
+    flex: 1,
+    padding: 5
+  },
+  text: {
+    marginTop: 80,
+    fontSize: 40
   },
   subtitle: {
     fontSize: 16,

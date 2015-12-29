@@ -18,24 +18,120 @@ var {
   PixelRatio
 } = React
 
-var Weather = React.createClass({
-  render: function() {
+const Search = require('./search.ios.js')
+
+
+
+const storage = {
+  getFromStorage(name, callback) {
+    AsyncStorage.getItem(name).then((value) => {
+      console.log(`AsyncStorage GET for ${name}: "${value}"`)
+      if (value) callback(value)
+      else callback(null)
+    }).done()
+  },
+  setInStorage(name, value) {
+    console.log(`AsyncStorage SET for ${name}: "${value}"`)
+    AsyncStorage.setItem(name, value)
+  },
+  removeItem: AsyncStorage.removeItem
+}
+
+const App = React.createClass({
+  render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+      <Navigator
+        initialRoute={{name: 'Search', index: 0}}
+        ref='navigator'
+        navigationBar={
+          <Navigator.NavigationBar
+            routeMapper={NavigationBarRouteMapper}
+            style={styles.navBar}
+          />
+        }
+        renderScene={(route, navigator) => {
+          console.log(route)
+          if (route.name == 'Forecast') return React.createElement(route.component, route.passProps)
+          return <Search
+            navigator={navigator}
+            storage={storage}
+            name={route.name}
+            onForward={() => {
+              var nextIndex = route.index + 1;
+              navigator.push({
+                name: 'Forecast',
+                index: nextIndex,
+              });
+            }}
+            onBack={() => {
+              if (route.index > 0) {
+                navigator.pop();
+              }
+            }}
+          />
+        }
+        }
+      />
     )
   }
 })
+
+const NavButton =  React.createClass({
+  render() {
+    return (
+      <TouchableHighlight
+        style={styles.button}
+        underlayColor="#B5B5B5"
+        onPress={this.props.onPress}>
+        <Text style={styles.buttonText}>{this.props.text}</Text>
+      </TouchableHighlight>
+    );
+  }
+})
+
+var NavigationBarRouteMapper = {
+
+  LeftButton: function(route, navigator, index, navState) {
+    if (index === 0) {
+      return null;
+    }
+
+    var previousRoute = navState.routeStack[index - 1];
+    return (
+      <TouchableOpacity
+        onPress={() => navigator.pop()}
+        style={styles.navBarLeftButton}>
+        <Text style={[styles.navBarText, styles.navBarButtonText, ]}>
+          {'<'} {previousRoute.name}
+        </Text>
+      </TouchableOpacity>
+    );
+  },
+
+  RightButton: function(route, navigator, index, navState) {
+    return (
+      <TouchableOpacity
+        onPress={() => navigator.push(newRandomRoute())}
+        style={styles.navBarRightButton}>
+        {//<Text style={[styles.navBarText, styles.navBarButtonText]}>
+        //   Next
+        // </Text>
+      }
+      </TouchableOpacity>
+    );
+  },
+
+  Title: function(route, navigator, index, navState) {
+    return (
+      <Text style={[styles.navBarText, styles.navBarTitleText]}>
+        {route.name}
+      </Text>
+    );
+  },
+
+};
+
+
 
 var styles = StyleSheet.create({
   navigatorContainer: {
@@ -103,149 +199,5 @@ var styles = StyleSheet.create({
 
 })
 
-
-const storage = {
-  getFromStorage(name, callback) {
-    AsyncStorage.getItem(name).then((value) => {
-      if (value) callback(value)
-      else callback(null)
-    }).done()
-  },
-  setInStorage(name, value) {
-    AsyncStorage.setItem(name, value)
-  }
-}
-
-const App = React.createClass({
-  // getInitialState(){
-  //   AsyncStorage.getItem('cityName').then((value) => {
-  //     console.log('yo', value)
-  //     if (value) this.setState({'cityName': value, isRemember: true})
-  //   }).done()
-  //   return {isForecast: false, cityName: '', isRemember: false}
-  // },
-  // search(cityName, isRemember) {
-  //   fetch(`${openWeatherUrl}/?appid=${openWeatherAppId}&q=${cityName}&units=metric`, {
-  //     method: 'GET'
-  //   }).then((response) => response.json())
-  //     .then((response) => {
-  //       if (isRemember) AsyncStorage.setItem('cityName', cityName)
-  //       let dataSource = new ListView.DataSource({
-  //         rowHasChanged: (row1, row2) => row1 !== row2
-  //       })
-  //
-  //       this.refs.navigator.push({
-  //         name: 'Forecast',
-  //         component: Forecast,
-  //         passProps: {forecastData: dataSource.cloneWithRows(response.list) }
-  //       })
-  //
-  //     })
-  //     .catch((error) => {
-  //       console.warn(error)
-  //     })
-  // },
-  // toggleRemember() {
-  //   console.log('toggle', this.state.isRemember)
-  //   this.setState({ isRemember: !this.state.isRemember}, ()=>{
-  //     if (this.state.isRemember) AsyncStorage.setItem('cityName', this.state.cityName)
-  //   })
-  // },
-  render() {
-    return (
-      <Navigator
-        initialRoute={{name: 'Search', index: 0}}
-        ref='navigator'
-        navigationBar={
-          <Navigator.NavigationBar
-            routeMapper={NavigationBarRouteMapper}
-            style={styles.navBar}
-          />
-        }
-        renderScene={(route, navigator) => {
-          console.log(route)
-          if (route.name == 'Forecast') return React.createElement(route.component, route.passProps)
-          return <Search
-            navigator={navigator}
-            storage={storage}
-            name={route.name}
-            onForward={() => {
-              var nextIndex = route.index + 1;
-              navigator.push({
-                name: 'Forecast',
-                index: nextIndex,
-              });
-            }}
-            onBack={() => {
-              if (route.index > 0) {
-                navigator.pop();
-              }
-            }}
-          />
-        }
-        }
-      />
-    )
-  }
-})
-
-class NavButton extends React.Component {
-  render() {
-    return (
-      <TouchableHighlight
-        style={styles.button}
-        underlayColor="#B5B5B5"
-        onPress={this.props.onPress}>
-        <Text style={styles.buttonText}>{this.props.text}</Text>
-      </TouchableHighlight>
-    );
-  }
-}
-
-var NavigationBarRouteMapper = {
-
-  LeftButton: function(route, navigator, index, navState) {
-    if (index === 0) {
-      return null;
-    }
-
-    var previousRoute = navState.routeStack[index - 1];
-    return (
-      <TouchableOpacity
-        onPress={() => navigator.pop()}
-        style={styles.navBarLeftButton}>
-        <Text style={[styles.navBarText, styles.navBarButtonText, ]}>
-          {'<'} {previousRoute.name}
-        </Text>
-      </TouchableOpacity>
-    );
-  },
-
-  RightButton: function(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity
-        onPress={() => navigator.push(newRandomRoute())}
-        style={styles.navBarRightButton}>
-        {//<Text style={[styles.navBarText, styles.navBarButtonText]}>
-        //   Next
-        // </Text>
-      }
-      </TouchableOpacity>
-    );
-  },
-
-  Title: function(route, navigator, index, navState) {
-    return (
-      <Text style={[styles.navBarText, styles.navBarTitleText]}>
-        {route.name}
-      </Text>
-    );
-  },
-
-};
-
-
-
-const Search = require('./search.ios.js')
 
 AppRegistry.registerComponent('weather', () => App)
