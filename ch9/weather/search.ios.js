@@ -53,7 +53,6 @@ module.exports = React.createClass({
             forecastRaw: response
           }
         })
-
       })
       .catch((error) => {
         console.warn(error)

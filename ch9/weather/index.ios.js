@@ -20,8 +20,6 @@ var {
 
 const Search = require('./search.ios.js')
 
-
-
 const storage = {
   getFromStorage(name, callback) {
     AsyncStorage.getItem(name).then((value) => {
@@ -41,7 +39,14 @@ const App = React.createClass({
   render() {
     return (
       <Navigator
-        initialRoute={{name: 'Search', index: 0}}
+        initialRoute={{
+          name: 'Search',
+          index: 0,
+          component: Search,
+          passProps: {
+            storage: storage
+          }
+        }}
         ref='navigator'
         navigationBar={
           <Navigator.NavigationBar
@@ -51,24 +56,10 @@ const App = React.createClass({
         }
         renderScene={(route, navigator) => {
           console.log(route)
-          if (route.name == 'Forecast') return React.createElement(route.component, route.passProps)
-          return <Search
-            navigator={navigator}
-            storage={storage}
-            name={route.name}
-            onForward={() => {
-              var nextIndex = route.index + 1;
-              navigator.push({
-                name: 'Forecast',
-                index: nextIndex,
-              });
-            }}
-            onBack={() => {
-              if (route.index > 0) {
-                navigator.pop();
-              }
-            }}
-          />
+          let props = route.passProps
+          props.navigator = navigator
+          props.name = route.name
+          return React.createElement(route.component, props)
         }
         }
       />
@@ -85,7 +76,7 @@ const NavButton =  React.createClass({
         onPress={this.props.onPress}>
         <Text style={styles.buttonText}>{this.props.text}</Text>
       </TouchableHighlight>
-    );
+    )
   }
 })
 
@@ -93,10 +84,10 @@ var NavigationBarRouteMapper = {
 
   LeftButton: function(route, navigator, index, navState) {
     if (index === 0) {
-      return null;
+      return null
     }
 
-    var previousRoute = navState.routeStack[index - 1];
+    var previousRoute = navState.routeStack[index - 1]
     return (
       <TouchableOpacity
         onPress={() => navigator.pop()}
@@ -105,7 +96,7 @@ var NavigationBarRouteMapper = {
           {'<'} {previousRoute.name}
         </Text>
       </TouchableOpacity>
-    );
+    )
   },
 
   RightButton: function(route, navigator, index, navState) {
@@ -118,7 +109,7 @@ var NavigationBarRouteMapper = {
         // </Text>
       }
       </TouchableOpacity>
-    );
+    )
   },
 
   Title: function(route, navigator, index, navState) {
@@ -126,10 +117,10 @@ var NavigationBarRouteMapper = {
       <Text style={[styles.navBarText, styles.navBarTitleText]}>
         {route.name}
       </Text>
-    );
+    )
   },
 
-};
+}
 
 
 
