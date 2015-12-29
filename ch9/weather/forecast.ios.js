@@ -13,9 +13,11 @@ var {
 
 
 const ForecastRow = (forecast)=> {
+  console.log(forecast)
   return (
     <View style={styles.row}>
       <View style={styles.rightContainer}>
+        <Text style={styles.subtitle}></Text>
         <Text style={styles.subtitle}>
           {forecast.dt_txt}: {forecast.weather[0].description}, {forecast.main.temp}
         </Text>

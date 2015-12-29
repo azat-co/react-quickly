@@ -111,9 +111,9 @@ const App = React.createClass({
   getInitialState(){
     AsyncStorage.getItem('cityName').then((value) => {
       console.log('yo', value)
-      if (value) this.setState({'cityName': value})
+      if (value) this.setState({'cityName': value, isRemember: true})
     }).done()
-    return {isForecast: false, cityName: ''}
+    return {isForecast: false, cityName: '', isRemember: false}
   },
   search(cityName, isRemember) {
     fetch(`${openWeatherUrl}/?appid=${openWeatherAppId}&q=${cityName}&units=metric`, {
@@ -136,6 +136,12 @@ const App = React.createClass({
         console.warn(error)
       })
   },
+  toggleRemember() {
+    console.log('toggle', this.state.isRemember)
+    this.setState({ isRemember: !this.state.isRemember}, ()=>{
+      if (this.state.isRemember) AsyncStorage.setItem('cityName', this.state.cityName)
+    })
+  },
   render() {
     return (
       <Navigator
@@ -153,6 +159,8 @@ const App = React.createClass({
           return <Search
             search={this.search}
             cityName={this.state.cityName}
+            isRemember={this.state.isRemember}
+            toggleRemember={this.toggleRemember}
             name={route.name}
             onForward={() => {
               var nextIndex = route.index + 1;

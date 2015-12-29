@@ -17,11 +17,8 @@ module.exports = React.createClass({
     return ({isRemember: false})
   },
   search(event) {
-    this.props.search(this.props.cityName, this.state.isRemember)
-  },
-  toggleRemember() {
-    console.log('toggle', this.state.isRemember)
-    this.setState({ isRemember: !this.state.isRemember})
+    console.log(this.props.isRemember)
+    this.props.search(this.props.cityName, this.props.isRemember)
   },
   render: function() {
     console.log('search:', this.props.cityName, this.props)
@@ -39,7 +36,7 @@ module.exports = React.createClass({
           returnKeyType="search"
           enablesReturnKeyAutomatically={true}
           onEndEditing={this.search} style={styles.textInput}/>
-        <Text>Remember?</Text><Switch onValueChange={this.toggleRemember} value={this.state.isRemember}></Switch>
+        <Text>Remember?</Text><Switch onValueChange={this.props.toggleRemember} value={this.props.isRemember}></Switch>
         <TouchableHighlight onPress={this.search}><Text style={styles.button}>Search</Text></TouchableHighlight>
       </View>
     )
