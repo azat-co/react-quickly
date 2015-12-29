@@ -42,16 +42,20 @@ var TimerWrapper = React.createClass({
   },
   render() {
     return (
-      <ScrollView><View style={styles.container}>
-        <Text style={styles.heading}>Timer</Text>
-        <Text style={styles.instructions}>Press a button</Text>
-        <View style={styles.buttons}>{timerOptions.map((item, index, list)=>{
-          return <Button key={index} time={item} startTimer={this.startTimer} isMinutes={this.state.isMinutes}/>
-        })}</View>
-      <Text>Minutes</Text><Switch onValueChange={this.toggleTime} value={this.state.isMinutes}></Switch>
-        <Timer time={this.state.time}/>
-
-      </View></ScrollView>
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.heading}>Timer</Text>
+          <Text style={styles.instructions}>Press a button</Text>
+          <View style={styles.buttons}>
+            {timerOptions.map((item, index, list)=>{
+              return <Button key={index} time={item} startTimer={this.startTimer} isMinutes={this.state.isMinutes}/>
+            })}
+          </View>
+          <Text>Minutes</Text>
+          <Switch onValueChange={this.toggleTime} value={this.state.isMinutes}></Switch>
+          <Timer time={this.state.time}/>
+        </View>
+      </ScrollView>
     )
   }
 })
@@ -64,8 +68,8 @@ var Button = React.createClass({
   render() {
     return (
       <TouchableHighlight onPress={this.startTimer}>
-      <Text style={styles.button}>{this.props.time} {(this.props.isMinutes) ? 'minutes' : 'seconds'}</Text>
-    </TouchableHighlight>
+        <Text style={styles.button}>{this.props.time} {(this.props.isMinutes) ? 'minutes' : 'seconds'}</Text>
+      </TouchableHighlight>
     )
   }
 })

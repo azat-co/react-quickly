@@ -117,10 +117,8 @@ var NavigationBarRouteMapper = {
         {route.name}
       </Text>
     )
-  },
-
+  }
 }
-
 
 
 var styles = StyleSheet.create({
@@ -185,8 +183,7 @@ var styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     backgroundColor: '#EAEAEA',
-  },
-
+  }
 })
 
 

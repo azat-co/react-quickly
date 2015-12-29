@@ -13,7 +13,6 @@ var {
 
 
 const ForecastRow = (forecast)=> {
-  console.log(forecast)
   return (
     <View style={styles.row}>
       <View style={styles.rightContainer}>

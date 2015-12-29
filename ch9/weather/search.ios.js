@@ -1,17 +1,17 @@
-'use strict';
+'use strict'
 
-var React = require('react-native');
+var React = require('react-native')
 var {
   StyleSheet,
   Text,
   TextInput,
   View,
-  NavigatorIOS,
   Switch,
   TouchableHighlight,
   ListView,
   Alert
 } = React
+
 const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
   openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
   // openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
@@ -25,7 +25,7 @@ module.exports = React.createClass({
     return ({isRemember: false, cityName: ''})
   },
   toggleRemember() {
-    console.log('toggle', this.state.isRemember)
+    console.log('toggle: ', this.state.isRemember)
     this.setState({ isRemember: !this.state.isRemember}, ()=>{
       if (!this.state.isRemember) this.props.storage.removeItem('cityName')
     })
@@ -51,7 +51,6 @@ module.exports = React.createClass({
         let dataSource = new ListView.DataSource({
           rowHasChanged: (row1, row2) => row1 !== row2
         })
-        console.log(this)
         this.props.navigator.push({
           name: 'Forecast',
           component: Forecast,
@@ -82,7 +81,8 @@ module.exports = React.createClass({
           enablesReturnKeyAutomatically={true}
           onChangeText={this.handleCityName}
           onEndEditing={this.search} style={styles.textInput}/>
-        <Text>Remember?</Text><Switch onValueChange={this.toggleRemember} value={this.state.isRemember}></Switch>
+        <Text>Remember?</Text>
+        <Switch onValueChange={this.toggleRemember} value={this.state.isRemember}></Switch>
         <TouchableHighlight onPress={this.search}><Text style={styles.button}>Search</Text></TouchableHighlight>
       </View>
     )
