@@ -1,6 +1,6 @@
-'use strict';
+'use strict'
 
-var React = require('react-native');
+var React = require('react-native')
 var {
   StyleSheet,
   Text,
@@ -9,7 +9,7 @@ var {
   NavigatorIOS,
   ListView,
   ScrollView
-} = React;
+} = React
 
 
 const ForecastRow = (forecast)=> {
@@ -32,9 +32,9 @@ module.exports = React.createClass({
         <Text style={styles.text}>{this.props.forecastRaw.city.name}</Text>
         <ListView dataSource={this.props.forecastData} renderRow={ForecastRow} style={styles.listView}/>
       </ScrollView>
-    );
+    )
   }
-});
+})
 
 var styles = StyleSheet.create({
   navigatorContainer: {
@@ -75,4 +75,4 @@ var styles = StyleSheet.create({
     fontWeight: 'normal',
     color: '#fff',
   }
-});
+})

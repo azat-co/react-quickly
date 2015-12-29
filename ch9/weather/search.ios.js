@@ -9,7 +9,8 @@ var {
   NavigatorIOS,
   Switch,
   TouchableHighlight,
-  ListView
+  ListView,
+  Alert
 } = React
 const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
   openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
@@ -35,7 +36,13 @@ module.exports = React.createClass({
   search(event) {
     let cityName = this.state.cityName,
       isRemember = this.state.isRemember
-    if (!cityName) return false
+    if (!cityName) return Alert.alert(
+            'No City Name',
+            'Please enter city name',
+            [
+              {text: 'OK', onPress: () => console.log('OK Pressed!')},
+            ]
+          )
     fetch(`${openWeatherUrl}/?appid=${openWeatherAppId}&q=${cityName}&units=metric`, {
       method: 'GET'
     }).then((response) => response.json())

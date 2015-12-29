@@ -55,7 +55,6 @@ const App = React.createClass({
           />
         }
         renderScene={(route, navigator) => {
-          console.log(route)
           let props = route.passProps
           props.navigator = navigator
           props.name = route.name
