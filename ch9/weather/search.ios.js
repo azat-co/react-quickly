@@ -8,18 +8,55 @@ var {
   View,
   NavigatorIOS,
   Switch,
-  TouchableHighlight
+  TouchableHighlight,
+  ListView
 } = React
+const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
+  // openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
+  openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
 
-
+const Forecast = require('./forecast.ios')
 module.exports = React.createClass({
   getInitialState() {
-    return ({isRemember: false})
+    this.props.storage.getFromStorage('cityName', (cityName) => {
+      if (cityName) this.setState({cityName: cityName})
+    })
+    return ({isRemember: false, cityName: ''})
+  },
+  toggleRemember() {
+    console.log('toggle', this.state.isRemember)
+    this.setState({ isRemember: !this.state.isRemember}, ()=>{
+      // if (this.state.isRemember) AsyncStorage.setItem('cityName', this.state.cityName)
+    })
   },
   search(event) {
-    console.log(this.props.isRemember)
-    this.props.search(this.props.cityName, this.props.isRemember)
+    let cityName = event.nativeEvent.text,
+      isRemember = this.state.isRemember
+    fetch(`${openWeatherUrl}/?appid=${openWeatherAppId}&q=${cityName}&units=metric`, {
+      method: 'GET'
+    }).then((response) => response.json())
+      .then((response) => {
+        if (isRemember) AsyncStorage.setItem('cityName', cityName)
+        let dataSource = new ListView.DataSource({
+          rowHasChanged: (row1, row2) => row1 !== row2
+        })
+        console.log(this)
+        this.props.navigator.push({
+          name: 'Forecast',
+          component: Forecast,
+          passProps: {forecastData: dataSource.cloneWithRows(response.list) }
+        })
+
+      })
+      .catch((error) => {
+        console.warn(error)
+      })
   },
+  // search(event) {
+
+    // console.log(this.props.isRemember)
+    // this.props.search(this.props.cityName, this.props.isRemember)
+  // },
   render: function() {
     console.log('search:', this.props.cityName, this.props)
     return (
@@ -32,11 +69,11 @@ module.exports = React.createClass({
         </Text>
         <TextInput
           placeholder="San Francisco"
-          value={this.props.cityName}
+          value={this.state.cityName}
           returnKeyType="search"
           enablesReturnKeyAutomatically={true}
           onEndEditing={this.search} style={styles.textInput}/>
-        <Text>Remember?</Text><Switch onValueChange={this.props.toggleRemember} value={this.props.isRemember}></Switch>
+        <Text>Remember?</Text><Switch onValueChange={this.toggleRemember} value={this.state.isRemember}></Switch>
         <TouchableHighlight onPress={this.search}><Text style={styles.button}>Search</Text></TouchableHighlight>
       </View>
     )

@@ -103,45 +103,54 @@ var styles = StyleSheet.create({
 
 })
 
-const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
-  openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
-  // openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
+
+const storage = {
+  getFromStorage(name, callback) {
+    AsyncStorage.getItem(name).then((value) => {
+      if (value) callback(value)
+      else callback(null)
+    }).done()
+  },
+  setInStorage(name, value) {
+    AsyncStorage.setItem(name, value)
+  }
+}
 
 const App = React.createClass({
-  getInitialState(){
-    AsyncStorage.getItem('cityName').then((value) => {
-      console.log('yo', value)
-      if (value) this.setState({'cityName': value, isRemember: true})
-    }).done()
-    return {isForecast: false, cityName: '', isRemember: false}
-  },
-  search(cityName, isRemember) {
-    fetch(`${openWeatherUrl}/?appid=${openWeatherAppId}&q=${cityName}&units=metric`, {
-      method: 'GET'
-    }).then((response) => response.json())
-      .then((response) => {
-        if (isRemember) AsyncStorage.setItem('cityName', cityName)
-        let dataSource = new ListView.DataSource({
-          rowHasChanged: (row1, row2) => row1 !== row2
-        })
-
-        this.refs.navigator.push({
-          name: 'Forecast',
-          component: Forecast,
-          passProps: {forecastData: dataSource.cloneWithRows(response.list) }
-        })
-
-      })
-      .catch((error) => {
-        console.warn(error)
-      })
-  },
-  toggleRemember() {
-    console.log('toggle', this.state.isRemember)
-    this.setState({ isRemember: !this.state.isRemember}, ()=>{
-      if (this.state.isRemember) AsyncStorage.setItem('cityName', this.state.cityName)
-    })
-  },
+  // getInitialState(){
+  //   AsyncStorage.getItem('cityName').then((value) => {
+  //     console.log('yo', value)
+  //     if (value) this.setState({'cityName': value, isRemember: true})
+  //   }).done()
+  //   return {isForecast: false, cityName: '', isRemember: false}
+  // },
+  // search(cityName, isRemember) {
+  //   fetch(`${openWeatherUrl}/?appid=${openWeatherAppId}&q=${cityName}&units=metric`, {
+  //     method: 'GET'
+  //   }).then((response) => response.json())
+  //     .then((response) => {
+  //       if (isRemember) AsyncStorage.setItem('cityName', cityName)
+  //       let dataSource = new ListView.DataSource({
+  //         rowHasChanged: (row1, row2) => row1 !== row2
+  //       })
+  //
+  //       this.refs.navigator.push({
+  //         name: 'Forecast',
+  //         component: Forecast,
+  //         passProps: {forecastData: dataSource.cloneWithRows(response.list) }
+  //       })
+  //
+  //     })
+  //     .catch((error) => {
+  //       console.warn(error)
+  //     })
+  // },
+  // toggleRemember() {
+  //   console.log('toggle', this.state.isRemember)
+  //   this.setState({ isRemember: !this.state.isRemember}, ()=>{
+  //     if (this.state.isRemember) AsyncStorage.setItem('cityName', this.state.cityName)
+  //   })
+  // },
   render() {
     return (
       <Navigator
@@ -157,10 +166,8 @@ const App = React.createClass({
           console.log(route)
           if (route.name == 'Forecast') return React.createElement(route.component, route.passProps)
           return <Search
-            search={this.search}
-            cityName={this.state.cityName}
-            isRemember={this.state.isRemember}
-            toggleRemember={this.toggleRemember}
+            navigator={navigator}
+            storage={storage}
             name={route.name}
             onForward={() => {
               var nextIndex = route.index + 1;
@@ -238,7 +245,7 @@ var NavigationBarRouteMapper = {
 };
 
 
-const Forecast = require('./forecast.ios')
+
 const Search = require('./search.ios.js')
 
 AppRegistry.registerComponent('weather', () => App)
