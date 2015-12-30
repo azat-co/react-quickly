@@ -13,7 +13,7 @@ var {
   Text,
   View,
   ScrollView,
-  TouchableHighlight,
+  TouchableOpacity,
   Switch
 } = React
 
@@ -67,9 +67,9 @@ var Button = React.createClass({
   },
   render() {
     return (
-      <TouchableHighlight onPress={this.startTimer}>
+      <TouchableOpacity onPress={this.startTimer}>
         <Text style={styles.button}>{this.props.time} {(this.props.isMinutes) ? 'minutes' : 'seconds'}</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 })

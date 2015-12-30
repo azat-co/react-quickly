@@ -59,8 +59,7 @@ const App = React.createClass({
           props.navigator = navigator
           props.name = route.name
           return React.createElement(route.component, props)
-        }
-        }
+        }}
       />
     )
   }
