@@ -68,8 +68,7 @@ const App = React.createClass({
 
 
 var NavigationBarRouteMapper = {
-
-  LeftButton: function(route, navigator, index, navState) {
+  LeftButton(route, navigator, index, navState) {
     if (index == 0) return null
     var previousRoute = navState.routeStack[index - 1]
     return (
@@ -82,14 +81,12 @@ var NavigationBarRouteMapper = {
       </TouchableOpacity>
     )
   },
-
-  RightButton: function(route, navigator, index, navState) {
+  RightButton(route, navigator, index, navState) {
     return (
       <View/>
     )
   },
-
-  Title: function(route, navigator, index, navState) {
+  Title(route, navigator, index, navState) {
     return (
       <Text style={[styles.navBarText, styles.navBarTitleText]}>
         {route.name}
@@ -98,46 +95,11 @@ var NavigationBarRouteMapper = {
   }
 }
 
-
 var styles = StyleSheet.create({
-  navigatorContainer: {
-    flex: 1
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  messageText: {
-    fontSize: 17,
-    fontWeight: '500',
-    padding: 15,
-    marginTop: 50,
-    marginLeft: 15,
-  },
-  button: {
-    backgroundColor: 'white',
-    padding: 15,
-    borderBottomWidth: 1 / PixelRatio.get(),
-    borderBottomColor: '#CDCDCD',
-  },
-  buttonText: {
-    fontSize: 17,
-    fontWeight: '500',
-  },
   navBar: {
     backgroundColor: 'white',
+    borderBottomWidth: 1 / PixelRatio.get(),
+    borderBottomColor: '#CDCDCD'
   },
   navBarText: {
     fontSize: 16,
@@ -156,13 +118,7 @@ var styles = StyleSheet.create({
   },
   navBarButtonText: {
     color: 'black'
-  },
-  scene: {
-    flex: 1,
-    paddingTop: 20,
-    backgroundColor: '#EAEAEA',
   }
 })
-
 
 AppRegistry.registerComponent('weather', () => App)
