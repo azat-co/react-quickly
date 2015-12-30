@@ -13,8 +13,8 @@ var {
 } = React
 
 const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
-  openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
-  // openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
+  // openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
+  openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
 
 const Forecast = require('./forecast.ios')
 module.exports = React.createClass({
@@ -36,13 +36,10 @@ module.exports = React.createClass({
   search(event) {
     let cityName = this.state.cityName,
       isRemember = this.state.isRemember
-    if (!cityName) return Alert.alert(
-            'No City Name',
-            'Please enter city name',
-            [
-              {text: 'OK', onPress: () => console.log('OK Pressed!')},
-            ]
-          )
+    if (!cityName) return Alert.alert('No City Name',
+      'Please enter city name',
+      [{text: 'OK', onPress: () => console.log('OK Pressed!')}]
+    )
     fetch(`${openWeatherUrl}/?appid=${openWeatherAppId}&q=${cityName}&units=metric`, {
       method: 'GET'
     }).then((response) => response.json())
@@ -69,7 +66,7 @@ module.exports = React.createClass({
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to Weather App, React Quickly example
+          Welcome to Weather App, React Quickly project
         </Text>
         <Text style={styles.instructions}>
           Enter your city name:

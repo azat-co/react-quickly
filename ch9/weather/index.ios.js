@@ -58,6 +58,7 @@ const App = React.createClass({
           let props = route.passProps
           props.navigator = navigator
           props.name = route.name
+          props.app = this
           return React.createElement(route.component, props)
         }}
       />
@@ -65,32 +66,17 @@ const App = React.createClass({
   }
 })
 
-const NavButton =  React.createClass({
-  render() {
-    return (
-      <TouchableHighlight
-        style={styles.button}
-        underlayColor="#B5B5B5"
-        onPress={this.props.onPress}>
-        <Text style={styles.buttonText}>{this.props.text}</Text>
-      </TouchableHighlight>
-    )
-  }
-})
 
 var NavigationBarRouteMapper = {
 
   LeftButton: function(route, navigator, index, navState) {
-    if (index === 0) {
-      return null
-    }
-
+    if (index == 0) return null
     var previousRoute = navState.routeStack[index - 1]
     return (
       <TouchableOpacity
         onPress={() => navigator.pop()}
         style={styles.navBarLeftButton}>
-        <Text style={[styles.navBarText, styles.navBarButtonText, ]}>
+        <Text style={[styles.navBarText, styles.navBarButtonText ]}>
           {'<'} {previousRoute.name}
         </Text>
       </TouchableOpacity>
@@ -99,14 +85,7 @@ var NavigationBarRouteMapper = {
 
   RightButton: function(route, navigator, index, navState) {
     return (
-      <TouchableOpacity
-        onPress={() => navigator.push(newRandomRoute())}
-        style={styles.navBarRightButton}>
-        {//<Text style={[styles.navBarText, styles.navBarButtonText]}>
-        //   Next
-        // </Text>
-      }
-      </TouchableOpacity>
+      <View/>
     )
   },
 
