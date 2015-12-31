@@ -14,6 +14,8 @@ var {
   Alert
 } = React
 
+// URL for London, response.json: http://api.openweathermap.org/data/2.5/forecast?q=London&appid=2de143494c0b295cca9337e1e96b00e0&units=metric
+
 const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0', // Don't be lazy, get your own KEY!
   // openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
   openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api

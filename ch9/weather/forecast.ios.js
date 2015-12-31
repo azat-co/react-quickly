@@ -10,8 +10,8 @@ var {
   ScrollView
 } = React
 
-const fToC = (f) => {
-  return Math.round((f - 31.996)*100/1.8)/100
+const cToF = (c) => {
+  return Math.round((c*1.8 + 32)*100)/100
 }
 
 const ForecastRow = (forecast)=> {
@@ -20,7 +20,7 @@ const ForecastRow = (forecast)=> {
       <View style={styles.rightContainer}>
         <Text style={styles.subtitle}></Text>
         <Text style={styles.subtitle}>
-          {forecast.dt_txt}: {forecast.weather[0].description}, {forecast.main.temp}C/{fToC(forecast.main.temp)}F
+          {forecast.dt_txt}: {forecast.weather[0].description}, {forecast.main.temp}C/{cToF(forecast.main.temp)}F
         </Text>
        </View>
     </View>
