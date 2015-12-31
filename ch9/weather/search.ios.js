@@ -1,6 +1,8 @@
 'use strict'
 
 var React = require('react-native')
+const Forecast = require('./forecast.ios')
+
 var {
   StyleSheet,
   Text,
@@ -12,11 +14,10 @@ var {
   Alert
 } = React
 
-const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0',
+const openWeatherAppId = '2de143494c0b295cca9337e1e96b00e0', // Don't be lazy, get your own KEY!
   // openWeatherUrl = 'http://api.openweathermap.org/data/2.5/forecast' // Real API
   openWeatherUrl = 'http://localhost:3000/' // Mock API, start with $ node weather-api
 
-const Forecast = require('./forecast.ios')
 module.exports = React.createClass({
   getInitialState() {
     this.props.storage.getFromStorage('cityName', (cityName) => {
@@ -62,7 +63,6 @@ module.exports = React.createClass({
       })
   },
   render: function() {
-    console.log('search:', this.props.cityName, this.props)
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -80,7 +80,9 @@ module.exports = React.createClass({
           onEndEditing={this.search} style={styles.textInput}/>
         <Text>Remember?</Text>
         <Switch onValueChange={this.toggleRemember} value={this.state.isRemember}></Switch>
-        <TouchableHighlight onPress={this.search}><Text style={styles.button}>Search</Text></TouchableHighlight>
+        <TouchableHighlight onPress={this.search}>
+          <Text style={styles.button}>Search</Text>
+        </TouchableHighlight>
       </View>
     )
   }

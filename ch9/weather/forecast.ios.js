@@ -6,7 +6,6 @@ var {
   Text,
   TextInput,
   View,
-  NavigatorIOS,
   ListView,
   ScrollView
 } = React
@@ -40,15 +39,6 @@ module.exports = React.createClass({
 })
 
 var styles = StyleSheet.create({
-  navigatorContainer: {
-    flex: 1
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
   listView: {
     marginTop: 10,
   },
@@ -76,6 +66,6 @@ var styles = StyleSheet.create({
   subtitle: {
     fontSize: 16,
     fontWeight: 'normal',
-    color: '#fff',
+    color: '#fff'
   }
 })
