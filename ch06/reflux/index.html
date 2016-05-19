@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="reflux.js"></script>
+    <script src="JSXTransformer.js"></script>
+    <link href="bootstrap.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/jsx">
+      var loadMessages = Reflux.createAction()
+      var messageStore = Reflux.createStore({
+        init: function() {
+          this.listenTo(loadMessages, 'onLoadMessages')
+        },
+        onLoadMessages: function(url){
+          var _this = this
+          setTimeout(function(){
+            _this.trigger([{name: 'Azat', message: 'React rocks!'}])
+          }, 1000)
+        }
+      })
+      var Content = React.createClass({
+        componentWillMount:function(){
+          loadMessages()
+        },
+        componentDidMount: function(){
+          messageStore.listen(this.update)
+        },
+        update: function(messages){
+          return this.setState({messages: messages})
+        },
+        render: function() {
+          return (
+            <div className="well">
+              <p>
+                {(this.state && this.state.messages.length) ?
+                  this.state.messages[0]['name'] + ': '
+                  + this.state.messages[0]['message'] : ''}
+              </p>
+            </div>
+          )
+        }
+      })
+
+      ReactDOM.render(
+        <Content />,
+        document.getElementById('content')
+      )
+    </script>
+  </body>
+</html>

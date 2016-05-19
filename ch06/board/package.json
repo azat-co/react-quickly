@@ -1,0 +1,34 @@
+{
+  "name": "board-react",
+  "version": "1.0.0",
+  "description": "Board message with Express.js, MongoDB and React.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "node node_modules/gulp/bin/gulp.js"
+  },
+  "keywords": [
+    "react.js",
+    "express.js",
+    "mongodb"
+  ],
+  "author": "Azat Mardan",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "1.13.2",
+    "compression": "1.5.1",
+    "errorhandler": "1.4.1",
+    "express": "4.13.1",
+    "express-validator": "2.13.0",
+    "mongodb": "2.0.36",
+    "morgan": "1.6.1"
+  },
+  "devDependencies": {
+    "gulp": "3.9.0",
+    "gulp-develop-server": "0.4.3",
+    "gulp-nodemon": "2.0.3",
+    "gulp-react": "3.0.1",
+    "gulp-watch": "4.2.4"
+  }
+}
