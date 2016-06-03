@@ -3,7 +3,7 @@ var HelloWorld = React.createClass({
     return React.createElement(
       'h1',
       this.props,
-      'Hello ' + this.props.frameworkName+ ' world!!!'
+      'Hello ' + this.props.frameworkName + ' world!!!'
     )
   }
 })

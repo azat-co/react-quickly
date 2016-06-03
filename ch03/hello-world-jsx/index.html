@@ -6,7 +6,12 @@
   </head>
   <body>
     <div id="content"></div>
-    <script type="text/javascript" src="js/script.js">
+    <script type="text/javascript">
+      var h1 = React.createElement('h1', null, 'Hello world!')
+      ReactDOM.render(
+        h1,
+        document.getElementById('content')
+      )
       // Usage without the h1 variable
       // React.render(
       //   React.createElement('h1', null, 'Hello world!'),
