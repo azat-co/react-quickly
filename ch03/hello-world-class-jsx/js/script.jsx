@@ -1,9 +1,9 @@
-var h1 = React.createElement('h1', null, 'Hello world!')
+var helloWorldReactElement = <h1>Hello world!</h1>
 var HelloWorld = React.createClass({
   render: function () {
     return <div>
-      {h1}
-      {h1}
+      {helloWorldReactElement}
+      {helloWorldReactElement}
     </div>
   }
 })

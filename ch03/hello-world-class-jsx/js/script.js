@@ -1,4 +1,8 @@
-var h1 = React.createElement('h1', null, 'Hello world!');
+var helloWorldReactElement = React.createElement(
+  'h1',
+  null,
+  'Hello world!'
+);
 var HelloWorld = React.createClass({
   displayName: 'HelloWorld',
 
@@ -6,8 +10,8 @@ var HelloWorld = React.createClass({
     return React.createElement(
       'div',
       null,
-      h1,
-      h1
+      helloWorldReactElement,
+      helloWorldReactElement
     );
   }
 });
