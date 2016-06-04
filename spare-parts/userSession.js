@@ -52,12 +52,12 @@ render: function() {
 ---
 render: function() {
   return <div>{
-      function(sessionFlag) {
-        if (sessionFlag)
-          return <a href='/logout'>Logout</a>
-        else
-          return <a href='/login'>Login</a>
-      }(this.props.user.session)
+    function(sessionFlag) {
+      if (sessionFlag)
+        return <a href='/logout'>Logout</a>
+      else
+        return <a href='/login'>Login</a>
+    }(this.props.user.session)
   }</div>
 }
 
@@ -70,3 +70,9 @@ render: function() {
     </a>
   </div>
 }
+
+---
+var specialChars = '&copy;&mdash;&ldquo;'
+
+<span>{specialChars}</span>
+<input value={specialChars}/>
