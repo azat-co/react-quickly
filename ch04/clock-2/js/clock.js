@@ -16,10 +16,6 @@ var Clock = React.createClass({
   },
   render: function () {
     console.log('rendering...');
-    return React.createElement(
-      'div',
-      null,
-      this.state.currentTime
-    );
+    return React.createElement(TimeDisplay, { time: this.state.currentTime });
   }
 });

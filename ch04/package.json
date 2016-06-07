@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-clock": "./node_modules/.bin/babel clock/jsx -d clock/js"
+    "build-clock": "./node_modules/.bin/babel clock/jsx -d clock/js",
+    "build-clock-2": "./node_modules/.bin/babel clock-2/jsx -d clock-2/js -w"
   },
   "keywords": [
     "react.js"

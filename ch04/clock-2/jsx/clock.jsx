@@ -14,6 +14,6 @@ var Clock = React.createClass({
   },
   render: function(){
     console.log('rendering...')
-    return <div>{this.state.currentTime}</div>
+    return <TimeDisplay time={this.state.currentTime}/>
   }
 })
