@@ -3,9 +3,10 @@ var Book = React.createClass({
   publisher: "Apress",
   year: 2014,
   render: function(){
+    this.props.title = 'new title'
   return (
     <div>
-      <i>{this.title}</i>
+      <i>{this.title} {this.props.title}</i>
       ({this.publisher}, {this.year})
     </div>
   )
@@ -24,6 +25,6 @@ var Content = React.createClass({
 })
 
 ReactDOM.render(
-  <Book />,
+  <Book title='old title'/>,
   document.getElementById('content')
 )
