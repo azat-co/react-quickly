@@ -27,7 +27,7 @@ var SliderButtons = React.createClass({
       null,
       React.createElement(
         "button",
-        { disabled: this.state.sliderValue <= 0 ? true : false,
+        { disabled: this.state.sliderValue < 1 ? true : false,
           className: "btn default-btn",
           onClick: this.handleChange(-1) },
         "1 Less (",
@@ -36,7 +36,7 @@ var SliderButtons = React.createClass({
       ),
       React.createElement(
         "button",
-        { disabled: this.state.sliderValue >= 100 ? true : false,
+        { disabled: this.state.sliderValue > 99 ? true : false,
           className: "btn default-btn",
           onClick: this.handleChange(1) },
         "1 More (",
