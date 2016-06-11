@@ -15,12 +15,10 @@ var SliderButtons = React.createClass({
   },
   componentDidMount() {
     $("#slider").on('slide', this.handleSlide);
-    // window.addEventListener('slide', this.handleSlide)
   },
 
   componentWillUnmount() {
     $("#slider").off('slide', this.handleSlide);
-    // window.removeEventListener('slide', this.handleSlide)
   },
 
   render: function () {
