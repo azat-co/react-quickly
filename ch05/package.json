@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-mouse": "./node_modules/.bin/babel mouse/jsx -d mouse/js -w",
     "build-mouse-event": "./node_modules/.bin/babel mouse-event/jsx -d mouse-event/js -w",
-    "build-slider": "./node_modules/.bin/babel slider/jsx -d slider/js -w"
+    "build-slider": "./node_modules/.bin/babel slider/jsx -d slider/js -w",
+    "build-radio": "./node_modules/.bin/babel radio/jsx -d radio/js -w"
   },
   "keywords": [
     "react.js"

@@ -7,15 +7,12 @@ var SliderValue = React.createClass({
   handleSlide(event) {
     this.setState({ sliderValue: event.detail.ui.value });
   },
-
   componentDidMount() {
     window.addEventListener('slide', this.handleSlide);
   },
-
   componentWillUnmount() {
     window.removeEventListener('slide', this.handleSlide);
   },
-
   render: function () {
     return React.createElement(
       'div',
