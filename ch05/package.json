@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-mouse": "./node_modules/.bin/babel mouse/jsx -d mouse/js",
-    "build-clock-analog-digital": "./node_modules/.bin/babel clock-analog-digital/jsx -d clock-analog-digital/js -w"
+    "build-mouse": "./node_modules/.bin/babel mouse/jsx -d mouse/js -w",
+    "build-mouse-event": "./node_modules/.bin/babel mouse-event/jsx -d mouse-event/js -w"
   },
   "keywords": [
     "react.js"
