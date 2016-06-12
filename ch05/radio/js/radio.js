@@ -20,6 +20,13 @@ var Radio = React.createClass({
       right: value
     };
   },
+  componentDidMount: function () {
+    window.addEventListener('resize', this.handleResize);
+  },
+
+  componentWillUnmount: function () {
+    window.removeEventListener('resize', this.handleResize);
+  },
   handleResize: function (e) {
     let w = 1 + Math.round(window.innerWidth / 300);
     this.setState({
@@ -28,13 +35,6 @@ var Radio = React.createClass({
     });
   },
 
-  componentDidMount: function () {
-    window.addEventListener('resize', this.handleResize);
-  },
-
-  componentWillUnmount: function () {
-    window.removeEventListener('resize', this.handleResize);
-  },
   render: function () {
     return React.createElement(
       'div',

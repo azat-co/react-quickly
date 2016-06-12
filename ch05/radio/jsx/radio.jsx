@@ -18,6 +18,13 @@ var Radio = React.createClass({
       right: value,
     }
   },
+  componentDidMount: function() {
+    window.addEventListener('resize', this.handleResize)
+  },
+
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', this.handleResize)
+  },
   handleResize: function(e) {
     let w = 1+ Math.round(window.innerWidth / 300)
     this.setState({
@@ -26,13 +33,6 @@ var Radio = React.createClass({
     })
   },
 
-  componentDidMount: function() {
-    window.addEventListener('resize', this.handleResize);
-  },
-
-  componentWillUnmount: function() {
-    window.removeEventListener('resize', this.handleResize);
-  },
   render: function(){
     return <div>
       <div className="radio-tagger" style={this.state.taggerStyle}>
@@ -43,7 +43,6 @@ var Radio = React.createClass({
           <div className="radio-outer" style={this.state.outerStyle}>
             <div className="radio-inner" style={this.state.innerStyle}>
               <div className="radio-selected" style={this.state.selectedStyle}>
-
               </div>
             </div>
           </div>
