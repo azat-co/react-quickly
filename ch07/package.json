@@ -1,0 +1,23 @@
+{
+  "name": "hello-world-class-jsx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-elements": "./node_modules/.bin/babel elements/jsx -d elements/js -w",
+    "build-refs": "./node_modules/.bin/babel refs/jsx -d refs/js -w"
+  },
+  "keywords": [
+    "react.js"
+  ],
+  "author": "Azat Mardan",
+  "license": "MIT",
+  "babel": {
+    "presets": ["react"]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-react": "^6.5.0"
+  }
+}
