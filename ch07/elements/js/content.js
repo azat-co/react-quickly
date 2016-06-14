@@ -15,7 +15,7 @@ var Content = React.createClass({
   render() {
     return React.createElement(
       "div",
-      { className: "contaner" },
+      { className: "container" },
       React.createElement(
         "form",
         { onChange: this.handleChange, onSubmit: this.handleSubmit },
@@ -38,14 +38,54 @@ var Content = React.createClass({
           null,
           "input: radio"
         ),
-        React.createElement("input", { type: "radio", name: "radioGroup", value: "angular", onChange: this.handleChange }),
-        React.createElement("input", { type: "radio", name: "radioGroup", value: "react", defaultChecked: true }),
-        React.createElement("input", { type: "radio", name: "radioGroup", value: "polymer", onChange: this.handleChange }),
+        React.createElement(
+          "label",
+          null,
+          React.createElement("input", { type: "radio", name: "radioGroup", value: "angular", onChange: this.handleChange }),
+          "Angular"
+        ),
+        React.createElement("br", null),
+        React.createElement(
+          "label",
+          null,
+          React.createElement("input", { type: "radio", name: "radioGroup", value: "react", defaultChecked: true }),
+          "React"
+        ),
+        React.createElement("br", null),
+        React.createElement(
+          "label",
+          null,
+          React.createElement("input", { type: "radio", name: "radioGroup", value: "polymer", onChange: this.handleChange }),
+          "Polymer"
+        ),
         React.createElement("hr", null),
-        React.createElement("input", { type: "checkbox", name: "checkboxGroup", value: "node", onChange: this.handleChange }),
-        React.createElement("input", { type: "checkbox", name: "checkboxGroup", value: "react", checked: true, onChange: this.handleChange }),
-        React.createElement("input", { type: "checkbox", name: "checkboxGroup", value: "express", onChange: this.handleChange }),
-        React.createElement("input", { type: "checkbox", name: "checkboxGroup", value: "mongodb", onChange: this.handleChange }),
+        React.createElement(
+          "label",
+          null,
+          React.createElement("input", { type: "checkbox", name: "checkboxGroup", value: "node", onChange: this.handleChange }),
+          "Node"
+        ),
+        React.createElement("br", null),
+        React.createElement(
+          "label",
+          null,
+          React.createElement("input", { type: "checkbox", name: "checkboxGroup", value: "react", checked: true, onChange: this.handleChange }),
+          "React"
+        ),
+        React.createElement("br", null),
+        React.createElement(
+          "label",
+          null,
+          React.createElement("input", { type: "checkbox", name: "checkboxGroup", value: "express", onChange: this.handleChange }),
+          "Express"
+        ),
+        React.createElement("br", null),
+        React.createElement(
+          "label",
+          null,
+          React.createElement("input", { type: "checkbox", name: "checkboxGroup", value: "mongodb", onChange: this.handleChange }),
+          "MongoDB"
+        ),
         React.createElement("hr", null),
         React.createElement("textarea", {
           name: "description1",

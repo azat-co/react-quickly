@@ -11,7 +11,7 @@ var Content = React.createClass({
     console.log(event.target.value, event.target.checked)
   },
   render() {
-    return <div className="contaner">
+    return <div className="container">
       <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
         <h2>input: text</h2>
         <input type="text" name="new-book-title" defaultValue="Node: The Best Parts"/>
@@ -20,16 +20,40 @@ var Content = React.createClass({
         <input type="password" defaultValue="123456" onChange={this.handleChange}/>
         <hr/>
         <h2>input: radio</h2>
-        <input type="radio" name="radioGroup" value='angular' onChange={this.handleChange}/>
-        <input type="radio" name="radioGroup" value='react' defaultChecked />
-        <input type="radio" name="radioGroup" value='polymer' onChange={this.handleChange}/>
-
+        <label>
+          <input type="radio" name="radioGroup" value='angular' onChange={this.handleChange}/>
+          Angular
+        </label>
+        <br/>
+        <label>
+          <input type="radio" name="radioGroup" value='react' defaultChecked />
+          React
+        </label>
+        <br/>
+        <label>
+          <input type="radio" name="radioGroup" value='polymer' onChange={this.handleChange}/>
+          Polymer
+        </label>
         <hr/>
-        <input type="checkbox" name="checkboxGroup" value='node'  onChange={this.handleChange}/>
-        <input type="checkbox" name="checkboxGroup" value='react' checked onChange={this.handleChange}/>
-        <input type="checkbox" name="checkboxGroup" value='express' onChange={this.handleChange}/>
-        <input type="checkbox" name="checkboxGroup" value='mongodb' onChange={this.handleChange}/>
-
+        <label>
+          <input type="checkbox" name="checkboxGroup" value='node'  onChange={this.handleChange}/>
+          Node
+        </label>
+        <br/>
+        <label>
+          <input type="checkbox" name="checkboxGroup" value='react' checked onChange={this.handleChange}/>
+          React
+        </label>
+        <br/>
+        <label>
+          <input type="checkbox" name="checkboxGroup" value='express' onChange={this.handleChange}/>
+          Express
+        </label>
+        <br/>
+        <label>
+          <input type="checkbox" name="checkboxGroup" value='mongodb' onChange={this.handleChange}/>
+          MongoDB
+        </label>
         <hr/>
 
         <textarea
