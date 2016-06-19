@@ -5,19 +5,22 @@ var Content = React.createClass({
     }
   },
   handleChange(event) {
-    console.log(event.target.value, event.target.checked)
+    console.log('onChange event: ', event.target.value, event.target.checked)
+  },
+  handleInput(event){
+    console.log('onInput event: ', event.target.value, event.target.checked)
   },
   handleSubmit(event){
     console.log(event.target.value, event.target.checked)
   },
   render() {
     return <div className="container">
-      <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+      <form  onSubmit={this.handleSubmit}>
         <h2>input: text</h2>
         <input type="text" name="new-book-title" defaultValue="Node: The Best Parts"/>
         <hr/>
         <h2>input: password</h2>
-        <input type="password" defaultValue="123456" onChange={this.handleChange}/>
+        <input type="password" defaultValue="123456" onChange={this.handleChange} onInput={this.handleInput}/>
         <hr/>
         <h2>input: radio</h2>
         <label>
