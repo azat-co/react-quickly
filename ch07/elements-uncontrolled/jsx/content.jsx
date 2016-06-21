@@ -1,18 +1,8 @@
 var Content = React.createClass({
   getInitialState() {
     return {
-      description: 'React rocks!',
-      radioGroup: {
-        angular: false,
-        react: true,
-        polymer: false
-      }
+      description: 'React rocks!'
     }
-  },
-  handleRadio(event) {
-    let obj = {}
-    obj[event.target.value] = event.target.checked // true
-    this.setState({radioGroup: obj})
   },
   handleChange(event) {
     console.log('onChange event: ', event.target.value, event.target.checked)
@@ -34,17 +24,17 @@ var Content = React.createClass({
         <hr/>
         <h2>input: radio</h2>
         <label>
-          <input type="radio" name="radioGroup" value='angular' checked={this.state.radioGroup['angular']} onChange={this.handleRadio}/>
+          <input type="radio" name="radioGroup" value='angular' onChange={this.handleChange}/>
           Angular
         </label>
         <br/>
         <label>
-          <input type="radio" name="radioGroup" value='react' checked={this.state.radioGroup['react']} onChange={this.handleRadio}/>
+          <input type="radio" name="radioGroup" value='react' defaultChecked />
           React
         </label>
         <br/>
         <label>
-          <input type="radio" name="radioGroup" value='polymer' checked={this.state.radioGroup['polymer']} onChange={this.handleRadio}/>
+          <input type="radio" name="radioGroup" value='polymer' onChange={this.handleChange}/>
           Polymer
         </label>
         <hr/>
