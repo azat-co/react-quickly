@@ -1,7 +1,8 @@
 var Content = React.createClass({
   getInitialState() {
     return {
-      description: 'React rocks!',
+      description: `With the right pattern, applications will be more scalable and easier to maintain.
+If you aspire one day to become a Node.js architect (or maybe you're already one and want to extend your knowledge), this presentation is for you.`,
       radioGroup: {
         angular: false,
         react: true,
@@ -22,6 +23,10 @@ var Content = React.createClass({
   },
   handleSubmit(event){
     console.log(event.target.value, event.target.checked)
+  },
+  handleSelectChange(event) {
+    this.setState({selected: event.target.value})
+    console.log(event.target.value, event.target.selected)
   },
   render() {
     return <div className="container">
@@ -68,17 +73,17 @@ var Content = React.createClass({
           MongoDB
         </label>
         <hr/>
-
         <textarea
-          name="description1"
-          defaultValue={"Pro Express.js is for the reader\n who wants to quickly get up-to-speed with Express.js, \nthe flexible Node.js framework"}
-          onChange={this.handleChange}/>
-        <textarea
-          name="description2"
+          name="description"
           defaultValue={this.state.description}
           onChange={this.handleChange}/>
         <hr/>
-        <select defaultValue="node" readOnly>
+        <textarea
+          name="description1"
+          defaultValue={"Pro Express.js is for the reader\nwho wants to quickly get up-to-speed with Express.js, \nthe flexible Node.js framework"}
+          onChange={this.handleChange}/>
+        <hr/>
+        <select value={this.state.select} onChange={this.handleSelectChange}>
           <option value="ruby">Ruby</option>
           <option value="node">Node</option>
           <option value="python">Python</option>

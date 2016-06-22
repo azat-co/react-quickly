@@ -1,15 +1,15 @@
-var prompt = 'Please enter your email to win $1,000,000.'
-var Content = React.createClass({
-  submit: function(e){
-    var emailAddress = this.refs.emailAddress
-    var comments = this.refs.comments
+let Content = React.createClass({
+  prompt: 'Please enter your email to win $1,000,000.',
+  submit(event) {
+    let emailAddress = this.refs.emailAddress
+    let comments = this.refs.comments
     console.log(ReactDOM.findDOMNode(emailAddress).value)
     console.log(ReactDOM.findDOMNode(comments).value)
   },
-  render: function() {
+  render () {
     return (
       <div className="well">
-        <p>{prompt}</p>
+        <p>{this.prompt}</p>
         <div className="form-group">
           Email: <input ref="emailAddress" className="form-control" type="text" placeholder="hi@azat.co"/>
         </div>
@@ -24,7 +24,3 @@ var Content = React.createClass({
   }
 })
 
-ReactDOM.render(
-  <Content />,
-  document.getElementById('content')
-)

@@ -3,7 +3,8 @@ var Content = React.createClass({
 
   getInitialState() {
     return {
-      description: 'React rocks!',
+      description: `With the right pattern, applications will be more scalable and easier to maintain.
+If you aspire one day to become a Node.js architect (or maybe you're already one and want to extend your knowledge), this presentation is for you.`,
       radioGroup: {
         angular: false,
         react: true,
@@ -24,6 +25,10 @@ var Content = React.createClass({
   },
   handleSubmit(event) {
     console.log(event.target.value, event.target.checked);
+  },
+  handleSelectChange(event) {
+    this.setState({ selected: event.target.value });
+    console.log(event.target.value, event.target.selected);
   },
   render() {
     return React.createElement(
@@ -101,17 +106,18 @@ var Content = React.createClass({
         ),
         React.createElement('hr', null),
         React.createElement('textarea', {
-          name: 'description1',
-          defaultValue: "Pro Express.js is for the reader\n who wants to quickly get up-to-speed with Express.js, \nthe flexible Node.js framework",
-          onChange: this.handleChange }),
-        React.createElement('textarea', {
-          name: 'description2',
+          name: 'description',
           defaultValue: this.state.description,
+          onChange: this.handleChange }),
+        React.createElement('hr', null),
+        React.createElement('textarea', {
+          name: 'description1',
+          defaultValue: "Pro Express.js is for the reader\nwho wants to quickly get up-to-speed with Express.js, \nthe flexible Node.js framework",
           onChange: this.handleChange }),
         React.createElement('hr', null),
         React.createElement(
           'select',
-          { defaultValue: 'node', readOnly: true },
+          { value: this.state.select, onChange: this.handleSelectChange },
           React.createElement(
             'option',
             { value: 'ruby' },
