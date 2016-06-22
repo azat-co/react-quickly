@@ -1,5 +1,5 @@
 var Content = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return {accountNumber: ''}
   },
   handleChange(event) {
