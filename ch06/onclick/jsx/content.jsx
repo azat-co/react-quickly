@@ -1,14 +1,14 @@
 var Content = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {counter: 0}
   },
-  click: function(e) {
+  handleClick(event) {
     this.setState({counter: ++this.state.counter})
   },
-  render: function() {
+  render() {
     return (
       <div>
-        <button onClick={this.click}>
+        <button onClick={this.handleClick} className="btn btn-primary">
           Don't click me {this.state.counter} times!
         </button>
       </div>
@@ -16,7 +16,3 @@ var Content = React.createClass({
   }
 })
 
-ReactDOM.render(
-  <Content />,
-  document.getElementById('content')
-);
