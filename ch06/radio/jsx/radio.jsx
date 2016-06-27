@@ -6,7 +6,7 @@ var Radio = React.createClass({
       outerStyle: this.getStyle(4, i),
       innerStyle: this.getStyle(1, i),
       selectedStyle: this.getStyle(2, i),
-      taggerStyle: {top: order*20, width: 25,height: 25}
+      taggerStyle: {top: order*20, width: 25, height: 25}
     }
   },
   getStyle(i, m) {
@@ -18,14 +18,14 @@ var Radio = React.createClass({
       right: value,
     }
   },
-  componentDidMount: function() {
+  componentDidMount() {
     window.addEventListener('resize', this.handleResize)
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize)
   },
-  handleResize: function(e) {
+  handleResize(event) {
     let w = 1+ Math.round(window.innerWidth / 300)
     this.setState({
       taggerStyle: {top: this.props.order*w*10, width: w*10, height: w*10},
@@ -33,7 +33,7 @@ var Radio = React.createClass({
     })
   },
 
-  render: function(){
+  render(){
     return <div>
       <div className="radio-tagger" style={this.state.taggerStyle}>
         <input type="radio" name={this.props.name} id={this.props.id}>

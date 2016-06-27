@@ -3,10 +3,14 @@ var Mouse = React.createClass({
 
   handleMouseOver(event) {
     console.log('mouse is over with event');
-    window.e = event;
+    window.e = event; // Anti-pattern
     console.dir(event.target);
+    setTimeout(() => {
+      console.table(event.target);
+      console.table(window.e.target);
+    }, 2345);
   },
-  render: function () {
+  render() {
     return React.createElement(
       'div',
       null,

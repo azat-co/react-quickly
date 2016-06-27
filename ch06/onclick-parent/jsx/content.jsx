@@ -1,6 +1,8 @@
 var ClickCounterButton = React.createClass({
   render() {
-    return <button onClick={this.props.handler} className="btn btn-info">
+    return <button
+      onClick={this.props.handler}
+      className="btn btn-info">
       Don't touch me with your dirty hands!
     </button>
   }
@@ -16,7 +18,7 @@ var Content = React.createClass({
   getInitialState() {
     return {counter: 0}
   },
-  handleClick(e) {
+  handleClick(event) {
     this.setState({counter: ++this.state.counter})
   },
   render() {

@@ -1,5 +1,5 @@
 var SliderValue = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return {sliderValue: 0}
   },
   handleSlide(event) {
@@ -11,7 +11,7 @@ var SliderValue = React.createClass({
   componentWillUnmount() {
     window.removeEventListener('slide', this.handleSlide)
   },
-  render: function(){
+  render() {
     return <div className="" >
       Value: {this.state.sliderValue}
     </div>
