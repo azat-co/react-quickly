@@ -1,5 +1,5 @@
 var HelloWorld = React.createClass({
-  render: function () {
+  render() {
     return React.createElement(
       'h1',
       this.props,
