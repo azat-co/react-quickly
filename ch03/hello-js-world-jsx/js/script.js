@@ -1,7 +1,7 @@
 var HelloWorld = React.createClass({
   displayName: 'HelloWorld',
 
-  render: function () {
+  render() {
     return React.createElement(
       'h1',
       this.props,
@@ -19,7 +19,6 @@ ReactDOM.render(React.createElement(
     id: 'ember',
     frameworkName: 'Ember.js',
     title: 'A framework for creating ambitious web applications.' }),
-  ',',
   React.createElement(HelloWorld, {
     id: 'backbone',
     frameworkName: 'Backbone.js',
