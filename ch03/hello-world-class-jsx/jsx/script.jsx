@@ -1,6 +1,6 @@
 var helloWorldReactElement = <h1>Hello world!</h1>
 var HelloWorld = React.createClass({
-  render: function () {
+  render() {
     return <div>
       {helloWorldReactElement}
       {helloWorldReactElement}

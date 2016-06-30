@@ -1,6 +1,6 @@
-// var h1 = <h1>Hello world!</h1>
+// var helloWorldReactElement = <h1>Hello world!</h1>
 // ReactDOM.render(
-//   h1,
+//   helloWorldReactElement,
 //   document.getElementById('content')
 // )
 
