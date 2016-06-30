@@ -12,7 +12,11 @@ var Content = React.createClass({
         'p',
         null,
         'Your REST API URL is: ',
-        this.getUrl()
+        React.createElement(
+          'a',
+          { href: this.getUrl() },
+          this.getUrl()
+        )
       )
     );
   }

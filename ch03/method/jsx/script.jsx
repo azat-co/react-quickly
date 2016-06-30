@@ -5,7 +5,7 @@ var Content = React.createClass({
   render: function() {
     return (
       <div>
-        <p>Your REST API URL is: {this.getUrl()}</p>
+        <p>Your REST API URL is: <a href={this.getUrl()}>{this.getUrl()}</a></p>
       </div>
     )
   }
