@@ -1,0 +1,19 @@
+{
+  "name": "react-quickly",
+  "version": "2.0.0",
+  "description": "Source code for the React Quickly book by Azat Mardan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azat-co/react-quickly.git"
+  },
+  "author": "Azat Mardan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azat-co/react-quickly/issues"
+  },
+  "homepage": "https://github.com/azat-co/react-quickly#readme"
+}
