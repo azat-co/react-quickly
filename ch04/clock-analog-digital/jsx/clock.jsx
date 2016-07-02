@@ -12,7 +12,7 @@ class Clock extends React.Component {
       this.setState({currentTime: (new Date()).toLocaleString()})
     }, 1000)
   }
-  render(){
+  render() {
     console.log('Rendering...')
     return <div>
       <AnalogDisplay time={this.state.currentTime}/>
