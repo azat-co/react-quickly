@@ -1,19 +1,16 @@
-const Clock = React.createClass({
-  displayName: 'Clock',
-
-  getInitialState() {
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
     this.launchClock();
-    return {
-      currentTime: new Date().toLocaleString()
-    };
-  },
+    this.state = { currentTime: new Date().toLocaleString() };
+  }
   launchClock() {
-    setInterval(function () {
+    setInterval(() => {
       console.log('Updating time...');
-      // use _this or this because of bind
+
       this.setState({ currentTime: new Date().toLocaleString() });
-    }.bind(this), 1000);
-  },
+    }, 1000);
+  }
   render() {
     console.log('Rendering Clock...');
     return React.createElement(
@@ -22,4 +19,4 @@ const Clock = React.createClass({
       this.state.currentTime
     );
   }
-});
+}
