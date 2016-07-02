@@ -1,21 +1,19 @@
-var Clock = React.createClass({
-  displayName: 'Clock',
-
-  getInitialState: function () {
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
     this.launchClock();
-    return {
+    this.state = {
       currentTime: new Date().toLocaleString()
     };
-  },
-  launchClock: function () {
-    var _this = this;
-    setInterval(function () {
-      console.log('updating...');
+  }
+  launchClock() {
+    setInterval(() => {
+      console.log('Updating...');
       this.setState({ currentTime: new Date().toLocaleString() });
-    }.bind(this), 1000);
-  },
-  render: function () {
-    console.log('rendering...');
+    }, 1000);
+  }
+  render() {
+    console.log('Rendering...');
     return React.createElement(
       'div',
       null,
@@ -23,4 +21,4 @@ var Clock = React.createClass({
       React.createElement(DigitalDisplay, { time: this.state.currentTime })
     );
   }
-});
+}

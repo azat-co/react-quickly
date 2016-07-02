@@ -1,4 +1,4 @@
-var DigitalDisplay = function (props) {
+const DigitalDisplay = function (props) {
   return React.createElement(
     "div",
     null,
