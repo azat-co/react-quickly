@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-clock": "./node_modules/.bin/babel clock/jsx -d clock/js",
+    "build-clock": "./node_modules/.bin/babel clock/jsx -d clock/js -w",
+    "build-clock-es6": "./node_modules/.bin/babel clock-es6/jsx -d clock-es6/js -w",
     "build-clock-analog-digital": "./node_modules/.bin/babel clock-analog-digital/jsx -d clock-analog-digital/js -w"
   },
   "keywords": [

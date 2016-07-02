@@ -9,6 +9,7 @@ var Clock = React.createClass({
     var _this = this
     setInterval(function(){
       console.log('updating...')
+      // use _this or this because of bind
       this.setState({currentTime: (new Date()).toLocaleString()})
     }.bind(this), 1000)
   },
