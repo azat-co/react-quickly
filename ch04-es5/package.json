@@ -1,0 +1,24 @@
+{
+  "name": "hello-world-class-jsx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-clock": "./node_modules/.bin/babel clock/jsx -d clock/js -w",
+    "build-clock-es6": "./node_modules/.bin/babel clock-es6/jsx -d clock-es6/js -w",
+    "build-clock-analog-digital": "./node_modules/.bin/babel clock-analog-digital/jsx -d clock-analog-digital/js -w"
+  },
+  "keywords": [
+    "react.js"
+  ],
+  "author": "Azat Mardan",
+  "license": "MIT",
+  "babel": {
+    "presets": ["react"]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-react": "^6.5.0"
+  }
+}
