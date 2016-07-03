@@ -1,0 +1,26 @@
+{
+  "name": "hello-world-class-jsx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-children": "./node_modules/.bin/babel children/jsx -d children/js -w",
+    "build-default-props": "./node_modules/.bin/babel default-props/jsx -d default-props/js -w",
+    "build-hi-order": "./node_modules/.bin/babel hi-order/jsx -d hi-order/js -w",
+    "build-prop-types": "./node_modules/.bin/babel prop-types/jsx -d prop-types/js -w",
+    "build-tooltip-logger": "./node_modules/.bin/babel tooltip-logger/jsx -d tooltip-logger/js -w"
+  },
+  "keywords": [
+    "react.js"
+  ],
+  "author": "Azat Mardan",
+  "license": "MIT",
+  "babel": {
+    "presets": ["react"]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-react": "^6.5.0"
+  }
+}
