@@ -1,11 +1,9 @@
-var helloWorldReactElement = React.createElement(
+let helloWorldReactElement = React.createElement(
   'h1',
   null,
   'Hello world!'
 );
-var HelloWorld = React.createClass({
-  displayName: 'HelloWorld',
-
+class HelloWorld extends React.Component {
   render() {
     return React.createElement(
       'div',
@@ -14,5 +12,5 @@ var HelloWorld = React.createClass({
       helloWorldReactElement
     );
   }
-});
+}
 ReactDOM.render(React.createElement(HelloWorld, null), document.getElementById('content'));

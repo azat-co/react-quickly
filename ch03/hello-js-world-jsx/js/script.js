@@ -1,6 +1,4 @@
-var HelloWorld = React.createClass({
-  displayName: 'HelloWorld',
-
+class HelloWorld extends React.Component {
   render() {
     return React.createElement(
       'h1',
@@ -10,7 +8,7 @@ var HelloWorld = React.createClass({
       ' world!!!'
     );
   }
-});
+}
 
 ReactDOM.render(React.createElement(
   'div',

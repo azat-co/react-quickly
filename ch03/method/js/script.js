@@ -1,10 +1,8 @@
-var Content = React.createClass({
-  displayName: 'Content',
-
-  getUrl: function () {
+class Content extends React.Component {
+  getUrl() {
     return 'http://webapplog.com';
-  },
-  render: function () {
+  }
+  render() {
     return React.createElement(
       'div',
       null,
@@ -20,6 +18,6 @@ var Content = React.createClass({
       )
     );
   }
-});
+}
 
 ReactDOM.render(React.createElement(Content, null), document.getElementById('content'));
