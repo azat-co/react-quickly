@@ -1,13 +1,16 @@
-var Content = React.createClass({
-  displayName: "Content",
-
+class Content extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log('I log, therefore I am');
+  }
   componentWillMount() {
     console.log(ReactDOM.findDOMNode(this));
-  },
+  }
   componentDidMount() {
     console.dir(ReactDOM.findDOMNode(this));
-  },
-  render: function () {
-    return React.createElement("div", null);
   }
-});
+  render() {
+    console.log('Render');
+    return React.createElement('div', null);
+  }
+}

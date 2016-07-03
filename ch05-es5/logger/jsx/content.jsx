@@ -1,12 +1,12 @@
-class Content extends React.Component {
-  constructor(props) {
-    super(props)
+
+let Content = React.createClass({
+  getInitialState(){
     this.launchClock()
-    this.state = {
+    return {
       counter: 0,
       currentTime: (new Date()).toLocaleString()
     }
-  }
+  },
   launchClock() {
     setInterval(()=>{
       this.setState({
@@ -14,51 +14,47 @@ class Content extends React.Component {
         currentTime: (new Date()).toLocaleString()
       })
     }, 1000)
-  }
-  render() {
+  },
+  render(){
     if (this.state.counter > 2) return <div/>
     return <Display time={this.state.currentTime}></Display>
   }
-}
-class Display extends React.Component {
-  constructor(props) {
-    super(props)
-    console.log('constructor')
-  }
-  componentWillMount() {
+})
+let Display = React.createClass({
+  componentWillMount: function(){
     console.log('componentWillMount is triggered')
-  }
-  componentDidMount(e) {
+  },
+  componentDidMount: function(e){
     console.log('componentDidMount is triggered')
     console.log('DOM node: ', ReactDOM.findDOMNode(this))
-  }
-  componentWillReceiveProps(newProps) {
+  },
+  componentWillReceiveProps: function(newProps){
     console.log('componentWillReceiveProps is triggered')
     console.log('new props: ', newProps)
-  }
-  shouldComponentUpdate(newProps, newState) {
+  },
+  shouldComponentUpdate: function(newProps, newState){
     console.log('shouldComponentUpdate is triggered')
     console.log('new props: ', newProps)
     console.log('new state: ', newState)
     return true
-  }
-  componentWillUpdate(newProps, newState) {
+  },
+  componentWillUpdate: function(newProps, newState){
     console.log('componentWillUpdate is triggered')
     console.log('new props: ', newProps)
     console.log('new state: ', newState)
-  }
-  componentDidUpdate(oldProps, oldState) {
+  },
+  componentDidUpdate: function(oldProps, oldState){
     console.log('componentDidUpdate is triggered')
     console.log('new props: ', oldProps)
     console.log('old props: ', oldState)
-  }
-  componentWillUnmount() {
+  },
+  componentWillUnmount: function(){
     console.log('componentWillUnmount')
-  }
-  render() {
+  },
+  render: function() {
     // console.log('rendering... Display')
     return (
       <div>{this.props.time}</div>
     )
   }
-}
+})
