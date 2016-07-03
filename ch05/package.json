@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-did-mount": "./node_modules/.bin/babel did-mount/jsx -d did-mount/js -w",
     "build-logger": "./node_modules/.bin/babel logger/jsx -d logger/js -w",
-    "build-note": "./node_modules/.bin/babel note/jsx -d note/js -w"
+    "build-note": "./node_modules/.bin/babel note/jsx -d note/js -w",
+    "build-users": "./node_modules/.bin/babel users/jsx -d users/js -w"
   },
   "keywords": [
     "react.js"
