@@ -18,6 +18,11 @@ ReactDOM.render(React.createElement(
   React.createElement(
     Content,
     null,
+    React.createElement("img", { src: "images/azat.jpg", width: "100" })
+  ),
+  React.createElement(
+    Content,
+    null,
     React.createElement(
       "a",
       { href: "http://react.rocks" },
