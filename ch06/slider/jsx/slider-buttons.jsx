@@ -1,24 +1,23 @@
-var SliderButtons = React.createClass({
-  getInitialState(){
-    return {sliderValue: 0}
-  },
+class SliderButtons extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {sliderValue: 0}
+  }
   handleSlide(event, ui) {
     this.setState({sliderValue: ui.value})
-  },
+  }
   handleChange(value) {
     return ()=> {
       $('#slider" ).slider('value', this.state.sliderValue+value)
       this.setState({sliderValue: this.state.sliderValue+value})
     }
-  },
+  }
   componentDidMount() {
     $('#slider').on('slide', this.handleSlide)
-  },
-
+  }
   componentWillUnmount() {
     $('#slider').off('slide', this.handleSlide)
-  },
-
+  }
   render() {
     return <div>
       <button disabled={(this.state.sliderValue<1)?true:false}
@@ -33,4 +32,4 @@ var SliderButtons = React.createClass({
       </button>
     </div>
   }
-})
+}
