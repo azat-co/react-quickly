@@ -1,21 +1,23 @@
-var prompt = 'Please enter your email to win $1,000,000.';
-var Content = React.createClass({
-  displayName: "Content",
-
-  submit: function (e) {
-    var emailAddress = this.refs.emailAddress;
-    var comments = this.refs.comments;
+class Content extends React.Component {
+  constructor(props) {
+    super(props);
+    this.submit = this.submit.bind(this);
+    this.prompt = 'Please enter your email to win $1,000,000.';
+  }
+  submit(event) {
+    let emailAddress = this.refs.emailAddress;
+    let comments = this.refs.comments;
     console.log(ReactDOM.findDOMNode(emailAddress).value);
     console.log(ReactDOM.findDOMNode(comments).value);
-  },
-  render: function () {
+  }
+  render() {
     return React.createElement(
       "div",
       { className: "well" },
       React.createElement(
         "p",
         null,
-        prompt
+        this.prompt
       ),
       React.createElement(
         "div",
@@ -40,6 +42,4 @@ var Content = React.createClass({
       )
     );
   }
-});
-
-ReactDOM.render(React.createElement(Content, null), document.getElementById('content'));
+}
