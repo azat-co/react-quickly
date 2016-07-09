@@ -1,16 +1,16 @@
-var Radio = React.createClass({
-  displayName: 'Radio',
-
-  getInitialState() {
-    let order = this.props.order;
+class Radio extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleResize = this.handleResize.bind(this);
+    let order = props.order;
     let i = 1;
-    return {
+    this.state = {
       outerStyle: this.getStyle(4, i),
       innerStyle: this.getStyle(1, i),
       selectedStyle: this.getStyle(2, i),
       taggerStyle: { top: order * 20, width: 25, height: 25 }
     };
-  },
+  }
   getStyle(i, m) {
     let value = i * m;
     return {
@@ -19,23 +19,21 @@ var Radio = React.createClass({
       left: value,
       right: value
     };
-  },
-  componentDidMount: function () {
+  }
+  componentDidMount() {
     window.addEventListener('resize', this.handleResize);
-  },
-
-  componentWillUnmount: function () {
+  }
+  componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
-  },
-  handleResize: function (e) {
+  }
+  handleResize(event) {
     let w = 1 + Math.round(window.innerWidth / 300);
     this.setState({
       taggerStyle: { top: this.props.order * w * 10, width: w * 10, height: w * 10 },
       textStyle: { left: w * 13, fontSize: 7 * w }
     });
-  },
-
-  render: function () {
+  }
+  render() {
     return React.createElement(
       'div',
       null,
@@ -64,4 +62,4 @@ var Radio = React.createClass({
       )
     );
   }
-});
+}
