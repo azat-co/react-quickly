@@ -1,6 +1,4 @@
-var Mouse = React.createClass({
-  displayName: 'Mouse',
-
+class Mouse extends React.Component {
   render() {
     return React.createElement(
       'div',
@@ -9,12 +7,12 @@ var Mouse = React.createClass({
         'div',
         {
           style: { border: '1px solid red' },
-          onMouseOver: event => {
+          onMouseOver: (event => {
             console.log('mouse is over with event');
             console.dir(event);
-          } },
+          }).bind(this) },
         'Open DevTools and move your mouse cursor over here'
       )
     );
   }
-});
+}

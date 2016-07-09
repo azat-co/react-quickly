@@ -1,0 +1,29 @@
+{
+  "name": "hello-world-class-jsx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-button": "./node_modules/.bin/babel button/jsx -d button/js -w",
+    "build-mouse": "./node_modules/.bin/babel mouse/jsx -d mouse/js -w",
+    "build-mouse-event": "./node_modules/.bin/babel mouse-event/jsx -d mouse-event/js -w",
+    "build-onclick": "./node_modules/.bin/babel onclick/jsx -d onclick/js -w",
+    "build-onclick-parent": "./node_modules/.bin/babel onclick-parent/jsx -d onclick-parent/js -w",
+    "build-onclick-props": "./node_modules/.bin/babel onclick-props/jsx -d onclick-props/js -w",
+    "build-slider": "./node_modules/.bin/babel slider/jsx -d slider/js -w",
+    "build-radio": "./node_modules/.bin/babel radio/jsx -d radio/js -w"
+  },
+  "keywords": [
+    "react.js"
+  ],
+  "author": "Azat Mardan",
+  "license": "MIT",
+  "babel": {
+    "presets": ["react"]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-react": "^6.5.0"
+  }
+}

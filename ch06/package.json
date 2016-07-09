@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build-button": "./node_modules/.bin/babel button/jsx -d button/js -w",
     "build-mouse": "./node_modules/.bin/babel mouse/jsx -d mouse/js -w",
+    "build-mouse-capture": "./node_modules/.bin/babel mouse-capture/jsx -d mouse-capture/js -w",
     "build-mouse-event": "./node_modules/.bin/babel mouse-event/jsx -d mouse-event/js -w",
     "build-onclick": "./node_modules/.bin/babel onclick/jsx -d onclick/js -w",
     "build-onclick-parent": "./node_modules/.bin/babel onclick-parent/jsx -d onclick-parent/js -w",

@@ -1,38 +1,12 @@
-var ClickCounterButton = React.createClass({
-  displayName: "ClickCounterButton",
-
-  render() {
-    return React.createElement(
-      "button",
-      { onClick: this.props.handler, className: "btn btn-info" },
-      "Don't touch me with your dirty hands!"
-    );
+class Content extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+    this.state = { counter: 0 };
   }
-});
-
-var Counter = React.createClass({
-  displayName: "Counter",
-
-  render() {
-    return React.createElement(
-      "span",
-      null,
-      "Clicked ",
-      this.props.value,
-      " times."
-    );
-  }
-});
-
-var Content = React.createClass({
-  displayName: "Content",
-
-  getInitialState() {
-    return { counter: 0 };
-  },
-  handleClick(e) {
+  handleClick(event) {
     this.setState({ counter: ++this.state.counter });
-  },
+  }
   render() {
     return React.createElement(
       "div",
@@ -42,4 +16,4 @@ var Content = React.createClass({
       React.createElement(Counter, { value: this.state.counter })
     );
   }
-});
+}

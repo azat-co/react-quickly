@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <script src="js/react-15.0.2.js"></script>
+    <script src="js/react-dom-15.0.2.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/jquery-ui.js"></script>
+
+    <script>
+      $(function() {
+        let handleChange = (e, ui)=>{
+          var slideEvent = new CustomEvent('slide', {
+            detail: {ui: ui, jQueryEvent: e}
+          })
+          window.dispatchEvent(slideEvent)
+        }
+        $('#slider').slider({
+          'change': handleChange,
+          'slide': handleChange
+        })
+      })
+    </script>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <h1>Slider Integration</h1>
+      <div id="slider"></div>
+
+      <div id="content"></div>
+      <script src="js/slider-buttons.js"></script>
+      <script src="js/slider-value.js"></script>
+      <script src="js/script.js"></script>
+    </div>
+  </body>
+
+</html>
