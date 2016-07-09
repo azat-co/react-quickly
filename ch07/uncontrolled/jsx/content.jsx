@@ -1,12 +1,13 @@
-var Content = React.createClass({
-  getInitialState(){
-    return {textbook: ''}
-  },
+class Content extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {textbook: ''}
+  }
   handleChange(event) {
     console.log(event.target.value)
     this.setState({textbook: event.target.value})
-  },
-  render: function() {
+  }
+  render() {
     return <div>
       <input
         type="text"
@@ -16,9 +17,4 @@ var Content = React.createClass({
       <span>{this.state.textbook}</span>
     </div>
   }
-})
-
-ReactDOM.render(
-  <Content/>,
-  document.getElementById('content')
-);
+}
