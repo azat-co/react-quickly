@@ -1,8 +1,12 @@
-var Content = React.createClass({
-  displayName: 'Content',
-
-  getInitialState() {
-    return {
+class Content extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleRadio = this.handleRadio.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.state = {
       description: `With the right pattern, applications will be more scalable and easier to maintain.
 If you aspire one day to become a Node.js architect (or maybe you're already one and want to extend your knowledge), this presentation is for you.`,
       radioGroup: {
@@ -11,25 +15,25 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
         polymer: false
       }
     };
-  },
+  }
   handleRadio(event) {
     let obj = {};
     obj[event.target.value] = event.target.checked; // true
     this.setState({ radioGroup: obj });
-  },
+  }
   handleChange(event) {
     console.log('onChange event: ', event.target.value, event.target.checked);
-  },
+  }
   handleInput(event) {
     console.log('onInput event: ', event.target.value, event.target.checked);
-  },
+  }
   handleSubmit(event) {
     console.log(event.target.value, event.target.checked);
-  },
+  }
   handleSelectChange(event) {
     this.setState({ selected: event.target.value });
     console.log(event.target.value, event.target.selected);
-  },
+  }
   render() {
     return React.createElement(
       'div',
@@ -164,4 +168,4 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
       )
     );
   }
-});
+}
