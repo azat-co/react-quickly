@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="browser.js"></script>
+    <script src="ReactRouter.js"></script>
+    <script src="History.js"></script>
+    <link href="bootstrap.css" type="text/css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="container-fluid ">
+
+      <div id="content" class=""></div>
+
+    </div>
+
+    <script type="text/babel">
+      var products = {
+        'msdos': 'Microsoft Disk Operating System is an operating system for x86-based personal computers.',
+        'win95': 'Windows 95 (codenamed Chicago) is a consumer-oriented operating system developed by Microsoft. Windows 95 merged Microsoft\'s formerly separate MS-DOS and Windows products.',
+        'ie5': 'Graphical web browser'
+      }
+      var Router = window.ReactRouter.Router
+      var Route = window.ReactRouter.Route
+      var Link = window.ReactRouter.Link
+      var IndexLink = window.ReactRouter.IndexLink
+      // var history = window.History.createHistory()
+      var history = window.History.createHashHistory({
+        queryKey: false
+      })
+
+      var Login = function(){
+        return <div>
+          <h3>Login</h3>
+          <input type="text" placeholder="email" className="form-control"></input>
+          <input type="text" placeholder="password" className="form-control"></input>
+          <button className="btn btn-primary">login</button>
+        </div>
+      }
+      var About = function(){
+        return <div>Microsoft Corporation is an American multinational technology company headquartered in Redmond, Washington.</div>
+      }
+      var Products = function(){
+        return <div>Products
+          <ol>
+            <li><Link to="/products/msdos">MS DOS</Link></li>
+            <li><Link to="/products/ie5">IE5</Link></li>
+            <li><Link to="/products/win95">Windows 95</Link></li>
+          </ol>
+        </div>
+      }
+      var Product = function Product (props) {
+        return (
+          <div>
+            <h3>Product ({props.params.id})</h3>
+            <p>{products[props.params.id]}</p>
+          </div>
+        )
+      }
+      var Contact = function(){
+        return <div>
+          <h3>Contact Us</h3>
+          <input type="text" placeholder="you message" className="form-control"></input>
+          <button className="btn btn-primary">send</button>
+        </div>
+      }
+      var App = React.createClass({
+        render() {
+          return (
+            <div>
+              <h1>IT Solutions</h1>
+              <div className="navbar navbar-default">
+                <ul className="nav nav-pills navbar-nav ">
+                  <li className={(this.props.history.isActive('/about'))? 'active': ''}><Link to="/about" activeClassName="active">About</Link></li>
+                  <li className={(this.props.history.isActive('/products'))? 'active': ''}><Link to="/products" activeClassName="active">Products</Link></li>
+                  <li className={(this.props.history.isActive('/contact'))? 'active': ''}><Link to="/contact" activeClassName="active">Contact Us</Link></li>
+                  <li><Link to="/login" activeClassName="active">Login</Link></li>
+                </ul>
+              </div>
+              {this.props.children}
+            </div>
+          )
+        }
+      })
+
+      ReactDOM.render((
+        <Router history={history}>
+          <Route path="/" component={App} >
+            <Route path="/about" component={About} />
+            <Route path="/products" component={Products}/>
+            <Route path="/products/:id" component={Product} />
+            <Route path="/contact" component={Contact} />
+          </Route>
+          <Route path="/login" component={Login}/>
+        </Router>
+      ), document.getElementById('content'))
+
+    </script>
+
+  </body>
+</html>
