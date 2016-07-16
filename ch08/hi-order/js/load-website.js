@@ -10,9 +10,6 @@ const LoadWebsite = Component => {
     getUrl() {
       return 'https://facebook.github.io/react/docs/top-level-api.html';
     }
-    componentWillMount() {
-      console.log('Component will mount');
-    }
     handleClick(event) {
       var iframe = document.getElementById('frame').src = this.getUrl();
     }
@@ -25,5 +22,6 @@ const LoadWebsite = Component => {
     }
   }
   _LoadWebsite.displayName = 'EhnancedComponent';
+
   return _LoadWebsite;
 };
