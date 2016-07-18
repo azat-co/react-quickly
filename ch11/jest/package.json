@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node -e \"console.log(require('./generate-password.js')())\""
   },
   "author": "Azat Mardan",
   "license": "MIT",
