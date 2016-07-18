@@ -2,13 +2,13 @@
 jest.autoMockOff()
 
 describe('Password', function() {
-  it('changes after click', function(){
+  it('changes after clicking the Generate button', function(){
     var TestUtils = require('react-addons-test-utils')
     React = require('react')
     ReactDOM = require('react-dom')
     var fD = ReactDOM.findDOMNode
     require('../js/generate-password.js')
-    require('../js/password.js')
+    const Password = require('../jsx/password.jsx')
 
     var password = TestUtils.renderIntoDocument(
       React.createElement(Password, {

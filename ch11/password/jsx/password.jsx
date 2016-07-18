@@ -1,6 +1,6 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
-
+const generatePassword = require('../js/generate-password.js')
 
 var rules =  {
   upperCase: {
@@ -25,10 +25,11 @@ var rules =  {
   }
 }
 
-class Password extends React.createClass {
+class Password extends React.Component {
   constructor(props) {
     super(props)
     this.state = {strength: {}, password: '', visible: false, ok: false}
+    this.generate = this.generate.bind(this)
   }
   checkStrength(e) {
     var _this = this
@@ -71,7 +72,7 @@ class Password extends React.createClass {
     }.bind(this))
     return (
       <div className="well form-group col-md-6">
-        <label forHtml="password">Password</label>
+        <label>Password</label>
         <PasswordInput
           name="password"
           onChange={this.checkStrength}
