@@ -1,0 +1,25 @@
+{
+  "name": "password",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest",
+    "build": "gulp build",
+    "dev": "gulp"
+  },
+  "author": "Azat Mardan",
+  "license": "MIT",
+  "devDependencies": {
+    "jest-cli": "0.5.10",
+    "react": "0.14.0",
+    "react-addons-test-utils": "0.14.0"
+  },
+  "dependencies": {
+    "gulp": "3.9.0",
+    "gulp-babel": "5.2.1",
+    "gulp-concat": "2.6.0",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-watch": "4.3.5"
+  }
+}

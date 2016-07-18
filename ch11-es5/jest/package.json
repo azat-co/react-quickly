@@ -1,0 +1,14 @@
+{
+  "name": "jest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Azat Mardan",
+  "license": "ISC",
+  "devDependencies": {
+    "jest-cli": "^0.5.10"
+  }
+}
