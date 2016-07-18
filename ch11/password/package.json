@@ -5,21 +5,24 @@
   "main": "index.html",
   "scripts": {
     "test": "jest",
-    "build": "gulp build",
-    "dev": "gulp"
+    "build-watch": "./node_modules/.bin/webpack -w",
+    "build": "./node_modules/.bin/webpack"
   },
   "author": "Azat Mardan",
   "license": "MIT",
-  "devDependencies": {
-    "jest-cli": "0.5.10",
-    "react": "0.14.0",
-    "react-addons-test-utils": "0.14.0"
+  "babel": {
+    "presets": [
+      "react"
+    ]
   },
-  "dependencies": {
-    "gulp": "3.9.0",
-    "gulp-babel": "5.2.1",
-    "gulp-concat": "2.6.0",
-    "gulp-sourcemaps": "1.6.0",
-    "gulp-watch": "4.3.5"
+  "devDependencies": {
+    "babel-core": "^6.10.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "jest-cli": "13.2.3",
+    "react": "15.2.1",
+    "react-addons-test-utils": "15.2.1",
+    "react-dom": "15.2.1",
+    "webpack": "1.12.9"
   }
 }

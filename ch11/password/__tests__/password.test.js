@@ -4,8 +4,8 @@ jest.autoMockOff()
 describe('Password', function() {
   it('changes after click', function(){
     var TestUtils = require('react-addons-test-utils')
-    React = require('../js/react-with-addons.js')
-    ReactDOM = require('../js/react-dom.js')
+    React = require('react')
+    ReactDOM = require('react-dom')
     var fD = ReactDOM.findDOMNode
     require('../js/generate-password.js')
     require('../js/password.js')

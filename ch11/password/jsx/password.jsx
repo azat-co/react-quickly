@@ -1,3 +1,7 @@
+const React = require('react')
+const ReactDOM = require('react-dom')
+
+
 var rules =  {
   upperCase: {
     message:  'Must have at least one upper-case character',
@@ -20,11 +24,13 @@ var rules =  {
     pattern: /(.{6,})/
   }
 }
-var Password = React.createClass({
-  getInitialState: function(){
-    return {strength: {}, password: '', visible: false, ok: false}
-  },
-  checkStrength: function(e){
+
+class Password extends React.createClass {
+  constructor(props) {
+    super(props)
+    this.state = {strength: {}, password: '', visible: false, ok: false}
+  }
+  checkStrength(e) {
     var _this = this
     var password = e.target.value
     this.setState({ password: password })
@@ -41,19 +47,19 @@ var Password = React.createClass({
         _this.setState({ok: false})
       }
     })
-  },
-  toggleVisibility: function(){
+  }
+  toggleVisibility() {
     this.setState({visible: !this.state.visible}, function(){
     })
-  },
+  }
 
-  generate: function(){
+  generate() {
     var _this = this
      this.setState({visible: true, password: generatePassword()}, function(){
        _this.checkStrength({target: {value: _this.state.password}})
      })
-  },
-  render: function(){
+  }
+  render() {
     var processedRules = Object.keys(this.props).map(function(key){
       if (this.props[key]) {
         return {
@@ -66,14 +72,25 @@ var Password = React.createClass({
     return (
       <div className="well form-group col-md-6">
         <label forHtml="password">Password</label>
-        <PasswordInput name="password" onChange={this.checkStrength} value={this.state.password}  visible={this.state.visible}/>
-        <PasswordVisibility checked={this.state.visible} onChange={this.toggleVisibility}/>
+        <PasswordInput
+          name="password"
+          onChange={this.checkStrength}
+          value={this.state.password}
+          visible={this.state.visible}/>
+        <PasswordVisibility
+          checked={this.state.visible}
+          onChange={this.toggleVisibility}/>
         <PasswordInfo rules={processedRules}/>
-        <PasswordGenerate onClick={this.generate}>Generate</PasswordGenerate>
-        <button className={'btn btn-primary' + ((this.state.ok)? '': ' disabled')}>Save</button>
+        <PasswordGenerate onClick={this.generate}>
+          Generate
+        </PasswordGenerate>
+        <button className={'btn btn-primary' + ((this.state.ok)? '': ' disabled')}>
+          Save
+        </button>
       </div>
     )
-}})
+}}
+
 var PasswordGenerate = React.createClass({
   render: function(){
     return (
@@ -117,4 +134,5 @@ var PasswordInfo = React.createClass({
   }
 })
 
-window.Password = Password
+module.exports = Password
+
