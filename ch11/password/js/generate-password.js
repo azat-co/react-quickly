@@ -1,4 +1,3 @@
-
 //Credit to Blender http://stackoverflow.com/a/12635919
 module.exports = function generatePassword() {
   var specials = '!@#$%^&*()_+{}:"<>?\|[]\',./`~'

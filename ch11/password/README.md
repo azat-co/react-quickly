@@ -1,12 +1,13 @@
 To run:
 
 ```
-$ npm install
-$ gulp
+$ npm build-watch
+$ npm build
 ```
 
 To test:
 
 ```
-npm test
+$ npm test
+$ npm test-watch
 ```
