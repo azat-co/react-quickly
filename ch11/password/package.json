@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "test": "jest",
+    "test-watch": "jest --watch",
     "build-watch": "./node_modules/.bin/webpack -w",
     "build": "./node_modules/.bin/webpack"
   },
