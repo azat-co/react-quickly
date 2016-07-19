@@ -27,7 +27,7 @@ class Password extends React.Component {
       }
     })
     this.setState({strength: strength}, ()=>{
-      if (Object.keys(this.state.strength).length == Object.keys( this.props).length) {
+      if (Object.keys(this.state.strength).length == Object.keys(this.props).length) {
         this.setState({ok: true})
       } else {
         this.setState({ok: false})
@@ -66,6 +66,9 @@ class Password extends React.Component {
           checked={this.state.visible}
           onChange={this.toggleVisibility}/>
         <PasswordInfo rules={processedRules}/>
+        <PasswordGenerate onClick={this.generate}>
+          Generate
+        </PasswordGenerate>        
         <PasswordGenerate onClick={this.generate}>
           Generate
         </PasswordGenerate>

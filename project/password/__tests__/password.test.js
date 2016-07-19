@@ -6,6 +6,12 @@ describe('Password', function() {
     const React = require('react')
     const ReactDOM = require('react-dom')
     const Password = require('../jsx/password.jsx')
+
+    const PasswordGenerate = require('../jsx/password-generate.jsx')
+    const PasswordInfo = require('../jsx/password-info.jsx')
+    const PasswordInput = require('../jsx/password-input.jsx')
+    const PasswordVisibility = require('../jsx/password-visibility.jsx')
+
     const fD = ReactDOM.findDOMNode
 
     let password = TestUtils.renderIntoDocument(<Password
@@ -16,7 +22,13 @@ describe('Password', function() {
       over6={true}
       />
     )
-    
+
+    const passwordRenderer = TestUtils.createRenderer()
+    passwordRenderer.render(<Password/>)
+    let p = passwordRenderer.getRenderOutput()
+    expect(p.type).toBe('div')
+    expect(p.props.children.length).toBe(6)
+
     let rules = TestUtils.scryRenderedDOMComponentsWithTag(password, 'li')
     expect(rules.length).toBe(5)
     expect(fD(rules[0]).textContent).toEqual('Must have at least one upper-case character')
