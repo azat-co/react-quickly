@@ -2,66 +2,45 @@ const React = require('react')
 const ReactDOM = require('react-dom')
 const generatePassword = require('../js/generate-password.js')
 
-var rules =  {
-  upperCase: {
-    message:  'Must have at least one upper-case character',
-    pattern: /([A-Z]+)/
-  },
-  lowerCase: {
-    message: 'Must have at least one lower-case character',
-    pattern: /([a-z]+)/
-  },
-  special:{
-    message: 'Must have at least one special character (#$@!&%...)',
-    pattern: /([\!\@\#\$\%\^\&\*\(\)\_\+\{\}\:\"\<\>\?\\|\[\]\/'\,\.\`\~]+)/
-  },
-  number: {
-    message: 'Must have at least one number',
-    pattern: /([0-9]+)/
-  },
-  'over6': {
-    message: 'Must be more than 6 characters',
-    pattern: /(.{6,})/
-  }
-}
+const rules = require('../js/rules.js')
 
 class Password extends React.Component {
   constructor(props) {
     super(props)
     this.state = {strength: {}, password: '', visible: false, ok: false}
     this.generate = this.generate.bind(this)
+    this.checkStrength = this.checkStrength.bind(this)
+    this.toggleVisibility = this.toggleVisibility.bind(this)
   }
-  checkStrength(e) {
-    var _this = this
-    var password = e.target.value
+  checkStrength(event) {
+    var password = event.target.value
     this.setState({ password: password })
     var strength = {}
-    Object.keys(this.props).forEach(function(key, index, list){
-      if (_this.props[key] && rules[key].pattern.test(password)) {
+    Object.keys(this.props).forEach((key, index, list)=>{
+      if (this.props[key] && rules[key].pattern.test(password)) {
         strength[key] = true
       }
     })
-    this.setState({strength: strength}, function() {
-      if (Object.keys(_this.state.strength).length == Object.keys( _this.props).length) {
-        _this.setState({ok: true})
+    this.setState({strength: strength}, ()=>{
+      if (Object.keys(this.state.strength).length == Object.keys( this.props).length) {
+        this.setState({ok: true})
       } else {
-        _this.setState({ok: false})
+        this.setState({ok: false})
       }
     })
   }
   toggleVisibility() {
-    this.setState({visible: !this.state.visible}, function(){
+    this.setState({visible: !this.state.visible}, ()=>{
     })
   }
 
   generate() {
-    var _this = this
-     this.setState({visible: true, password: generatePassword()}, function(){
-       _this.checkStrength({target: {value: _this.state.password}})
+     this.setState({visible: true, password: generatePassword()}, ()=>{
+       this.checkStrength({target: {value: this.state.password}})
      })
   }
   render() {
-    var processedRules = Object.keys(this.props).map(function(key){
+    var processedRules = Object.keys(this.props).map((key)=>{
       if (this.props[key]) {
         return {
           key: key,
@@ -69,7 +48,7 @@ class Password extends React.Component {
           isCompleted: this.state.strength[key] || false
         }
       }
-    }.bind(this))
+    })
     return (
       <div className="well form-group col-md-6">
         <label>Password</label>
@@ -92,33 +71,39 @@ class Password extends React.Component {
     )
 }}
 
-var PasswordGenerate = React.createClass({
-  render: function(){
+class PasswordGenerate extends React.Component{
+  render() {
     return (
       <button {...this.props} className="btn generate-btn">{this.props.children}</button>
     )
   }
-})
-var PasswordInput = React.createClass({
-    render: function(){
-      return(
-        <input className="form-control" type={this.props.visible ? 'text' : 'password'} name={this.props.name} value={this.props.value} onChange={this.props.onChange}/>
-      )
-    }
-})
-var PasswordVisibility = React.createClass({
-    render: function(){
-      return(
-        <label className="form-control">
-          <input className="" type="checkbox" checked={this.props.checked} onChange={this.props.onChange}/> Show password
-        </label>
-      )
-    }
-})
+}
+class PasswordInput extends React.Component {
+  render() {
+    return(
+      <input className="form-control"
+        type={this.props.visible ? 'text' : 'password'}
+        name={this.props.name}
+        value={this.props.value}
+        onChange={this.props.onChange}/>
+    )
+  }
+}
+class PasswordVisibility extends React.Component {
+  render() {
+    return (
+      <label className="form-control">
+        <input className=""
+          type="checkbox"
+          checked={this.props.checked}
+          onChange={this.props.onChange}/> Show password
+      </label>
+    )
+  }
+}
 
-var PasswordInfo = React.createClass({
-  render: function () {
-    var _this = this
+class PasswordInfo extends React.Component {
+  render() {
     return (
       <div>
         <h4>Password Strength</h4>
@@ -133,7 +118,6 @@ var PasswordInfo = React.createClass({
       </div>
     )
   }
-})
+}
 
 module.exports = Password
-

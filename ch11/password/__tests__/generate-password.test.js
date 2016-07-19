@@ -2,7 +2,7 @@ jest.dontMock('../js/generate-password.js')
 var password,
   password2,
   pattern = /^[A-Za-z0-9\!\@\#\$\%\^\&\*\(\)\_\+\{\}\:\"\<\>\?\\|\[\]\/'\,\.\`\~]{8,16}$/
-require('../js/generate-password.js')
+const generatePassword = require('../js/generate-password.js')
 
 describe('method generatePassword', function(){
 
