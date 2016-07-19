@@ -4,6 +4,11 @@ const generatePassword = require('../js/generate-password.js')
 
 const rules = require('../js/rules.js')
 
+const PasswordGenerate = require('./password-generate.jsx')
+const PasswordInfo = require('./password-info.jsx')
+const PasswordInput = require('./password-input.jsx')
+const PasswordVisibility = require('./password-visibility.jsx')
+
 class Password extends React.Component {
   constructor(props) {
     super(props)
@@ -14,7 +19,7 @@ class Password extends React.Component {
   }
   checkStrength(event) {
     var password = event.target.value
-    this.setState({ password: password })
+    this.setState({password: password})
     var strength = {}
     Object.keys(this.props).forEach((key, index, list)=>{
       if (this.props[key] && rules[key].pattern.test(password)) {
@@ -70,54 +75,5 @@ class Password extends React.Component {
       </div>
     )
 }}
-
-class PasswordGenerate extends React.Component{
-  render() {
-    return (
-      <button {...this.props} className="btn generate-btn">{this.props.children}</button>
-    )
-  }
-}
-class PasswordInput extends React.Component {
-  render() {
-    return(
-      <input className="form-control"
-        type={this.props.visible ? 'text' : 'password'}
-        name={this.props.name}
-        value={this.props.value}
-        onChange={this.props.onChange}/>
-    )
-  }
-}
-class PasswordVisibility extends React.Component {
-  render() {
-    return (
-      <label className="form-control">
-        <input className=""
-          type="checkbox"
-          checked={this.props.checked}
-          onChange={this.props.onChange}/> Show password
-      </label>
-    )
-  }
-}
-
-class PasswordInfo extends React.Component {
-  render() {
-    return (
-      <div>
-        <h4>Password Strength</h4>
-        <ul>
-          {this.props.rules.map(function(processedRule, index, list){
-            if (processedRule.isCompleted)
-              return <li key={processedRule.key}><strike>{processedRule.rule.message}</strike></li>
-            else
-              return <li key={processedRule.key}>{processedRule.rule.message}</li>
-          })}
-        </ul>
-      </div>
-    )
-  }
-}
 
 module.exports = Password

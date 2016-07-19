@@ -21091,13 +21091,16 @@
 /* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	const React = __webpack_require__(1);
 	const ReactDOM = __webpack_require__(33);
 	const generatePassword = __webpack_require__(173);
 	
 	const rules = __webpack_require__(174);
+	
+	const PasswordGenerate = __webpack_require__(175);
+	const PasswordInfo = __webpack_require__(176);
+	const PasswordInput = __webpack_require__(177);
+	const PasswordVisibility = __webpack_require__(178);
 	
 	class Password extends React.Component {
 	  constructor(props) {
@@ -21169,71 +21172,6 @@
 	        'button',
 	        { className: 'btn btn-primary' + (this.state.ok ? '' : ' disabled') },
 	        'Save'
-	      )
-	    );
-	  }
-	}
-	
-	class PasswordGenerate extends React.Component {
-	  render() {
-	    return React.createElement(
-	      'button',
-	      _extends({}, this.props, { className: 'btn generate-btn' }),
-	      this.props.children
-	    );
-	  }
-	}
-	class PasswordInput extends React.Component {
-	  render() {
-	    return React.createElement('input', { className: 'form-control',
-	      type: this.props.visible ? 'text' : 'password',
-	      name: this.props.name,
-	      value: this.props.value,
-	      onChange: this.props.onChange });
-	  }
-	}
-	class PasswordVisibility extends React.Component {
-	  render() {
-	    return React.createElement(
-	      'label',
-	      { className: 'form-control' },
-	      React.createElement('input', { className: '',
-	        type: 'checkbox',
-	        checked: this.props.checked,
-	        onChange: this.props.onChange }),
-	      ' Show password'
-	    );
-	  }
-	}
-	
-	class PasswordInfo extends React.Component {
-	  render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h4',
-	        null,
-	        'Password Strength'
-	      ),
-	      React.createElement(
-	        'ul',
-	        null,
-	        this.props.rules.map(function (processedRule, index, list) {
-	          if (processedRule.isCompleted) return React.createElement(
-	            'li',
-	            { key: processedRule.key },
-	            React.createElement(
-	              'strike',
-	              null,
-	              processedRule.rule.message
-	            )
-	          );else return React.createElement(
-	            'li',
-	            { key: processedRule.key },
-	            processedRule.rule.message
-	          );
-	        })
 	      )
 	    );
 	  }
@@ -21319,6 +21257,102 @@
 	    pattern: /(.{6,})/
 	  }
 	};
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	const React = __webpack_require__(1);
+	class PasswordGenerate extends React.Component {
+	  render() {
+	    return React.createElement(
+	      "button",
+	      _extends({}, this.props, { className: "btn generate-btn" }),
+	      this.props.children
+	    );
+	  }
+	}
+	module.exports = PasswordGenerate;
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+	class PasswordInfo extends React.Component {
+	  render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h4',
+	        null,
+	        'Password Strength'
+	      ),
+	      React.createElement(
+	        'ul',
+	        null,
+	        this.props.rules.map(function (processedRule, index, list) {
+	          if (processedRule.isCompleted) return React.createElement(
+	            'li',
+	            { key: processedRule.key },
+	            React.createElement(
+	              'strike',
+	              null,
+	              processedRule.rule.message
+	            )
+	          );else return React.createElement(
+	            'li',
+	            { key: processedRule.key },
+	            processedRule.rule.message
+	          );
+	        })
+	      )
+	    );
+	  }
+	}
+	
+	module.exports = PasswordInfo;
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+	class PasswordInput extends React.Component {
+	  render() {
+	    return React.createElement('input', { className: 'form-control',
+	      type: this.props.visible ? 'text' : 'password',
+	      name: this.props.name,
+	      value: this.props.value,
+	      onChange: this.props.onChange });
+	  }
+	}
+	
+	module.exports = PasswordInput;
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const React = __webpack_require__(1);
+	class PasswordVisibility extends React.Component {
+	  render() {
+	    return React.createElement(
+	      "label",
+	      { className: "form-control" },
+	      React.createElement("input", { className: "",
+	        type: "checkbox",
+	        checked: this.props.checked,
+	        onChange: this.props.onChange }),
+	      " Show password"
+	    );
+	  }
+	}
+	
+	module.exports = PasswordVisibility;
 
 /***/ }
 /******/ ]);
