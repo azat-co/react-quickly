@@ -3,7 +3,6 @@ const {Link} = require('react-router')
 
 class Content extends React.Component {
   render() {
-    console.log(this.context, this.props, this);
     return (
       <div>
         <h1>Node.University</h1>

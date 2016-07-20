@@ -55,6 +55,7 @@
 	const Login = __webpack_require__(260);
 	const Post = __webpack_require__(261);
 	const Posts = __webpack_require__(262);
+	const { withRouter } = __webpack_require__(172);
 	
 	const posts = __webpack_require__(263);
 	
@@ -66,7 +67,7 @@
 	let hashHistory = ReactRouter.useRouterHistory(History.createHashHistory)({
 	  queryKey: false
 	});
-	// console.log(Content);
+	
 	ReactDOM.render(React.createElement(
 	  Router,
 	  { history: hashHistory },
@@ -76,7 +77,7 @@
 	    React.createElement(Route, { path: '/about', component: About }),
 	    React.createElement(Route, { path: '/posts', component: Posts, posts: posts }),
 	    React.createElement(Route, { path: '/posts/:id', component: Post, posts: posts }),
-	    React.createElement(Route, { path: '/contact', component: Contact })
+	    React.createElement(Route, { path: '/contact', component: withRouter(Contact) })
 	  ),
 	  React.createElement(Route, { path: '/login', component: Login })
 	), document.getElementById('content'));
@@ -28830,7 +28831,6 @@
 	
 	class Content extends React.Component {
 	  render() {
-	    console.log(this.context, this.props, this);
 	    return React.createElement(
 	      'div',
 	      null,
@@ -28917,7 +28917,8 @@
 
 	const React = __webpack_require__(1);
 	
-	module.exports = function Contact() {
+	module.exports = function Contact(props) {
+	  // setTimeout(()=>{props.router.push('about')}, 1000)
 	  return React.createElement(
 	    "div",
 	    null,
