@@ -4,6 +4,11 @@ module.exports = {
     path: __dirname + '/js/',
     filename: 'bundle.js'
   },
+  devtool: '#sourcemap',
+  stats: {
+   colors: true,
+   reasons: true
+  },  
   module: {
     loaders: [
       {

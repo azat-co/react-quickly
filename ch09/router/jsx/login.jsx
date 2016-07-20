@@ -1,4 +1,6 @@
-var Login = function(){
+const React = require('react')
+
+module.exports = function Login() {
   return <div>
     <h3>Login</h3>
     <input type="text" placeholder="email" className="form-control"></input>

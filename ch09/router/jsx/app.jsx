@@ -1,30 +1,31 @@
 const React = require('react')
 const ReactDOM = require ('react-dom')
-const Router = require('./router.jsx')
-const Content = require('./content.jsx')
 const ReactRouter = require('react-router')
-<script src="History.js"></script>
+const History = require('history')
 
-var products = {
-  'express': '',
-  'mongoose': 'Windows 95 (codenamed Chicago) is a consumer-oriented operating system developed by Microsoft. Windows 95 merged Microsoft\'s formerly separate MS-DOS and Windows products.',
-  'nodeprogram': 'Graphical web browser'
-}
-var Router = ReactRouter.Router
-var Route = ReactRouter.Route
-var Link = ReactRouter.Link
-var IndexLink = ReactRouter.IndexLink
-// var history = window.History.createHistory()
-var history = window.History.createHashHistory({
-  queryKey: false
-})
+const Content = require('./content.jsx')
+const About = require('./about.jsx')
+const Contact = require('./contact.jsx')
+const Login = require('./login.jsx')
+const Post = require('./post.jsx')
+const Posts = require('./posts.jsx')
 
+
+const posts = require('../posts.js')
+
+let { Router,
+  Route,
+  Link
+} = ReactRouter
+
+let history = ReactRouter.useRouterHistory(History.createHashHistory)({ queryKey: false })
+// console.log(Content);
 ReactDOM.render((
   <Router history={history}>
     <Route path="/" component={Content} >
       <Route path="/about" component={About} />
-      <Route path="/products" component={Products}/>
-      <Route path="/products/:id" component={Product} />
+      <Route path="/posts" component={Posts} posts={posts}/>
+      <Route path="/posts/:id" component={Post}  posts={posts}/>
       <Route path="/contact" component={Contact} />
     </Route>
     <Route path="/login" component={Login}/>

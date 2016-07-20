@@ -1,14 +1,34 @@
-module.exports = class Content extends React.Component {
+const React = require('react')
+const {Link} = require('react-router')
+
+class Content extends React.Component {
   render() {
+    // console.log(this.context, this.location, this.props);
     return (
       <div>
-        <h1>IT Solutions</h1>
+        <h1>Node.University</h1>
         <div className="navbar navbar-default">
           <ul className="nav nav-pills navbar-nav ">
-            <li className={(this.props.history.isActive('/about'))? 'active': ''}><Link to="/about" activeClassName="active">About</Link></li>
-            <li className={(this.props.history.isActive('/products'))? 'active': ''}><Link to="/products" activeClassName="active">Products</Link></li>
-            <li className={(this.props.history.isActive('/contact'))? 'active': ''}><Link to="/contact" activeClassName="active">Contact Us</Link></li>
-            <li><Link to="/login" activeClassName="active">Login</Link></li>
+            <li className={(this.context.router.isActive('/about'))? 'active': ''}>
+              <Link to="/about" activeClassName="active">
+                About
+              </Link>
+            </li>
+            <li className={(this.context.router.isActive('/posts'))? 'active': ''}>
+              <Link to="/posts" activeClassName="active">
+                Blog
+              </Link>
+            </li>
+            <li className={(this.context.router.isActive('/contact'))? 'active': ''}>
+              <Link to="/contact" activeClassName="active">
+                Contact Us
+              </Link>
+            </li>
+            <li>
+              <Link to="/login" activeClassName="active">
+                Login
+              </Link>
+            </li>
           </ul>
         </div>
         {this.props.children}
@@ -16,3 +36,10 @@ module.exports = class Content extends React.Component {
     )
   }
 }
+Content.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
+Content.childContextTypes = {
+  location: React.PropTypes.object
+}
+module.exports = Content
