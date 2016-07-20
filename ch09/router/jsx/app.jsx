@@ -18,10 +18,12 @@ let { Router,
   Link
 } = ReactRouter
 
-let history = ReactRouter.useRouterHistory(History.createHashHistory)({ queryKey: false })
+let hashHistory = ReactRouter.useRouterHistory(History.createHashHistory)({
+  queryKey: false
+})
 // console.log(Content);
 ReactDOM.render((
-  <Router history={history}>
+  <Router history={hashHistory}>
     <Route path="/" component={Content} >
       <Route path="/about" component={About} />
       <Route path="/posts" component={Posts} posts={posts}/>

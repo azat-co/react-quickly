@@ -63,11 +63,13 @@
 	  Link
 	} = ReactRouter;
 	
-	let history = ReactRouter.useRouterHistory(History.createHashHistory)({ queryKey: false });
+	let hashHistory = ReactRouter.useRouterHistory(History.createHashHistory)({
+	  queryKey: false
+	});
 	// console.log(Content);
 	ReactDOM.render(React.createElement(
 	  Router,
-	  { history: history },
+	  { history: hashHistory },
 	  React.createElement(
 	    Route,
 	    { path: '/', component: Content },
@@ -28828,7 +28830,7 @@
 	
 	class Content extends React.Component {
 	  render() {
-	    // console.log(this.context, this.location, this.props);
+	    console.log(this.context, this.props, this);
 	    return React.createElement(
 	      'div',
 	      null,
@@ -28888,9 +28890,6 @@
 	Content.contextTypes = {
 	  router: React.PropTypes.object.isRequired
 	};
-	Content.childContextTypes = {
-	  location: React.PropTypes.object
-	};
 	module.exports = Content;
 
 /***/ },
@@ -28908,7 +28907,7 @@
 	      { href: "http://Node.University", target: "_blank" },
 	      "Node.University"
 	    ),
-	    " is home to top-notch Node education which brings joy to JavaScript engineers."
+	    "is home to top-notch Node education which brings joy to JavaScript engineers."
 	  );
 	};
 

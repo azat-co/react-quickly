@@ -3,7 +3,7 @@ const {Link} = require('react-router')
 
 class Content extends React.Component {
   render() {
-    // console.log(this.context, this.location, this.props);
+    console.log(this.context, this.props, this);
     return (
       <div>
         <h1>Node.University</h1>
@@ -38,8 +38,5 @@ class Content extends React.Component {
 }
 Content.contextTypes = {
   router: React.PropTypes.object.isRequired
-}
-Content.childContextTypes = {
-  location: React.PropTypes.object
 }
 module.exports = Content
