@@ -6,6 +6,7 @@ class Content extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.state = {
       description: `With the right pattern, applications will be more scalable and easier to maintain.
 If you aspire one day to become a Node.js architect (or maybe you're already one and want to extend your knowledge), this presentation is for you.`,
@@ -13,7 +14,8 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
         angular: false,
         react: true,
         polymer: false
-      }
+      },
+      selectedValue: 'node'
     };
   }
   handleRadio(event) {
@@ -27,11 +29,19 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
   handleInput(event) {
     console.log('onInput event: ', event.target.value, event.target.checked);
   }
+  handleFirstNameChange(event) {
+    this.setState({ firstName: event.target.value });
+  }
   handleSubmit(event) {
     console.log(event.target.value, event.target.checked);
+    fetch(this.props['data-url'], { method: 'POST', body: JSON.stringify(this.state) }).then(response => {
+      return response.json();
+    }).then(data => {
+      console.log('Submitted: ', data);
+    });
   }
   handleSelectChange(event) {
-    this.setState({ selected: event.target.value });
+    this.setState({ selectedValue: event.target.value });
     console.log(event.target.value, event.target.selected);
   }
   render() {
@@ -121,7 +131,7 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
         React.createElement('hr', null),
         React.createElement(
           'select',
-          { value: this.state.select, onChange: this.handleSelectChange },
+          { value: this.state.selectedValue, onChange: this.handleSelectChange },
           React.createElement(
             'option',
             { value: 'ruby' },
@@ -158,6 +168,13 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
             'jQuery'
           )
         ),
+        React.createElement('hr', null),
+        React.createElement(
+          'h2',
+          null,
+          'input: first name [text]'
+        ),
+        React.createElement('input', { type: 'text', name: 'first-name', onChange: this.handleFirstNameChange }),
         React.createElement('hr', null),
         React.createElement(
           'h2',
