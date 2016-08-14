@@ -17,3 +17,7 @@ class Logo extends React.Component {
     return <img onClick={this.props.handleClick} width="40" src="logo.png" href="#"/>
   }
 }
+
+// Logo = (props)=>{
+//   return <img onClick={props.handleClick} width="40" src="logo.png" href="#"/>
+// }
