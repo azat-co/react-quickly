@@ -15,5 +15,7 @@
   "bugs": {
     "url": "https://github.com/azat-co/react-quickly/issues"
   },
-  "homepage": "https://github.com/azat-co/react-quickly#readme"
+  "homepage": "https://github.com/azat-co/react-quickly#readme",
+  "dependencies": {},
+  "devDependencies": {}
 }
