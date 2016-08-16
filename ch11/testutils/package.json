@@ -17,14 +17,10 @@
     ]
   },
   "devDependencies": {
-    "babel-core": "^6.10.4",
     "babel-jest": "^13.2.2",
-    "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",
     "jest-cli": "13.2.3",
     "react": "15.2.1",
-    "react-addons-test-utils": "15.2.1",
-    "react-dom": "15.2.1",
-    "webpack": "1.12.9"
+    "react-addons-test-utils": "15.2.1"
   }
 }
