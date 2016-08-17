@@ -21504,7 +21504,7 @@
 	          React.createElement(
 	            "div",
 	            null,
-	            "Core React.js by Azat (",
+	            "React Quickly by Azat (",
 	            React.createElement(
 	              "a",
 	              { href: "http://twitter.com/azat_co", target: "_blank" },
@@ -21522,17 +21522,15 @@
 /* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
-	React = __webpack_require__(1);
-	ReactDOM = __webpack_require__(35);
-	request = __webpack_require__(178);
+	const React = __webpack_require__(1);
+	const ReactDOM = __webpack_require__(35);
+	const request = __webpack_require__(178);
 	
-	var url = 'http://localhost:3000/messages';
-	var fD = ReactDOM.findDOMNode;
+	const url = 'http://localhost:3000/messages';
+	const fD = ReactDOM.findDOMNode;
 	
-	var MessageList = React.createClass({
-	  displayName: 'MessageList',
-	
-	  render: function () {
+	class MessageList extends React.Component {
+	  render() {
 	    var messages = this.props.messages;
 	    if (!messages || !messages.length > 0) return React.createElement(
 	      'p',
@@ -21587,23 +21585,31 @@
 	      )
 	    );
 	  }
-	});
+	}
 	
-	var NewMessage = React.createClass({
-	  displayName: 'NewMessage',
-	
-	  addMessage: function () {
+	class NewMessage extends React.Component {
+	  constructor(props) {
+	    super(props);
+	    this.addMessage = this.addMessage.bind(this);
+	    this.keyup = this.keyup.bind(this);
+	  }
+	  addMessage() {
+	    let name = fD(this.refs.name).value.trim();
+	    let message = fD(this.refs.message).value.trim();
+	    if (!name || !message) {
+	      return console.error('Name and message cannot be empty');
+	    }
 	    this.props.addMessageCb({
-	      name: fD(this.refs.name).value,
-	      message: fD(this.refs.message).value
+	      name: name,
+	      message: message
 	    });
 	    fD(this.refs.name).value = '';
 	    fD(this.refs.message).value = '';
-	  },
-	  keyup: function (e) {
+	  }
+	  keyup(e) {
 	    if (e.keyCode == 13) return this.addMessage();
-	  },
-	  render: function () {
+	  }
+	  render() {
 	    return React.createElement(
 	      'div',
 	      { className: 'row-fluid', id: 'new-message' },
@@ -21612,50 +21618,53 @@
 	        { className: 'span12' },
 	        React.createElement(
 	          'form',
-	          { className: 'well form-inline', onKeyUp: this.keyup },
-	          React.createElement('input', { type: 'text', name: 'username', className: 'input-small', placeholder: 'Azat', ref: 'name' }),
-	          React.createElement('input', { type: 'text', name: 'message', className: 'input-small', placeholder: 'Hello!', ref: 'message' }),
+	          { className: 'well form-inline', onKeyUp: this.keyup, onSubmit: this.addMessage },
+	          React.createElement('input', {
+	            type: 'text', name: 'username',
+	            className: 'input-small', placeholder: 'Azat', ref: 'name' }),
+	          React.createElement('input', {
+	            type: 'text', name: 'message', className: 'input-small',
+	            placeholder: 'Hello!', ref: 'message' }),
 	          React.createElement(
 	            'a',
-	            { id: 'send', className: 'btn btn-primary', onClick: this.addMessage },
+	            { id: 'send', className: 'btn btn-primary',
+	              onClick: this.addMessage },
 	            'POST'
 	          )
 	        )
 	      )
 	    );
 	  }
-	});
+	}
 	
-	module.exports = MessageBoard = React.createClass({
-	  displayName: 'MessageBoard',
-	
-	  getInitialState: function (ops) {
-	    if (this.props.messages) return { messages: this.props.messages };
-	  },
-	  componentDidMount: function () {
-	
-	    var _this = this;
-	    request.get(url, function (result) {
+	class MessageBoard extends React.Component {
+	  constructor(ops) {
+	    super(ops);
+	    this.addMessage = this.addMessage.bind(this);
+	    if (this.props.messages) this.state = { messages: this.props.messages };
+	  }
+	  componentDidMount() {
+	    request.get(url, result => {
 	      console.log(result);
 	      if (!result || !result.length) {
 	        return;
 	      }
 	      // console.log(result)
-	      _this.setState({ messages: result });
+	      this.setState({ messages: result });
 	    });
-	  },
-	  addMessage: function (message) {
-	    var messages = this.state.messages;
-	    var _this = this;
-	    request({ method: 'POST', url: url, json: message }, function (error, response, body) {
-	      if (!body || error) {
+	  }
+	  addMessage(message) {
+	    let messages = this.state.messages;
+	    request.post(url, message).then(result => result.data).then(data => {
+	      if (!data) {
 	        return console.error('Failed to save');
 	      }
-	      messages.unshift(body);
-	      _this.setState({ messages: messages });
+	      console.log('Saved!');
+	      messages.unshift(data);
+	      this.setState({ messages: messages });
 	    });
-	  },
-	  render: function () {
+	  }
+	  render() {
 	    return React.createElement(
 	      'div',
 	      null,
@@ -21663,7 +21672,9 @@
 	      React.createElement(MessageList, { messages: this.state.messages })
 	    );
 	  }
-	});
+	}
+	
+	module.exports = MessageBoard;
 
 /***/ },
 /* 178 */
