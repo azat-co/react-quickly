@@ -1,10 +1,12 @@
 {
-  "name": "board-react",
-  "version": "1.0.0",
+  "name": "message-board",
+  "version": "2.0.0",
   "description": "Board message with Express.js, MongoDB and React.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./node_modules/.bin/webpack -w",
+    "start": "./node_modules/.bin/webpack && node-dev ."
   },
   "keywords": [
     "react.js",
@@ -13,25 +15,32 @@
   ],
   "author": "Azat Mardan",
   "license": "MIT",
+  "babel": {
+    "presets": [
+      "react"
+    ]
+  },
   "dependencies": {
+    "babel-register": "^6.11.6",
     "body-parser": "^1.13.2",
     "compression": "^1.5.1",
     "errorhandler": "^1.4.1",
     "express": "^4.13.1",
-    "express-handlebars": "^2.0.1",
+    "express-handlebars": "^3.0.0",
     "express-validator": "^2.13.0",
-    "mongodb": "^2.0.36",
+    "mongodb": "^2.2.6",
     "morgan": "^1.6.1",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0",
-    "request": "^2.65.0"
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-browserify": "^0.5.1",
-    "gulp-develop-server": "^0.4.3",
-    "gulp-nodemon": "^2.0.3",
-    "gulp-react": "^3.0.1",
-    "gulp-watch": "^4.2.4"
+    "axios": "^0.13.1",
+    "babel-core": "^6.10.4",
+    "babel-jest": "^13.2.2",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "jest-cli": "13.2.3",
+    "node-dev": "^3.1.3",
+    "webpack": "^1.13.1"
   }
 }

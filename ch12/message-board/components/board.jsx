@@ -1,6 +1,6 @@
 React = require('react')
 ReactDOM = require('react-dom')
-request = require('request')
+request = require('axios')
 
 var url = 'http://localhost:3000/messages'
 var fD = ReactDOM.findDOMNode

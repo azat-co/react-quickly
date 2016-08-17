@@ -1,4 +1,7 @@
-var express = require('express'),
+require('babel-register')({
+  presets: [ 'react' ]
+})
+const express = require('express'),
   mongodb = require('mongodb'),
   app = express(),
   bodyParser = require('body-parser'),
@@ -8,13 +11,13 @@ var express = require('express'),
   compression = require('compression'),
   exphbs  = require('express-handlebars'),
   url = 'mongodb://localhost:27017/board',
-  ReactDOM = require('react-dom'),
   ReactDOMServer = require('react-dom/server'),
-  React = require('react'),
-  components = require('./src/build/components.js'),
-  Header = React.createFactory(components.Header),
-  Footer = React.createFactory(components.Footer)
-  MessageBoard = React.createFactory(components.MessageBoard)
+  React = require('react')
+
+
+const Header = React.createFactory(require('./components/header.jsx')),
+  Footer = React.createFactory(require('./components/footer.jsx')),
+  MessageBoard = React.createFactory(require('./components/board.jsx'))
 
 mongodb.MongoClient.connect(url, function(err, db) {
   if (err) {
