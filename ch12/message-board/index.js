@@ -9,7 +9,6 @@ const express = require('express'),
   logger = require('morgan'),
   errorHandler = require('errorhandler'),
   compression = require('compression'),
-  exphbs  = require('express-handlebars'),
   url = 'mongodb://localhost:27017/board',
   ReactDOMServer = require('react-dom/server'),
   React = require('react')
@@ -32,8 +31,7 @@ mongodb.MongoClient.connect(url, function(err, db) {
   app.use(validator())
   app.use(express.static('public'))
 
-  app.engine('handlebars', exphbs())
-  app.set('view engine', 'handlebars')
+  app.set('view engine', 'hbs')
 
   app.use(function(req, res, next){
     req.messages = db.collection('messages')
