@@ -31,6 +31,7 @@ mongodb.MongoClient.connect(url, function(err, db) {
   app.use(bodyParser.json())
   app.use(validator())
   app.use(express.static('public'))
+
   app.engine('handlebars', exphbs())
   app.set('view engine', 'handlebars')
 

@@ -21468,18 +21468,15 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	React = __webpack_require__(1);
+	const Header = () => {
+	  return React.createElement(
+	    'h1',
+	    null,
+	    'Message Board'
+	  );
+	};
 	
-	module.exports = Header = React.createClass({
-	  displayName: 'Header',
-	
-	  render: function () {
-	    return React.createElement(
-	      'h1',
-	      null,
-	      'Message Board'
-	    );
-	  }
-	});
+	module.exports = Header;
 
 /***/ },
 /* 176 */

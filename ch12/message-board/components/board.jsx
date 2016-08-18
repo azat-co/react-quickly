@@ -100,7 +100,7 @@ class MessageBoard extends React.Component {
       .then(result => result.data)
       .then((data) =>{
         if(!data){
-          return console.error('Failed to save');
+          return console.error('Failed to save')
         }
         console.log('Saved!')
         messages.unshift(data)
