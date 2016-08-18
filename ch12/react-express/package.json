@@ -1,0 +1,21 @@
+{
+  "name": "react-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-react": "^6.11.1",
+    "babel-register": "^6.11.6",
+    "errorhandler": "^1.4.3",
+    "express": "^4.14.0",
+    "hbs": "^4.0.0",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
+  }
+}
