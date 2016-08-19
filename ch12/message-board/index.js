@@ -48,9 +48,13 @@ mongodb.MongoClient.connect(url, function(err, db) {
     console.log(req.body)
     req.checkBody('message', 'Invalid message in body').notEmpty()
     req.checkBody('name', 'Invalid name in body').notEmpty()
+    let newMessage = {
+      message: req.body.message,
+      name: req.body.name
+    }
     var errors = req.validationErrors()
     if (errors) return next(errors)
-    req.messages.insert(req.body, function (err, result) {
+    req.messages.insert(newMessage, function (err, result) {
       if (err) return next(err)
       return res.json(result.ops[0])
     })
