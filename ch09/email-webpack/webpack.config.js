@@ -1,7 +1,6 @@
 module.exports = {
   entry: './jsx/app.jsx',
   output: {
-    publicPath: 'js/',
     path: __dirname + '/js/',
     filename: 'bundle.js'
   },
@@ -12,7 +11,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.css$/, loader: "style!css" },
+      { test: /\.css$/, loader: 'style!css' },
       {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,

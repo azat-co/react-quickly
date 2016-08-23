@@ -6,10 +6,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   devtool: '#sourcemap',
-  stats: {
-   colors: true,
-   reasons: true
-  },
   module: {
     loaders: [
       {

@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/webpack -w",
-    "wds": "webpack-dev-server --inline --hot --module-bind 'jsx=react-hot!babel' --config webpack.dev-cli.config.js"
+    "wds": "./node_modules/.bin/webpack-dev-server --inline --hot --module-bind 'jsx=react-hot!babel' --config webpack.dev-cli.config.js"
   },
   "author": "Azat Mardan",
   "license": "MIT",
