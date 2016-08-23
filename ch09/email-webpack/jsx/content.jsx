@@ -5,7 +5,6 @@ class Content extends React.Component {
   constructor(props) {
     super(props)
     this.submit = this.submit.bind(this)
-    this.prompt = 'Please enter your email to win $1,000,000.'
   }
   submit(event) {
     let emailAddress = this.refs.emailAddress
@@ -14,6 +13,7 @@ class Content extends React.Component {
     console.log(ReactDOM.findDOMNode(comments).value)
   }
   render() {
+    this.prompt = 'Please enter your email to win a Sublime Text license'
     return (
       <div className="well">
         <p>{this.prompt}</p>
@@ -24,7 +24,7 @@ class Content extends React.Component {
           Comments: <textarea ref="comments" className="form-control"  placeholder="I like your website!"/>
         </div>
         <div className="form-group">
-          <a className="btn btn-primary" value="Submit" onClick={this.submit}>Submit</a>
+          <a className="btn btn-primary" onClick={this.submit}>Submit</a>
         </div>
       </div>
     )

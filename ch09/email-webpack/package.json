@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/webpack -w"
+    "build": "./node_modules/.bin/webpack -w",
+    "wds": "webpack-dev-server --inline --hot --module-bind 'jsx=react-hot!babel' --config webpack.dev-cli.config.js"
   },
   "author": "Azat Mardan",
   "license": "MIT",
@@ -19,8 +20,11 @@
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.23.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
+    "react-hot-loader": "^1.3.0",
+    "style-loader": "^0.13.1",
     "webpack": "1.12.9",
     "webpack-dev-server": "^1.14.1"
   }

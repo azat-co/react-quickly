@@ -1,5 +1,11 @@
+const webpack = require('webpack')
+
 module.exports = {
-  entry: './jsx/app.jsx',
+  entry: [
+    'webpack-dev-server/client/?http://localhost:8080',
+    'webpack/hot/dev-server',
+    './jsx/app.jsx'
+  ],
   output: {
     publicPath: 'js/',
     path: __dirname + '/js/',
@@ -12,12 +18,15 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.css$/, loader: "style!css" },
       {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,
-        loaders: ['babel']
+        loaders: ['react-hot', 'babel']
       }
     ]
-  }
+  },
+  devServer: {
+    hot: true
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 }
