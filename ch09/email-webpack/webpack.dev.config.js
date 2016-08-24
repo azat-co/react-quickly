@@ -14,6 +14,7 @@ module.exports = {
   devtool: '#sourcemap',
   module: {
     loaders: [
+      { test: /\.css$/, loader: 'style!css' },
       {
         test: /\.jsx?$/,
         exclude: /(node_modules)/,

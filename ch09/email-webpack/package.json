@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "./node_modules/.bin/webpack -w",
-    "wds": "./node_modules/.bin/webpack-dev-server --inline --hot --module-bind 'jsx=react-hot!babel' --config webpack.dev-cli.config.js"
+    "wds-cli": "./node_modules/.bin/webpack-dev-server --inline --hot --module-bind 'css=style!css'  --module-bind 'jsx=react-hot!babel' --config webpack.dev-cli.config.js",
+    "wds": "./node_modules/.bin/webpack-dev-server --config webpack.dev.config.js"
   },
   "author": "Azat Mardan",
   "license": "MIT",
