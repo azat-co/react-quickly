@@ -1,0 +1,140 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+}
+
+.app__2oExz {
+  height: 100vh;
+  width: 100vw;
+}
+.movies__3OpEd {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  overflow-y: auto;
+  background-color: black;
+}
+
+.list__2a3aq {
+  width: 100%;
+}
+
+.listHidden__2aptA {
+  display: none;
+}
+
+.movie__37UeZ {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  height: 320px;
+  width: 240px;
+  margin: 10px auto;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 667px) {
+  .movies__3OpEd {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  .list__2a3aq, .listHidden__2aptA {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .movie__37UeZ {
+    margin: 10px;
+  }
+}
+.movie__3Ry7w {
+  padding: 10px;
+  color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.cover__1xFmZ {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  height: 320px;
+  min-height: 320px;
+  max-height: 320px;
+  width: 240px;
+  min-width: 240px;
+  max-width: 240px;
+  margin: 10px auto;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.description__3UyaW {
+  width: 100%;
+  margin: 10px;
+}
+
+.title__2GhK8 {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: rgba(255, 255, 255, 0.825);
+}
+
+.year__DT3Gh {
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.565;
+  color: rgba(255, 255, 255, 0.325);
+}
+
+.starring__1V7GN {
+  margin: 20px 0 0;
+}
+
+.actor__3_SZ9 {
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.closeButton__1ROrN {
+  display: block;
+  padding: 10px 25px 10px 35px;
+  font-size: 20px;
+  line-height: 2.45;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+
+@media (min-width: 667px) {
+  .movie__3Ry7w {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    max-height: 100%;
+    min-width: 667px;
+    overflow-y: auto;
+  }
+}

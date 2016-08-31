@@ -1,0 +1,75 @@
+.movie {
+  padding: 10px;
+  color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.cover {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  height: 320px;
+  min-height: 320px;
+  max-height: 320px;
+  width: 240px;
+  min-width: 240px;
+  max-width: 240px;
+  margin: 10px auto;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.description {
+  width: 100%;
+  margin: 10px;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: rgba(255, 255, 255, 0.825);
+}
+
+.year {
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.565;
+  color: rgba(255, 255, 255, 0.325);
+}
+
+.starring {
+  margin: 20px 0 0;
+}
+
+.actor {
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.closeButton {
+  display: block;
+  padding: 10px 25px 10px 35px;
+  font-size: 20px;
+  line-height: 2.45;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+
+@media (min-width: 667px) {
+  .movie {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    max-height: 100%;
+    min-width: 667px;
+    overflow-y: auto;
+  }
+}
