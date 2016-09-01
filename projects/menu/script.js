@@ -1,24 +1,24 @@
-var Menu = React.createClass({
-  render: function(){
-    var menus = ['Home',
+class Menu extends React.Component {
+  render() {
+    let menus = ['Home',
       'About',
       'Services',
       'Portfolio',
       'Contact us']
     return React.createElement('div',
       null,
-      menus.map(function(v,i){
+      menus.map((v,i) => {
         return React.createElement('div',
           {key: i},
           React.createElement(Link, {label: v})
         )
       })
     )
-}})
+}}
 
-var Link = React.createClass({
-  render: function () {
-    var url='/'
+class Link extends React.Component {
+  render() {
+    const url='/'
       + this.props.label
         .toLowerCase()
         .trim()
@@ -33,7 +33,7 @@ var Link = React.createClass({
       React.createElement('br')
       )
   }
-})
+}
 
 ReactDOM.render(
   React.createElement(
