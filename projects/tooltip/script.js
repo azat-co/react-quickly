@@ -1,23 +1,19 @@
-'use strict';
-
-var Tooltip = React.createClass({
-  displayName: 'Tooltip',
-
-  getInitialState: function getInitialState() {
-    return {
-      opacity: false
-    };
-  },
-  toggle: function toggle() {
-    var tooltipNode = ReactDOM.findDOMNode(this);
+class Tooltip extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { opacity: false };
+    this.toggle = this.toggle.bind(this);
+  }
+  toggle() {
+    const tooltipNode = ReactDOM.findDOMNode(this);
     this.setState({
       opacity: !this.state.opacity,
       top: tooltipNode.offsetTop,
       left: tooltipNode.offsetLeft
     });
-  },
-  render: function render() {
-    var style = {
+  }
+  render() {
+    const style = {
       zIndex: this.state.opacity ? 1000 : -1000,
       opacity: +this.state.opacity,
       top: (this.state.top || 0) + 20,
@@ -43,7 +39,7 @@ var Tooltip = React.createClass({
       )
     );
   }
-});
+}
 
 ReactDOM.render(React.createElement(
   'div',

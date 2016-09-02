@@ -2,6 +2,7 @@ class Tooltip extends React.Component {
   constructor(props) {
     super(props)
     this.state = {opacity: false}
+    this.toggle = this.toggle.bind(this)
   }
   toggle() {
     const tooltipNode = ReactDOM.findDOMNode(this)

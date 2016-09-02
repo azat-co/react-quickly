@@ -1,30 +1,30 @@
-var Timer = React.createClass({
-   render: function() {
-     if (this.props.time == 0) {
-       document.getElementById('end-of-time').play()
-     }
-     if (this.props.time == null || this.props.time == 0) return <div/>
-     return <h1>Time left: {this.props.time}</h1>
-    }
-})
+class Timer extends React.Component {
+  render() {
+  if (this.props.timeLeft == 0) {
+    document.getElementById('end-of-time').play()
+  }
+  if (this.props.timeLeft == null || this.props.timeLeft == 0) return <div/>
+    return <h1>Time left: {this.props.timeLeft}</h1>
+  }
+}
 
-var TimerWrapper = React.createClass({
-  getInitialState: function () {
-    return {time: null, int: null}
-  },
-  startTimer: function (time) {
-    clearInterval(this.state.int)
-    var _this= this
-    var int = setInterval(function() {
+class TimerWrapper extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state =  {time: null, timer: null}
+  }
+  startTimer(time) {
+    clearInterval(this.state.timer)
+    let timer = setInterval(() => {
       console.log('2: Inside of setInterval')
-      var tl = _this.state.time - 1
-      if (tl == 0) clearInterval(int)
-      _this.setState({time: tl})
+      var timeLeft = this.state.time - 1
+      if (timeLeft == 0) clearInterval(timer)
+      this.setState({timeLeft: timeLeft})
     }, 1000)
     console.log('1: After setInterval')
-    return this.setState({time: time, int: int})
-  },
-  render: function() {
+    return this.setState({timeLeft: timeLeft, timer: timer})
+  }
+  render() {
     return (
       <div className="row-fluid">
         <h2>Timer</h2>
@@ -33,23 +33,23 @@ var TimerWrapper = React.createClass({
           <Button time="10" startTimer={this.startTimer}/>
           <Button time="15" startTimer={this.startTimer}/>
         </div>
-        <Timer time={this.state.time}/>
+        <Timer time={this.state.timeLeft}/>
       <audio id="end-of-time" src="flute_c_long_01.wav" preload="auto"></audio>
       </div>
     );
   }
-})
+}
 
-var Button = React.createClass({
-  startTimer: function (e) {
-    return this.props.startTimer(this.props.time)
+class Button extends React.Component {
+  startTimer(event) {
+    return this.props.startTimer(this.props.timeLeft)
   },
-  render: function () {
+  render() {
     return <button type="button" className='btn-default btn' onClick={this.startTimer}>
-      {this.props.time} seconds
+      {this.props.timeLeft} seconds
     </button>
   }
-})
+}
 
 ReactDOM.render(
   <TimerWrapper/>,
