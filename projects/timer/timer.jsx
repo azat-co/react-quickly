@@ -38,7 +38,7 @@ class TimerWrapper extends React.Component {
         <Timer timeLeft={this.state.timeLeft}/>
       <audio id="end-of-time" src="flute_c_long_01.wav" preload="auto"></audio>
       </div>
-    );
+    )
   }
 }
 
