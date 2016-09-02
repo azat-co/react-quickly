@@ -1,18 +1,18 @@
-var React = require('react'),
+const React = require('react'),
   ReactDOM = require('react-dom'),
   request = require('request'),
   Reflux = require('reflux')
 
-var fD = ReactDOM.findDOMNode
+const fD = ReactDOM.findDOMNode
 
-var Actions = Reflux.createActions([
+const Actions = Reflux.createActions([
   'loadOptions',
   'addOption',
   'setUrl',
   'setOptions'
 ])
 
-var optionsStore = Reflux.createStore({
+const optionsStore = Reflux.createStore({
     listenables: [Actions],
     onSetUrl: function(url){
       this.url = url

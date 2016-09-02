@@ -1,0 +1,42 @@
+{
+  "name": "autocomplete",
+  "version": "1.0.0",
+  "description": "React.js autocomplete component with Express.js, and MongoDB example.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "gulp",
+    "seed": "mongoimport rooms.json --jsonArray --collection=rooms --db=autocomplete" 
+  },
+  "keywords": [
+    "react.js",
+    "express.js",
+    "mongodb"
+  ],
+  "author": "Azat Mardan",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "compression": "^1.5.1",
+    "errorhandler": "^1.4.1",
+    "express": "^4.13.1",
+    "express-handlebars": "^2.0.1",
+    "express-validator": "^2.13.0",
+    "mongodb": "^2.0.36",
+    "morgan": "^1.6.1",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "reflux": "^0.3.0",
+    "request": "^2.65.0"
+  },
+  "devDependencies": {
+    "jest-cli": "0.5.10",
+    "react-addons-test-utils": "0.14.0",
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-develop-server": "^0.4.3",
+    "gulp-nodemon": "^2.0.3",
+    "gulp-react": "^3.0.1",
+    "gulp-watch": "^4.2.4"
+  }
+}
