@@ -1,41 +1,36 @@
-'use strict';
-
-var Timer = React.createClass({
-  displayName: 'Timer',
-
-  render: function render() {
-    if (this.props.time == 0) {
+class Timer extends React.Component {
+  render() {
+    if (this.props.timeLeft == 0) {
       document.getElementById('end-of-time').play();
     }
-    if (this.props.time == null || this.props.time == 0) return React.createElement('div', null);
+    if (this.props.timeLeft == null || this.props.timeLeft == 0) return React.createElement('div', null);
     return React.createElement(
       'h1',
       null,
       'Time left: ',
-      this.props.time
+      this.props.timeLeft
     );
   }
-});
+}
 
-var TimerWrapper = React.createClass({
-  displayName: 'TimerWrapper',
-
-  getInitialState: function getInitialState() {
-    return { time: null, int: null };
-  },
-  startTimer: function startTimer(time) {
-    clearInterval(this.state.int);
-    var _this = this;
-    var int = setInterval(function () {
+class TimerWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { timeLeft: null, timer: null };
+    this.startTimer = this.startTimer.bind(this);
+  }
+  startTimer(timeLeft) {
+    clearInterval(this.state.timer);
+    let timer = setInterval(() => {
       console.log('2: Inside of setInterval');
-      var tl = _this.state.time - 1;
-      if (tl == 0) clearInterval(int);
-      _this.setState({ time: tl });
+      var timeLeft = this.state.timeLeft - 1;
+      if (timeLeft == 0) clearInterval(timer);
+      this.setState({ timeLeft: timeLeft });
     }, 1000);
     console.log('1: After setInterval');
-    return this.setState({ time: time, int: int });
-  },
-  render: function render() {
+    return this.setState({ timeLeft: timeLeft, timer: timer });
+  }
+  render() {
     return React.createElement(
       'div',
       { className: 'row-fluid' },
@@ -51,26 +46,24 @@ var TimerWrapper = React.createClass({
         React.createElement(Button, { time: '10', startTimer: this.startTimer }),
         React.createElement(Button, { time: '15', startTimer: this.startTimer })
       ),
-      React.createElement(Timer, { time: this.state.time }),
+      React.createElement(Timer, { timeLeft: this.state.timeLeft }),
       React.createElement('audio', { id: 'end-of-time', src: 'flute_c_long_01.wav', preload: 'auto' })
     );
   }
-});
+}
 
-var Button = React.createClass({
-  displayName: 'Button',
-
-  startTimer: function startTimer(e) {
+class Button extends React.Component {
+  startTimer(event) {
     return this.props.startTimer(this.props.time);
-  },
-  render: function render() {
+  }
+  render() {
     return React.createElement(
       'button',
-      { type: 'button', className: 'btn-default btn', onClick: this.startTimer },
+      { type: 'button', className: 'btn-default btn', onClick: this.startTimer.bind(this) },
       this.props.time,
       ' seconds'
     );
   }
-});
+}
 
 ReactDOM.render(React.createElement(TimerWrapper, null), document.getElementById('timer-app'));

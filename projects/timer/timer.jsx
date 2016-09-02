@@ -11,13 +11,14 @@ class Timer extends React.Component {
 class TimerWrapper extends React.Component {
   constructor(props) {
     super(props)
-    this.state =  {time: null, timer: null}
+    this.state =  {timeLeft: null, timer: null}
+    this.startTimer = this.startTimer.bind(this)
   }
-  startTimer(time) {
+  startTimer(timeLeft) {
     clearInterval(this.state.timer)
     let timer = setInterval(() => {
       console.log('2: Inside of setInterval')
-      var timeLeft = this.state.time - 1
+      var timeLeft = this.state.timeLeft - 1
       if (timeLeft == 0) clearInterval(timer)
       this.setState({timeLeft: timeLeft})
     }, 1000)
@@ -33,7 +34,7 @@ class TimerWrapper extends React.Component {
           <Button time="10" startTimer={this.startTimer}/>
           <Button time="15" startTimer={this.startTimer}/>
         </div>
-        <Timer time={this.state.timeLeft}/>
+        <Timer timeLeft={this.state.timeLeft}/>
       <audio id="end-of-time" src="flute_c_long_01.wav" preload="auto"></audio>
       </div>
     );
@@ -42,11 +43,11 @@ class TimerWrapper extends React.Component {
 
 class Button extends React.Component {
   startTimer(event) {
-    return this.props.startTimer(this.props.timeLeft)
-  },
+    return this.props.startTimer(this.props.time)
+  }
   render() {
-    return <button type="button" className='btn-default btn' onClick={this.startTimer}>
-      {this.props.timeLeft} seconds
+    return <button type="button" className='btn-default btn' onClick={this.startTimer.bind(this)}>
+      {this.props.time} seconds
     </button>
   }
 }
