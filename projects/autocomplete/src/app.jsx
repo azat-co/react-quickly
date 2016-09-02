@@ -1,7 +1,6 @@
 React = require('react')
 ReactDOM = require('react-dom')
-request = require('request')
 
-Autocomplete = require('./autocomplete.js')
+const Autocomplete = require('./autocomplete.jsx')
 
 ReactDOM.render(<Autocomplete options={rooms} url={url}/>, document.getElementById('autocomplete'))
