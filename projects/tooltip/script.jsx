@@ -1,19 +1,18 @@
-var Tooltip = React.createClass({
-  getInitialState: function() {
-    return {
-      opacity: false
-    }
-  },
-  toggle: function(){
-    var tooltipNode = ReactDOM.findDOMNode(this)
+class Tooltip extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {opacity: false}
+  }
+  toggle() {
+    const tooltipNode = ReactDOM.findDOMNode(this)
     this.setState({
       opacity: !this.state.opacity,
       top: tooltipNode.offsetTop,
       left: tooltipNode.offsetLeft
     })
-  },
-  render: function () {
-    var style = {
+  }
+  render() {
+    const style = {
       zIndex: (this.state.opacity) ? 1000 : -1000,
       opacity: +this.state.opacity,
       top: (this.state.top || 0) + 20,
@@ -33,7 +32,7 @@ var Tooltip = React.createClass({
       </div>
     )
   }
-})
+}
 
 ReactDOM.render(<div>
   <Tooltip text="Master Express.js-The Node.js Framework For Your Web Development">Pro Express.js</Tooltip> was published in 2014. It was one of the first books on v4.x. And it was my second book published with Apress
