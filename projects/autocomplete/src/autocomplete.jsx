@@ -61,14 +61,14 @@ class Autocomplete extends React.Component {
           onChange={this.filter}
           value={this.currentOption}
           placeholder="React.js">
-
         </input>
         {this.state.filteredOptions.map(function(option, index, list){
           return <div key={option._id}>
             <a className="btn btn-default option-list-item"
               href={'/#/'+option.name} target="_blank">
               #{option.name}
-            </a></div>
+            </a>
+          </div>
         })}
         {(()=>{
           if (this.state.filteredOptions.length == 0 && this.state.currentOption!='')
