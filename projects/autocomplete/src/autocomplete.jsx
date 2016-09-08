@@ -15,6 +15,7 @@ class Autocomplete extends React.Component {
     this.addOption = this.addOption.bind(this)
   }
   componentDidMount() {
+    if (this.props.url == 'test') return true
     request({url: this.props.url})
       .then(response=>response.data)
       .then(body => {
@@ -54,13 +55,27 @@ class Autocomplete extends React.Component {
   render() {
     return (
       <div className="form-group">
-        <input type="text" onKeyUp={(event)=>(event.keyCode==13)?this.addOption():''} className="form-control option-name" onChange={this.filter} value={this.currentOption} placeholder="React.js"></input>
+        <input type="text"
+          onKeyUp={(event)=>(event.keyCode==13)?this.addOption():''}
+          className="form-control option-name"
+          onChange={this.filter}
+          value={this.currentOption}
+          placeholder="React.js">
+
+        </input>
         {this.state.filteredOptions.map(function(option, index, list){
-          return <div key={option._id}><a className="btn btn-default option-list-item" href={'/#/'+option.name} target="_blank">#{option.name}</a></div>
+          return <div key={option._id}>
+            <a className="btn btn-default option-list-item"
+              href={'/#/'+option.name} target="_blank">
+              #{option.name}
+            </a></div>
         })}
-        {function(){if (this.state.filteredOptions.length == 0 && this.state.currentOption!='')
-          return <a className="btn btn-info option-add" onClick={this.addOption}>Add #{this.state.currentOption}</a>
-        }.bind(this)()}
+        {(()=>{
+          if (this.state.filteredOptions.length == 0 && this.state.currentOption!='')
+            return <a className="btn btn-info option-add" onClick={this.addOption}>
+              Add #{this.state.currentOption}
+            </a>
+        })()}
       </div>
     )
   }
