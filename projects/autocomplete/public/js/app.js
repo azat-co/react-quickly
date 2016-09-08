@@ -21451,11 +21451,11 @@
 	      this.setState({ options: body });
 	    });
 	  }
-	  filter(e) {
+	  filter(event) {
 	    this.setState({
-	      currentOption: e.target.value,
+	      currentOption: event.target.value,
 	      filteredOptions: this.state.options.filter(function (option, index, list) {
-	        return e.target.value === option.name.substr(0, e.target.value.length);
+	        return event.target.value === option.name.substr(0, event.target.value.length);
 	      })
 	    }, function () {});
 	  }

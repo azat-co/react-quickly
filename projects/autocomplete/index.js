@@ -1,4 +1,5 @@
-var express = require('express'),
+
+const express = require('express'),
   mongodb = require('mongodb'),
   app = express(),
   bodyParser = require('body-parser'),
@@ -10,8 +11,13 @@ var express = require('express'),
   url = 'mongodb://localhost:27017/autocomplete',
   ReactDOM = require('react-dom'),
   ReactDOMServer = require('react-dom/server'),
-  React = require('react'),
-  Autocomplete  = React.createFactory(require('./src/build/autocomplete.js')),
+  React = require('react')
+
+require('babel-register')({
+  presets: [ 'react' ]
+})
+
+const Autocomplete  = React.createFactory(require('./src/autocomplete.jsx')),
   port = 3000
 
 

@@ -4,7 +4,6 @@ const React = require('react'),
 
 const fD = ReactDOM.findDOMNode
 
-
 class Autocomplete extends React.Component {
   constructor(props) {
     super(props)
@@ -25,11 +24,11 @@ class Autocomplete extends React.Component {
       this.setState({options: body})
     })
   }
-  filter(e) {
+  filter(event) {
     this.setState({
-      currentOption: e.target.value,
+      currentOption: event.target.value,
       filteredOptions: (this.state.options.filter(function(option, index, list){
-        return (e.target.value === option.name.substr(0, e.target.value.length))
+        return (event.target.value === option.name.substr(0, event.target.value.length))
       }))
     }, function(){
     })
