@@ -21443,15 +21443,15 @@
 	    this.addOption = this.addOption.bind(this);
 	  }
 	  componentDidMount() {
-	    request({ url: this.props.url }, (error, response, body) => {
-	      if (error || !body) {
+	    request({ url: this.props.url }).then(response => response.data).then(body => {
+	      if (!body) {
 	        return console.error('Failed to load');
 	      }
-	      body = JSON.parse(body);
 	      this.setState({ options: body });
-	    });
+	    }).catch(console.error);
 	  }
 	  filter(event) {
+	    // console.log(event)
 	    this.setState({
 	      currentOption: event.target.value,
 	      filteredOptions: this.state.options.filter(function (option, index, list) {
@@ -21459,22 +21459,25 @@
 	      })
 	    }, function () {});
 	  }
-	  addOption(e) {
-	    var currentOption = this.state.currentOption;
-	    let option = this.state.currentOption;
-	    request.post(this.props.url, { name: option }).then(response => response.data).then(body => {
-	      if (error || !body) {
+	  addOption(event) {
+	    let currentOption = this.state.currentOption;
+	    request.post(this.props.url, { name: currentOption }).then(response => response.data).then(body => {
+	      if (!body) {
 	        return console.error('Failed to save');
 	      }
-	      this.options.unshift(body);
-	      this.filter({ target: { value: currentOption } });
+	      this.setState({ options: [body].concat(this.state.options) }, () => {
+	        // console.log(this.state.options)
+	        this.filter({ target: { value: currentOption } });
+	      });
+	    }).catch(error => {
+	      return console.error('Failed to save');
 	    });
 	  }
 	  render() {
 	    return React.createElement(
 	      'div',
 	      { className: 'form-group' },
-	      React.createElement('input', { type: 'text', className: 'form-control option-name', onChange: this.filter, value: this.currentOption, placeholder: 'React.js' }),
+	      React.createElement('input', { type: 'text', onKeyUp: event => event.keyCode == 13 ? this.addOption() : '', className: 'form-control option-name', onChange: this.filter, value: this.currentOption, placeholder: 'React.js' }),
 	      this.state.filteredOptions.map(function (option, index, list) {
 	        return React.createElement(
 	          'div',

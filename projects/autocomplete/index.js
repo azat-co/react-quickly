@@ -29,7 +29,6 @@ mongodb.MongoClient.connect(url, function(err, db) {
   app.use(compression())
   app.use(logger('dev'))
   app.use(errorHandler())
-  app.use(bodyParser.urlencoded({extended: true}))
   app.use(bodyParser.json())
   app.use(validator())
   app.use(express.static('public'))

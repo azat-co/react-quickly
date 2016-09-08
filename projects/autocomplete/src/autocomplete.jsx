@@ -13,18 +13,20 @@ class Autocomplete extends React.Component {
     }
     this.filter = this.filter.bind(this)
     this.addOption = this.addOption.bind(this)
-
   }
   componentDidMount() {
-    request({url: this.props.url}, (error, response, body) => {
-      if(error || !body){
-        return console.error('Failed to load')
-      }
-      body = JSON.parse(body)
+    request({url: this.props.url})
+      .then(response=>response.data)
+      .then(body => {
+        if(!body){
+          return console.error('Failed to load')
+        }
       this.setState({options: body})
-    })
+      })
+      .catch(console.error)
   }
   filter(event) {
+    // console.log(event)
     this.setState({
       currentOption: event.target.value,
       filteredOptions: (this.state.options.filter(function(option, index, list){
@@ -33,24 +35,26 @@ class Autocomplete extends React.Component {
     }, function(){
     })
   }
-  addOption(e) {
-    var currentOption = this.state.currentOption
-    let option = this.state.currentOption
+  addOption(event) {
+    let currentOption = this.state.currentOption
     request
-      .post(this.props.url,{name: option})
+      .post(this.props.url, {name: currentOption})
       .then(response => response.data)
       .then((body) => {
-        if(error || !body){
+        if(!body){
           return console.error('Failed to save')
         }
-        this.options.unshift(body)
-        this.filter({target: {value: currentOption}})
-    })
+        this.setState({ options: [body].concat(this.state.options) }, ()=>{
+          // console.log(this.state.options)
+          this.filter({target: {value: currentOption}})
+        })
+      })
+      .catch(error=>{return console.error('Failed to save')})
   }
   render() {
     return (
       <div className="form-group">
-        <input type="text" className="form-control option-name" onChange={this.filter} value={this.currentOption} placeholder="React.js"></input>
+        <input type="text" onKeyUp={(event)=>(event.keyCode==13)?this.addOption():''} className="form-control option-name" onChange={this.filter} value={this.currentOption} placeholder="React.js"></input>
         {this.state.filteredOptions.map(function(option, index, list){
           return <div key={option._id}><a className="btn btn-default option-list-item" href={'/#/'+option.name} target="_blank">#{option.name}</a></div>
         })}

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "./node_modules/.bin/node-dev index.js",
+    "start": "npm run build && ./node_modules/.bin/node-dev index.js",
     "build": "./node_modules/.bin/webpack",
     "seed": "mongoimport rooms.json --jsonArray --collection=rooms --db=autocomplete"
   },
