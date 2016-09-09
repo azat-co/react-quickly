@@ -18,9 +18,9 @@ class Password extends React.Component {
     this.toggleVisibility = this.toggleVisibility.bind(this)
   }
   checkStrength(event) {
-    var password = event.target.value
+    let password = event.target.value
     this.setState({password: password})
-    var strength = {}
+    let strength = {}
     Object.keys(this.props).forEach((key, index, list)=>{
       if (this.props[key] && rules[key].pattern.test(password)) {
         strength[key] = true
@@ -66,9 +66,6 @@ class Password extends React.Component {
           checked={this.state.visible}
           onChange={this.toggleVisibility}/>
         <PasswordInfo rules={processedRules}/>
-        <PasswordGenerate onClick={this.generate}>
-          Generate
-        </PasswordGenerate>        
         <PasswordGenerate onClick={this.generate}>
           Generate
         </PasswordGenerate>

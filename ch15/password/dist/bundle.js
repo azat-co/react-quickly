@@ -21111,9 +21111,9 @@
 	    this.toggleVisibility = this.toggleVisibility.bind(this);
 	  }
 	  checkStrength(event) {
-	    var password = event.target.value;
+	    let password = event.target.value;
 	    this.setState({ password: password });
-	    var strength = {};
+	    let strength = {};
 	    Object.keys(this.props).forEach((key, index, list) => {
 	      if (this.props[key] && rules[key].pattern.test(password)) {
 	        strength[key] = true;
@@ -21163,11 +21163,6 @@
 	        checked: this.state.visible,
 	        onChange: this.toggleVisibility }),
 	      React.createElement(PasswordInfo, { rules: processedRules }),
-	      React.createElement(
-	        PasswordGenerate,
-	        { onClick: this.generate },
-	        'Generate'
-	      ),
 	      React.createElement(
 	        PasswordGenerate,
 	        { onClick: this.generate },

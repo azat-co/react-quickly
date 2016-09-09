@@ -23,11 +23,15 @@ describe('Password', function() {
       />
     )
 
+    // SHALLOW RENDERING: No children
+
     const passwordRenderer = TestUtils.createRenderer()
     passwordRenderer.render(<Password/>)
     let p = passwordRenderer.getRenderOutput()
     expect(p.type).toBe('div')
     expect(p.props.children.length).toBe(6)
+
+    // NORMAL RENDERING
 
     let rules = TestUtils.scryRenderedDOMComponentsWithTag(password, 'li')
     expect(rules.length).toBe(5)
