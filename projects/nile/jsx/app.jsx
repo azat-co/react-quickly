@@ -21,9 +21,6 @@ const PRODUCTS = [
   { id: 4, src: 'images/fullstack-cover.png', title: 'Full Stack JavaScript', url: 'http://www.apress.com/9781484217504'}
 ]
 
-
-
-
 const Heading = () => {
   return <h1>Nile Book Store</h1>
 }
@@ -90,7 +87,6 @@ const addToCart = (id) => {
   else
     cartItems[id] = 1
 }
-const getCartItems = ()=>cartItems
 
 ReactDOM.render((
   <Router history={hashHistory}>
