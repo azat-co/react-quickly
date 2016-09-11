@@ -6,23 +6,7 @@
   "author": "Azat Mardan",
   "license": "ISC",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node node_modules/webpack/bin/webpack.js",
-    "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js"
-  },
-  "dependencies": {
-    "history": "1.17.0",
-    "react": "0.14.3",
-    "react-dom": "0.14.3",
-    "react-router": "1.0.2"
-  },
-  "devDependencies": {
-    "babel-core": "6.3.21",
-    "babel-loader": "6.2.0",
-    "babel-plugin-transform-react-jsx": "6.3.13",
-    "babel-preset-es2015": "6.3.13",
-    "webpack": "1.12.9",
-    "webpack-dev-server": "1.14.0"
+    "build": "node node_modules/webpack/bin/webpack.js -w"
   },
   "babel": {
     "plugins": [
@@ -35,5 +19,18 @@
       "bundle.js",
       "node_modules/**/*.js"
     ]
+  },
+  "devDependencies": {
+    "babel-core": "6.3.21",
+    "babel-loader": "6.2.0",
+    "babel-plugin-transform-react-jsx": "6.3.13",
+    "babel-preset-es2015": "6.3.13",
+    "history": "^4.0.0",
+    "react": "15.3.1",
+    "react-addons-test-utils": "15.2.1",
+    "react-dom": "15.3.1",
+    "react-router": "^2.8.0",
+    "webpack": "1.13.1",
+    "webpack-dev-server": "1.14.0"
   }
 }

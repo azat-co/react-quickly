@@ -1,8 +1,13 @@
 module.exports = {
-  entry: "./app.jsx",
+  entry: "./jsx/app.jsx",
   output: {
     path: __dirname,
     filename: "bundle.js"
+  },
+  devtool: '#sourcemap',
+  stats: {
+   colors: true,
+   reasons: true
   },
   module: {
     loaders: [
