@@ -4,8 +4,12 @@ const {
 } = require('react-router')
 
 class Product extends React.Component {
-  handlerBuy () {
-    this.props.route.handlerBuy(this.props.params.id)
+  constructor(props) {
+    super(props)
+    this.handleBuy = this.handleBuy.bind(this)
+  }
+  handleBuy (event) {
+    this.props.route.addToCart(this.props.params.id)
   }
   render() {
     return (
@@ -17,7 +21,7 @@ class Product extends React.Component {
             pathname: `/cart`,
             state: { productId: this.props.params.id}
           }}
-          onClick={this.handlerBuy}
+          onClick={this.handleBuy}
           className="btn btn-primary">
           Buy
         </Link>

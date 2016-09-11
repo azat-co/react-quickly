@@ -67,14 +67,12 @@
 	var IndexLink = _require.IndexLink;
 	
 	
-	var PRODUCTS = [{ id: 0, src: 'images/proexpress-cover.jpg', title: 'Pro Express.js', url: 'http://amzn.to/1D6qiqk' }, { id: 1, src: 'images/practicalnode-cover.jpeg', title: 'Practical Node.js', url: 'http://amzn.to/NuQ0fM' }, { id: 2, src: 'images/expressapiref-cover.jpg', title: 'Express API Reference', url: 'http://amzn.to/1xcHanf' }, { id: 3, src: 'images/reactquickly-cover.jpg', title: 'React Quickly', url: 'https://www.manning.com/books/react-quickly' }, { id: 4, src: 'images/fullstack-cover.png', title: 'Full Stack JavaScript', url: 'http://www.apress.com/9781484217504' }];
-	
-	var CartItems = {};
-	
 	var Modal = __webpack_require__(235);
 	var Cart = __webpack_require__(236);
 	var Checkout = __webpack_require__(237);
 	var Product = __webpack_require__(238);
+	
+	var PRODUCTS = [{ id: 0, src: 'images/proexpress-cover.jpg', title: 'Pro Express.js', url: 'http://amzn.to/1D6qiqk' }, { id: 1, src: 'images/practicalnode-cover.jpeg', title: 'Practical Node.js', url: 'http://amzn.to/NuQ0fM' }, { id: 2, src: 'images/expressapiref-cover.jpg', title: 'Express API Reference', url: 'http://amzn.to/1xcHanf' }, { id: 3, src: 'images/reactquickly-cover.jpg', title: 'React Quickly', url: 'https://www.manning.com/books/react-quickly' }, { id: 4, src: 'images/fullstack-cover.png', title: 'Full Stack JavaScript', url: 'http://www.apress.com/9781484217504' }];
 	
 	var Heading = function Heading() {
 	  return React.createElement(
@@ -183,8 +181,12 @@
 	  return Index;
 	}(React.Component);
 	
-	var handlerBuy = function handlerBuy(id) {
-	  if (CartItems[id]) CartItems[id] += 1;else CartItems[id] = 1;
+	var cartItems = {};
+	var addToCart = function addToCart(id) {
+	  if (cartItems[id]) cartItems[id] += 1;else cartItems[id] = 1;
+	};
+	var getCartItems = function getCartItems() {
+	  return cartItems;
 	};
 	
 	ReactDOM.render(React.createElement(
@@ -195,11 +197,13 @@
 	    { path: '/', component: App },
 	    React.createElement(IndexRoute, { component: Index }),
 	    React.createElement(Route, { path: '/products/:id', component: Product,
-	      handlerBuy: handlerBuy,
+	      addToCart: addToCart,
 	      products: PRODUCTS }),
-	    React.createElement(Route, { path: '/cart', component: Cart })
+	    React.createElement(Route, { path: '/cart', component: Cart,
+	      cartItems: cartItems, products: PRODUCTS })
 	  ),
-	  React.createElement(Route, { path: '/checkout', component: Checkout })
+	  React.createElement(Route, { path: '/checkout', component: Checkout,
+	    cartItems: cartItems, products: PRODUCTS })
 	), document.getElementById('content'));
 
 /***/ },
@@ -27330,10 +27334,12 @@
 	  _createClass(Cart, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      return React.createElement(
 	        'div',
 	        null,
-	        Object.keys(CartItems).length == 0 ? React.createElement(
+	        Object.keys(this.props.route.cartItems).length == 0 ? React.createElement(
 	          'p',
 	          null,
 	          'Your cart is empty'
@@ -27341,13 +27347,13 @@
 	        React.createElement(
 	          'ul',
 	          null,
-	          Object.keys(CartItems).map(function (item, index, list) {
+	          Object.keys(this.props.route.cartItems).map(function (item, index, list) {
 	            return React.createElement(
 	              'li',
 	              { key: item },
-	              PRODUCTS[item].title,
+	              _this2.props.route.products[item].title,
 	              ' - ',
-	              CartItems[item]
+	              _this2.props.route.cartItems[item]
 	            );
 	          })
 	        ),
@@ -27402,6 +27408,8 @@
 	  _createClass(Checkout, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+	
 	      var count = 0;
 	      return React.createElement(
 	        'div',
@@ -27417,20 +27425,20 @@
 	          React.createElement(
 	            'tbody',
 	            null,
-	            Object.keys(CartItems).map(function (item, index, list) {
-	              count += CartItems[item];
+	            Object.keys(this.props.route.cartItems).map(function (item, index, list) {
+	              count += _this2.props.route.cartItems[item];
 	              return React.createElement(
 	                'tr',
 	                { key: item },
 	                React.createElement(
 	                  'td',
 	                  null,
-	                  PRODUCTS[item].title
+	                  _this2.props.route.products[item].title
 	                ),
 	                React.createElement(
 	                  'td',
 	                  null,
-	                  CartItems[item]
+	                  _this2.props.route.cartItems[item]
 	                )
 	              );
 	            })
@@ -27474,16 +27482,19 @@
 	var Product = function (_React$Component) {
 	  _inherits(Product, _React$Component);
 	
-	  function Product() {
+	  function Product(props) {
 	    _classCallCheck(this, Product);
 	
-	    return _possibleConstructorReturn(this, (Product.__proto__ || Object.getPrototypeOf(Product)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Product.__proto__ || Object.getPrototypeOf(Product)).call(this, props));
+	
+	    _this.handleBuy = _this.handleBuy.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Product, [{
-	    key: 'handlerBuy',
-	    value: function handlerBuy() {
-	      this.props.route.handlerBuy(this.props.params.id);
+	    key: 'handleBuy',
+	    value: function handleBuy(event) {
+	      this.props.route.addToCart(this.props.params.id);
 	    }
 	  }, {
 	    key: 'render',
@@ -27504,7 +27515,7 @@
 	              pathname: '/cart',
 	              state: { productId: this.props.params.id }
 	            },
-	            onClick: this.handlerBuy,
+	            onClick: this.handleBuy,
 	            className: 'btn btn-primary' },
 	          'Buy'
 	        )

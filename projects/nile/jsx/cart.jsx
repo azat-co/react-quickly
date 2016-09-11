@@ -6,10 +6,10 @@ const {
 class Cart extends React.Component {
   render() {
     return <div>
-      {(Object.keys(CartItems).length == 0) ? <p>Your cart is empty</p> : '' }
+      {(Object.keys(this.props.route.cartItems).length == 0) ? <p>Your cart is empty</p> : '' }
        <ul>
-        {Object.keys(CartItems).map((item, index, list)=>{
-          return <li key={item}>{PRODUCTS[item].title} - {CartItems[item]}</li>
+        {Object.keys(this.props.route.cartItems).map((item, index, list)=>{
+          return <li key={item}>{this.props.route.products[item].title} - {this.props.route.cartItems[item]}</li>
         })}
       </ul>
       <Link to="/checkout" className="btn btn-primary">Checkout</Link>

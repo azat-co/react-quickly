@@ -16,7 +16,7 @@
       "es2015"
     ],
     "ignore": [
-      "bundle.js",
+      "js/bundle.js",
       "node_modules/**/*.js"
     ]
   },

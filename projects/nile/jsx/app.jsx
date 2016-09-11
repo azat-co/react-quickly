@@ -8,6 +8,11 @@ const { hashHistory,
   IndexLink
 } = require('react-router')
 
+const Modal = require('./modal.jsx')
+const Cart = require('./cart.jsx')
+const Checkout = require('./checkout.jsx')
+const Product = require('./product.jsx')
+
 const PRODUCTS = [
   { id: 0, src: 'images/proexpress-cover.jpg', title: 'Pro Express.js', url: 'http://amzn.to/1D6qiqk' },
   { id: 1, src: 'images/practicalnode-cover.jpeg', title: 'Practical Node.js', url: 'http://amzn.to/NuQ0fM' },
@@ -16,12 +21,8 @@ const PRODUCTS = [
   { id: 4, src: 'images/fullstack-cover.png', title: 'Full Stack JavaScript', url: 'http://www.apress.com/9781484217504'}
 ]
 
-let CartItems = {}
 
-const Modal = require('./modal.jsx')
-const Cart = require('./cart.jsx')
-const Checkout = require('./checkout.jsx')
-const Product = require('./product.jsx')
+
 
 const Heading = () => {
   return <h1>Nile Book Store</h1>
@@ -48,6 +49,7 @@ class App extends React.Component {
         <Heading/>
         <div>
           {(this.isModal)?this.previousChildren:this.props.children}
+          {/* {this.props.children} */}
           {(this.isModal)?
             <Modal isOpen={true} returnTo={this.props.location.state.returnTo}>
               {this.props.children}
@@ -81,23 +83,26 @@ class Index extends React.Component {
     )
   }
 }
-
-const handlerBuy = (id) => {
-  if (CartItems[id])
-    CartItems[id] += 1
+let cartItems = {}
+const addToCart = (id) => {
+  if (cartItems[id])
+    cartItems[id] += 1
   else
-    CartItems[id] = 1
+    cartItems[id] = 1
 }
+const getCartItems = ()=>cartItems
 
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Index}/>
       <Route path="/products/:id" component={Product}
-        handlerBuy={handlerBuy}
+        addToCart={addToCart}
         products={PRODUCTS} />
-      <Route path="/cart" component={Cart}/>
+      <Route path="/cart" component={Cart}
+      cartItems={cartItems} products={PRODUCTS}/>
     </Route>
-    <Route path="/checkout" component={Checkout}/>
+    <Route path="/checkout" component={Checkout}
+      cartItems={cartItems} products={PRODUCTS}/>
   </Router>
 ), document.getElementById('content'))
