@@ -21443,6 +21443,7 @@
 	    this.addOption = this.addOption.bind(this);
 	  }
 	  componentDidMount() {
+	    if (this.props.url == 'test') return true;
 	    request({ url: this.props.url }).then(response => response.data).then(body => {
 	      if (!body) {
 	        return console.error('Failed to load');
