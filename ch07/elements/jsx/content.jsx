@@ -31,7 +31,7 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
     this.setState({radioGroup: obj})
   }
   handleCheckbox(event) {
-    let obj = Object.assign(this.state.checkboxGroup)
+    let obj = this.state.checkboxGroup
     obj[event.target.value] = event.target.checked // true or false
     this.setState({checkboxGroup: obj})
   }
@@ -105,7 +105,7 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
             type="checkbox"
             name="checkboxGroup"
             value='express'
-            checked={this.state.checkboxGroup['express']}
+            checked={this.state.checkboxGroup.express}
             onChange={this.handleCheckbox}/>
           Express
         </label>
@@ -147,6 +147,9 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
         <hr/>
         <h2>input: button</h2>
         <input type="button" defaultValue="Send" onClick={this.handleSubmit}/>
+        <hr/>
+        <input type="text" name="title" value="Mr." />
+
       </form>
     </div>
   }
