@@ -2,6 +2,7 @@ class Content extends React.Component {
   constructor(props) {
     super(props)
     this.handleRadio = this.handleRadio.bind(this)
+    this.handleCheckbox = this.handleCheckbox.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleInput = this.handleInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -15,6 +16,12 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
         react: true,
         polymer: false
       },
+      checkboxGroup: {
+        node: false,
+        react: true,
+        express: false,
+        mongodb: false
+      },
       selectedValue: 'node'
     }
   }
@@ -22,6 +29,11 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
     let obj = {}
     obj[event.target.value] = event.target.checked // true
     this.setState({radioGroup: obj})
+  }
+  handleCheckbox(event) {
+    let obj = Object.assign(this.state.checkboxGroup)
+    obj[event.target.value] = event.target.checked // true or false
+    this.setState({checkboxGroup: obj})
   }
   handleChange(event) {
     console.log('onChange event: ', event.target.value, event.target.checked)
@@ -67,23 +79,44 @@ If you aspire one day to become a Node.js architect (or maybe you're already one
           Polymer
         </label>
         <hr/>
+        <h2>input: checkbox</h2>
         <label>
-          <input type="checkbox" name="checkboxGroup" value='node'  onChange={this.handleChange}/>
+          <input
+            type="checkbox"
+            name="checkboxGroup"
+            value='node'
+            checked={this.state.checkboxGroup['node']}
+            onChange={this.handleCheckbox}/>
           Node
         </label>
         <br/>
         <label>
-          <input type="checkbox" name="checkboxGroup" value='react' checked onChange={this.handleChange}/>
+          <input
+            type="checkbox"
+            name="checkboxGroup"
+            value='react'
+            checked={this.state.checkboxGroup['react']}
+            onChange={this.handleCheckbox}/>
           React
         </label>
         <br/>
         <label>
-          <input type="checkbox" name="checkboxGroup" value='express' onChange={this.handleChange}/>
+          <input
+            type="checkbox"
+            name="checkboxGroup"
+            value='express'
+            checked={this.state.checkboxGroup['express']}
+            onChange={this.handleCheckbox}/>
           Express
         </label>
         <br/>
         <label>
-          <input type="checkbox" name="checkboxGroup" value='mongodb' onChange={this.handleChange}/>
+          <input
+            type="checkbox"
+            name="checkboxGroup"
+            value='mongodb'
+            checked={this.state.checkboxGroup['mongodb']}
+            onChange={this.handleCheckbox}/>
           MongoDB
         </label>
         <hr/>
