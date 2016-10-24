@@ -8,13 +8,6 @@ class SaveButton extends React.Component {
       null,
       React.createElement(
         "button",
-        { onClick: event => {
-            console.log(this, event);
-          } },
-        "Save"
-      ),
-      React.createElement(
-        "button",
         { onClick: this.handleSave.bind(this) },
         "Save"
       )
