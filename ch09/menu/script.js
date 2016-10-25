@@ -7,7 +7,7 @@ class Menu extends React.Component {
       'Contact us']
     return React.createElement('div',
       null,
-      menus.map((v,i) => {
+      menus.map((v, i) => {
         return React.createElement('div',
           {key: i},
           React.createElement(Link, {label: v})
