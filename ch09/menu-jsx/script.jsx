@@ -12,7 +12,8 @@ class Menu extends React.Component {
         })}
       </div>
     )
-}}
+  }
+}
 
 class Link extends React.Component {
   render() {
