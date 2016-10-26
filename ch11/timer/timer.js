@@ -13,6 +13,25 @@ class Timer extends React.Component {
   }
 }
 
+class Button extends React.Component {
+  startTimer(event) {
+    return this.props.startTimer(this.props.time);
+  }
+  render() {
+    return React.createElement(
+      'button',
+      {
+        type: 'button',
+        className: 'btn-default btn',
+        onClick: () => {
+          this.props.startTimer(this.props.time);
+        } },
+      this.props.time,
+      ' seconds'
+    );
+  }
+}
+
 class TimerWrapper extends React.Component {
   constructor(props) {
     super(props);
@@ -48,20 +67,6 @@ class TimerWrapper extends React.Component {
       ),
       React.createElement(Timer, { timeLeft: this.state.timeLeft }),
       React.createElement('audio', { id: 'end-of-time', src: 'flute_c_long_01.wav', preload: 'auto' })
-    );
-  }
-}
-
-class Button extends React.Component {
-  startTimer(event) {
-    return this.props.startTimer(this.props.time);
-  }
-  render() {
-    return React.createElement(
-      'button',
-      { type: 'button', className: 'btn-default btn', onClick: this.startTimer.bind(this) },
-      this.props.time,
-      ' seconds'
     );
   }
 }

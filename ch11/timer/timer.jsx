@@ -2,8 +2,9 @@ class Timer extends React.Component {
   render() {
     if (this.props.timeLeft == 0) {
       document.getElementById('end-of-time').play()
-      return <div/>
     }
+    if (this.props.timeLeft == null || this.props.timeLeft == 0)
+      return <div/>
     return <h1>Time left: {this.props.timeLeft}</h1>
   }
 }
@@ -13,7 +14,10 @@ class Button extends React.Component {
     return this.props.startTimer(this.props.time)
   }
   render() {
-    return <button type="button" className='btn-default btn' onClick={this.startTimer.bind(this)}>
+    return <button
+      type="button"
+      className='btn-default btn'
+      onClick={()=>{this.props.startTimer(this.props.time)}}>
       {this.props.time} seconds
     </button>
   }
@@ -22,7 +26,7 @@ class Button extends React.Component {
 class TimerWrapper extends React.Component {
   constructor(props) {
     super(props)
-    this.state =  {timeLeft: 0, timer: null}
+    this.state =  {timeLeft: null, timer: null}
     this.startTimer = this.startTimer.bind(this)
   }
   startTimer(timeLeft) {
