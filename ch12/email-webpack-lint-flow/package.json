@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint ./jsx",
     "build": "./node_modules/.bin/webpack -w",
     "wds-cli": "./node_modules/.bin/webpack-dev-server --inline --hot --module-bind 'css=style!css'  --module-bind 'jsx=react-hot!babel' --config webpack.dev-cli.config.js",
     "wds": "./node_modules/.bin/webpack-dev-server --config webpack.dev.config.js"
@@ -21,6 +22,8 @@
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
+    "eslint": "^3.8.1",
+    "eslint-plugin-react": "^6.4.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-hot-loader": "^1.3.0",
