@@ -1,0 +1,14 @@
+{
+  "name": "npm-script-hooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prelearn-react": "echo \"Purchasing React Quickly\"",
+    "learn-react": "echo \"Reading React Quickly\" ",
+    "postlearn-react": "echo \"Creating my own React app\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
