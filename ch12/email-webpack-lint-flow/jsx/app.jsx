@@ -1,3 +1,5 @@
+// @flow
+
 require('../css/main.css')
 
 const React = require('react')
