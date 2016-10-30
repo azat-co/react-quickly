@@ -11,7 +11,15 @@ class Movies extends React.Component {
   componentWillMount() {
     this.props.fetchMovies(movies)
   }
+  // Comment componentWillMount() and uncomment componentDidMount to use async fetch
 
+  // componentDidMount() {
+  //   fetch('/src/movies.json', {method: 'GET'})
+  //     .then((response)=>{return response.json()})
+  //     .then((movies)=>{
+  //       this.props.fetchMovies(movies)
+  //     })
+  // }
   render() {
     const {
       children,
