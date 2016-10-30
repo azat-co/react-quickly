@@ -9,7 +9,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'build', 'public'),
     filename: '[name].js'
   },
   target: 'web',

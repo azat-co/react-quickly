@@ -13,11 +13,14 @@ app.use('/q', graphqlHTTP(req => ({
   context: req.session
 })))
 
-app.use('/build/:file', (req, res) => {
-  res.sendFile(req.params.file, {
-    root: path.resolve(PWD, 'build')
-  })
-})
+
+app.use('/dist', express.static(path.resolve(PWD, 'build', 'public')))
+
+// app.use('/build/:file', (req, res) => {
+//   res.sendFile(req.params.file, {
+//     root: path.resolve(PWD, 'build')
+//   })
+// })
 
 app.use('*', (req, res) => {
   res.sendFile('index.html', {

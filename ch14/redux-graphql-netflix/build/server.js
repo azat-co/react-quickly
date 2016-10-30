@@ -64,11 +64,11 @@
 	var express = __webpack_require__(4);
 	var graphqlHTTP = __webpack_require__(5);
 	var schema = __webpack_require__(6);
-	var _process$env = process.env;
-	var _process$env$PORT = _process$env.PORT;
-	var PORT = _process$env$PORT === undefined ? 3000 : _process$env$PORT;
-	var _process$env$PWD = _process$env.PWD;
-	var PWD = _process$env$PWD === undefined ? __dirname : _process$env$PWD;
+	var _process$env = process.env,
+	    _process$env$PORT = _process$env.PORT,
+	    PORT = _process$env$PORT === undefined ? 3000 : _process$env$PORT,
+	    _process$env$PWD = _process$env.PWD,
+	    PWD = _process$env$PWD === undefined ? __dirname : _process$env$PWD;
 
 	var app = express();
 
@@ -79,11 +79,13 @@
 	  };
 	}));
 
-	app.use('/build/:file', function (req, res) {
-	  res.sendFile(req.params.file, {
-	    root: path.resolve(PWD, 'build')
-	  });
-	});
+	app.use('/dist', express.static(path.resolve(PWD, 'build', 'public')));
+
+	// app.use('/build/:file', (req, res) => {
+	//   res.sendFile(req.params.file, {
+	//     root: path.resolve(PWD, 'build')
+	//   })
+	// })
 
 	app.use('*', function (req, res) {
 	  res.sendFile('index.html', {
@@ -120,14 +122,13 @@
 
 	'use strict';
 
-	var _require = __webpack_require__(7);
-
-	var GraphQLSchema = _require.GraphQLSchema;
-	var GraphQLObjectType = _require.GraphQLObjectType;
-	var GraphQLList = _require.GraphQLList;
-	var GraphQLString = _require.GraphQLString;
-	var GraphQLInt = _require.GraphQLInt;
-	var GraphQLFloat = _require.GraphQLFloat;
+	var _require = __webpack_require__(7),
+	    GraphQLSchema = _require.GraphQLSchema,
+	    GraphQLObjectType = _require.GraphQLObjectType,
+	    GraphQLList = _require.GraphQLList,
+	    GraphQLString = _require.GraphQLString,
+	    GraphQLInt = _require.GraphQLInt,
+	    GraphQLFloat = _require.GraphQLFloat;
 
 	var movies = __webpack_require__(8);
 
