@@ -4,7 +4,6 @@
   "description": "A sample project in React, GraphQL, Express and Redux that copies Netflix's features and workflow",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"webpack --watch --config webpack.config.js\" \"webpack --watch --config webpack.server.config.js\" \"webpack-dev-server\" \"nodemon ./build/server.js\""
   },
   "repository": {
