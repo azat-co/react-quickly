@@ -35,7 +35,9 @@ describe('Password', function() {
 
     let rules = TestUtils.scryRenderedDOMComponentsWithTag(password, 'li')
     expect(rules.length).toBe(5)
+    expect(rules.length).toEqual(5)
     expect(fD(rules[0]).textContent).toEqual('Must have at least one upper-case character')
+    expect(fD(rules[0]).textContent).toBe('Must have at least one upper-case character')
     let generateButton = TestUtils.findRenderedDOMComponentWithClass(password, 'generate-btn')
     expect(fD(rules[1]).firstChild.nodeName.toLowerCase()).toBe('#text')
     TestUtils.Simulate.click(fD(generateButton))
