@@ -185,9 +185,6 @@
 	var addToCart = function addToCart(id) {
 	  if (cartItems[id]) cartItems[id] += 1;else cartItems[id] = 1;
 	};
-	var getCartItems = function getCartItems() {
-	  return cartItems;
-	};
 	
 	ReactDOM.render(React.createElement(
 	  Router,
