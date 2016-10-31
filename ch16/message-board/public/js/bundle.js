@@ -21467,7 +21467,7 @@
 /* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
-	React = __webpack_require__(1);
+	const React = __webpack_require__(1);
 	const Header = () => {
 	  return React.createElement(
 	    'h1',
@@ -21482,7 +21482,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	React = __webpack_require__(1);
+	const React = __webpack_require__(1);
 	
 	module.exports = Footer = React.createClass({
 	  displayName: "Footer",
@@ -21641,13 +21641,13 @@
 	    if (this.props.messages) this.state = { messages: this.props.messages };
 	  }
 	  componentDidMount() {
-	    request.get(url, result => {
-	      console.log(result);
-	      if (!result || !result.length) {
+	    request.get(url).then(response => response.data).then(messages => {
+	      console.log(messages);
+	      if (!messages || !messages.length) {
 	        return;
 	      }
-	      // console.log(result)
-	      this.setState({ messages: result });
+	      console.log(messages);
+	      this.setState({ messages: messages });
 	    });
 	  }
 	  addMessage(message) {

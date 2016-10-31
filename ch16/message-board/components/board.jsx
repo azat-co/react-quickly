@@ -85,14 +85,16 @@ class MessageBoard extends React.Component {
       this.state = {messages: this.props.messages}
   }
   componentDidMount() {
-    request.get(url, (result) => {
-      console.log(result)
-      if(!result || !result.length){
-        return;
-      }
-      // console.log(result)
-      this.setState({messages: result})
-    })
+    request.get(url)
+      .then(response => response.data)
+      .then(messages => {
+        console.log(messages)
+        if(!messages || !messages.length){
+          return;
+        }
+        console.log(messages)
+        this.setState({messages: messages})
+      })
   }
   addMessage(message) {
     let messages = this.state.messages
