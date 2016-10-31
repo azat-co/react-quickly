@@ -1,4 +1,4 @@
-React = require('react')
+const React = require('react')
 const Header = ()=>{
   return (
     <h1>Message Board</h1>

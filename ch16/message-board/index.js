@@ -23,6 +23,9 @@ mongodb.MongoClient.connect(url, function(err, db) {
     console.error(err)
     process.exit(1)
   }
+
+  app.set('view engine', 'hbs')
+
   app.use(compression())
   app.use(logger('dev'))
   app.use(errorHandler())
@@ -31,7 +34,7 @@ mongodb.MongoClient.connect(url, function(err, db) {
   app.use(validator())
   app.use(express.static('public'))
 
-  app.set('view engine', 'hbs')
+
 
   app.use(function(req, res, next){
     req.messages = db.collection('messages')
