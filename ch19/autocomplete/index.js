@@ -65,9 +65,12 @@ mongodb.MongoClient.connect(url, function(err, db) {
           options: rooms,
           url: url
         })),
-        props: '<script type="text/javascript">var rooms = '
-          + JSON.stringify(rooms)
-          + ', url = "' + url + '"</script>'
+        data: `<script type="text/javascript">
+                window.__autocomplete_data = {
+                  rooms: ${JSON.stringify(rooms, null, 2)},
+                  url: "${url}"
+                }
+              </script>`
       })
     })
   })

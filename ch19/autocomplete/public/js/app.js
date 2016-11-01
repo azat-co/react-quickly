@@ -44,12 +44,15 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	React = __webpack_require__(1);
-	ReactDOM = __webpack_require__(34);
+	const React = __webpack_require__(1);
+	const ReactDOM = __webpack_require__(34);
 	
 	const Autocomplete = __webpack_require__(172);
+	const { rooms, url } = window.__autocomplete_data;
 	
-	ReactDOM.render(React.createElement(Autocomplete, { options: rooms, url: url }), document.getElementById('autocomplete'));
+	ReactDOM.render(React.createElement(Autocomplete, {
+	    options: rooms,
+	    url: url }), document.getElementById('autocomplete'));
 
 /***/ },
 /* 1 */
