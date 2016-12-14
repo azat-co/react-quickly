@@ -1,47 +1,50 @@
-//Credit to Blender http://stackoverflow.com/a/12635919
-module.exports = function generatePassword() {
-  var specials = '!@#$%^&*()_+{}:"<>?\|[]\',./`~'
-  var lowercase = 'abcdefghijklmnopqrstuvwxyz'
-  var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  var numbers = '0123456789'
+const SPECIALS = '!@#$%^&*()_+{}:"<>?\|[]\',./`~'
+const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'
+const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const NUMBERS = '0123456789'
+const ALL = `${SPECIALS}${LOWERCASE}${UPPERCASE}${NUMBERS}`
 
-  var all = specials + lowercase + uppercase + numbers
+// adding +1 to avoid 0 as a value in case we want to use it differently than the index.
+const getIterable = (length) => Array.from({length}, (_, index) => index + 1)
 
-  var pick = function(set, min, max) {
-    var n, chars = ''
+const pick = (set, min, max) => {
+    let length = min
 
-    if (typeof max === 'undefined') {
-        n = min
-    } else {
-        n = min + Math.floor(Math.random() * (max - min))
+    if (typeof max !== 'undefined') {
+        length += Math.floor(Math.random() * (max - min))
     }
 
-    for (var i = 0; i < n; i++) {
-        chars += set.charAt(Math.floor(Math.random() * set.length))
-    }
-    return chars
+    // creating an iterable element with empty stryings to avoid for and while loops
+    // and using a more declarative approach.
+
+    return getIterable(length).map(() => (
+        set.charAt(Math.floor(Math.random() * set.length))
+    )).join('');
   }
 
-  // Credit to Christoph: http://stackoverflow.com/a/962890/464744
-  var shuffle = function(set) {
-      var array = set.split('')
-      var tmp, current, top = array.length
+const shuffle = (set) => {
+    let array = set.split('')
+    let length = array.length
+    // we reverse the iterable to get value from max to min.
+    let iterable = getIterable(length).reverse();
 
-      if (top) while (--top) {
-          current = Math.floor(Math.random() * (top + 1))
-          tmp = array[current]
-          array[current] = array[top]
-          array[top] = tmp
-      }
+    let shuffled = iterable.reduce((acc, value, index) => {
+        let randomIndex = Math.floor(Math.random() * value);
 
-      return array.join('')
-  }
+        [acc[value -1], acc[randomIndex]] = [acc[randomIndex], acc[value - 1]];
 
-  var password = (pick(specials, 1)
-    + pick(lowercase, 1)
-    + pick(numbers, 1)
-    + pick(uppercase, 1)
-    + pick(all, 4, 12))
+        return acc
+    }, [...array]);
+
+    return shuffled.join('')
+}
+
+module.exports = () => {
+  let password = (pick(SPECIALS, 1)
+    + pick(LOWERCASE, 1)
+    + pick(NUMBERS, 1)
+    + pick(UPPERCASE, 1)
+    + pick(ALL, 4, 12))
 
   return shuffle(password)
 }
