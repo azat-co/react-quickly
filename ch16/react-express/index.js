@@ -13,7 +13,7 @@ const ReactDOMServer = require('react-dom/server')
 const About = React.createFactory(require('./components/about.jsx'))
 
 app.set('view engine', 'hbs')
-app.get('/', (request, response, next)=>{
+app.get('/', (request, response, next) => {
   response.send('Hello!')
 })
 app.get('/about', (request, response, next) => {
@@ -28,7 +28,7 @@ app.get('/about', (request, response, next) => {
 // </div>`)
 //})
 
-app.all('*', (request, response, next)=> {
+app.all('*', (request, response, next) => {
   response.status(404).send('Not found... did you mean to go to /about instead?')
 })
 app.use((error, request, response, next) => {

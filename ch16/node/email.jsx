@@ -1,6 +1,6 @@
 const React = require('react')
 
-const Email = (props)=> {
+const Email = (props) => {
   return (
     <div>
       <h1>Thank you {(props.name)?props.name:''}for signing up!</h1>

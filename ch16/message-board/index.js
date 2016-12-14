@@ -1,6 +1,7 @@
 require('babel-register')({
   presets: [ 'react' ]
 })
+
 const express = require('express'),
   mongodb = require('mongodb'),
   app = express(),
@@ -18,7 +19,7 @@ const Header = React.createFactory(require('./components/header.jsx')),
   Footer = React.createFactory(require('./components/footer.jsx')),
   MessageBoard = React.createFactory(require('./components/board.jsx'))
 
-mongodb.MongoClient.connect(url, function(err, db) {
+mongodb.MongoClient.connect(url, (err, db) => {
   if (err) {
     console.error(err)
     process.exit(1)
@@ -34,20 +35,19 @@ mongodb.MongoClient.connect(url, function(err, db) {
   app.use(validator())
   app.use(express.static('public'))
 
-
-
-  app.use(function(req, res, next){
+  app.use((req, res, next) => {
     req.messages = db.collection('messages')
     return next()
   })
 
-  app.get('/messages', function(req, res, next) {
-    req.messages.find({}, {sort: {_id: -1}}).toArray(function(err, docs){
+  app.get('/messages', (req, res, next) => {
+    req.messages.find({}, {sort: {_id: -1}}).toArray((err, docs) => {
       if (err) return next(err)
       return res.json(docs)
     })
   })
-  app.post('/messages', function(req, res, next){
+
+  app.post('/messages', (req, res, next) => {
     console.log(req.body)
     req.checkBody('message', 'Invalid message in body').notEmpty()
     req.checkBody('name', 'Invalid name in body').notEmpty()
@@ -55,16 +55,16 @@ mongodb.MongoClient.connect(url, function(err, db) {
       message: req.body.message,
       name: req.body.name
     }
-    var errors = req.validationErrors()
+    let errors = req.validationErrors()
     if (errors) return next(errors)
-    req.messages.insert(newMessage, function (err, result) {
+    req.messages.insert(newMessage, (err, result) => {
       if (err) return next(err)
       return res.json(result.ops[0])
     })
   })
 
-  app.get('/', function(req, res, next){
-    req.messages.find({}, {sort: {_id: -1}}).toArray(function(err, docs){
+  app.get('/', (req, res, next) => {
+    req.messages.find({}, {sort: {_id: -1}}).toArray((err, docs) => {
       if (err) return next(err)
       res.render('index', {
         header: ReactDOMServer.renderToString(Header()),
