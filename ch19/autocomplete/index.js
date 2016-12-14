@@ -14,12 +14,11 @@ const express = require('express'),
   React = require('react')
 
 require('babel-register')({
-  presets: [ 'react' ]
+  presets: ['react']
 })
 
 const Autocomplete  = React.createFactory(require('./src/autocomplete.jsx')),
   port = 3000
-
 
 mongodb.MongoClient.connect(url, function(err, db) {
   if (err) {

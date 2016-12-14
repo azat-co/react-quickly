@@ -14,7 +14,7 @@ const pick = (set, min, max) => {
         length += Math.floor(Math.random() * (max - min))
     }
 
-    // creating an iterable element with empty stryings to avoid for and while loops
+    // creating an iterable element with empty strings to avoid for and while loops
     // and using a more declarative approach.
 
     return getIterable(length).map(() => (
