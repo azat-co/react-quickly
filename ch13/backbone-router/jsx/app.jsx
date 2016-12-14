@@ -1,5 +1,5 @@
 const React = require('react')
-const ReactDOM = require ('react-dom')
+const {render} = require ('react-dom')
 const Backbone = require ('backbone')
 
 const Content = require('./content.jsx')
@@ -23,30 +23,30 @@ const Router = Backbone.Router.extend({
     'login': 'login'
   },
   index: function() {
-    ReactDOM.render(<Content router={router}/>, content)
+    render(<Content router={router}/>, content)
   },
   about: function() {
-    ReactDOM.render(<Content>
+    render(<Content>
       <About/>
     </Content>, content)
   },
   posts: function() {
-    ReactDOM.render(<Content>
+    render(<Content>
       <Posts posts={posts}/>
     </Content>, content)
   },
   post: function(id) {
-    ReactDOM.render(<Content>
+    render(<Content>
       <Post id={id} posts={posts}/>
     </Content>, content)
   },
   contact: function() {
-    ReactDOM.render(<Content>
+    render(<Content>
       <Contact />
     </Content>, content)
   },
   login: function() {
-    ReactDOM.render(<Login />, content)
+    render(<Login />, content)
   }
 
 })

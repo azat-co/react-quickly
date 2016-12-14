@@ -45,7 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const React = __webpack_require__(1);
-	const ReactDOM = __webpack_require__(32);
+	const { render } = __webpack_require__(32);
 	const Backbone = __webpack_require__(178);
 	
 	const Content = __webpack_require__(181);
@@ -69,38 +69,38 @@
 	    'login': 'login'
 	  },
 	  index: function () {
-	    ReactDOM.render(React.createElement(Content, { router: router }), content);
+	    render(React.createElement(Content, { router: router }), content);
 	  },
 	  about: function () {
-	    ReactDOM.render(React.createElement(
+	    render(React.createElement(
 	      Content,
 	      null,
 	      React.createElement(About, null)
 	    ), content);
 	  },
 	  posts: function () {
-	    ReactDOM.render(React.createElement(
+	    render(React.createElement(
 	      Content,
 	      null,
 	      React.createElement(Posts, { posts: posts })
 	    ), content);
 	  },
 	  post: function (id) {
-	    ReactDOM.render(React.createElement(
+	    render(React.createElement(
 	      Content,
 	      null,
 	      React.createElement(Post, { id: id, posts: posts })
 	    ), content);
 	  },
 	  contact: function () {
-	    ReactDOM.render(React.createElement(
+	    render(React.createElement(
 	      Content,
 	      null,
 	      React.createElement(Contact, null)
 	    ), content);
 	  },
 	  login: function () {
-	    ReactDOM.render(React.createElement(Login, null), content);
+	    render(React.createElement(Login, null), content);
 	  }
 	
 	});
