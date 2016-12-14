@@ -6,7 +6,7 @@
   "author": "Azat Mardan",
   "license": "ISC",
   "scripts": {
-    "build": "node node_modules/webpack/bin/webpack.js -w"
+    "build": "node ./node_modules/webpack/bin/webpack.js -w"
   },
   "babel": {
     "plugins": [
