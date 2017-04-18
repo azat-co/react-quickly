@@ -7,8 +7,8 @@
     "test": "jest"
   },
   "author": "Azat Mardan",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "jest-cli": "^0.5.10"
+    "jest-cli": "19.0.2"
   }
 }
