@@ -9,6 +9,6 @@
     "postlearn-react": "echo \"Creating my own React app\""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Azat Mardan",
+  "license": "MIT"
 }
