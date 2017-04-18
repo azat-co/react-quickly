@@ -5,6 +5,9 @@ const errorHandler = require('errorhandler')
 const http = require('http')
 const https = require('https')
 
+const httpPort = 3000
+const httpsPort = 443
+
 const React = require('react')
 require('babel-register')({
   presets: [ 'react' ]
@@ -39,7 +42,9 @@ app.use((error, request, response, next) => {
 app.use(errorHandler)
 
 http.createServer(app)
-  .listen(3000)
+  .listen(httpPort, ()=>{
+    console.log(`HTTP server is listening on ${httpPort}`)
+  })
 
 
 try {
@@ -48,8 +53,10 @@ try {
     cert: fs.readFileSync('./server.crt')
   }
 } catch (e) {
-  console.warn('Create server.key and server.crt for HTTPS')
+  console.warn('Cannot start HTTPS. \nCreate server.key and server.crt for HTTPS.')
 }
 if (typeof options != 'undefined')
   https.createServer(app, options)
-    .listen(443)
+    .listen(httpsPort, ()=>{
+      console.log(`HTTPS server is listening on ${httpsPort}`)
+    })

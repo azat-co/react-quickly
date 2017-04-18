@@ -4,15 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Azat Mardan",
+  "license": "MIT",
   "dependencies": {
-    "babel-core": "^6.13.2",
-    "babel-plugin-transform-react-jsx": "^6.8.0",
-    "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react": "15.5.4",
+    "react-dom": "15.5.4"
   }
 }
