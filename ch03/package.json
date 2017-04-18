@@ -8,7 +8,8 @@
     "build-method": "./node_modules/.bin/babel method/jsx/script.jsx -o method/js/script.js -w",
     "build-hello-js-world-jsx": "./node_modules/.bin/babel hello-js-world-jsx/jsx/script.jsx -o hello-js-world-jsx/js/script.js -w",
     "build-hello-world-jsx": "./node_modules/.bin/babel hello-world-jsx/jsx/script.jsx -o hello-world-jsx/js/script.js -w",
-    "build-hello-world-class-jsx": "./node_modules/.bin/babel hello-world-class-jsx/jsx/script.jsx -o hello-world-class-jsx/js/script.js -w"
+    "build-hello-world-class-jsx": "./node_modules/.bin/babel hello-world-class-jsx/jsx/script.jsx -o hello-world-class-jsx/js/script.js -w",
+    "build": "npm run build-method & npm run build-hello-js-world-jsx & npm run build-hello-world-jsx & npm run build-hello-world-class-jsx"
   },
   "keywords": [
     "react.js"
@@ -16,10 +17,12 @@
   "author": "Azat Mardan",
   "license": "MIT",
   "babel": {
-    "presets": ["react"]
+    "presets": [
+      "react"
+    ]
   },
   "devDependencies": {
-    "babel-cli": "^6.9.0",
-    "babel-preset-react": "^6.5.0"
+    "babel-cli": "6.24.1",
+    "babel-preset-react": "6.24.1"
   }
 }
