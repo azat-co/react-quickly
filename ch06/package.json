@@ -13,7 +13,8 @@
     "build-onclick-parent": "./node_modules/.bin/babel onclick-parent/jsx -d onclick-parent/js -w",
     "build-onclick-props": "./node_modules/.bin/babel onclick-props/jsx -d onclick-props/js -w",
     "build-slider": "./node_modules/.bin/babel slider/jsx -d slider/js -w",
-    "build-radio": "./node_modules/.bin/babel radio/jsx -d radio/js -w"
+    "build-radio": "./node_modules/.bin/babel radio/jsx -d radio/js -w",
+    "build": "npm run build-button & npm run build-mouse & npm run build-mouse-capture & npm run build-mouse-event & npm run build-onclick & npm run build-onclick-parent & npm run build-onclick-props & npm run build-slider & npm run build-radio"
   },
   "keywords": [
     "react.js"
@@ -21,10 +22,12 @@
   "author": "Azat Mardan",
   "license": "MIT",
   "babel": {
-    "presets": ["react"]
+    "presets": [
+      "react"
+    ]
   },
   "devDependencies": {
-    "babel-cli": "^6.9.0",
-    "babel-preset-react": "^6.5.0"
+    "babel-cli": "6.24.1",
+    "babel-preset-react": "6.24.1"
   }
 }

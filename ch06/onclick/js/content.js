@@ -12,7 +12,9 @@ class Content extends React.Component {
       null,
       React.createElement(
         "button",
-        { onClick: this.handleClick.bind(this), className: "btn btn-primary" },
+        {
+          onClick: this.handleClick.bind(this),
+          className: "btn btn-primary" },
         "Don't click me ",
         this.state.counter,
         " times!"
