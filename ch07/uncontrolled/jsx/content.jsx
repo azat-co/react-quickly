@@ -2,6 +2,7 @@ class Content extends React.Component {
   constructor(props){
     super(props)
     this.state = {textbook: ''}
+    this.handleChange = this.handleChange.bind(this)
   }
   handleChange(event) {
     console.log(event.target.value)

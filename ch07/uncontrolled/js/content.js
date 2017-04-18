@@ -1,14 +1,14 @@
-var Content = React.createClass({
-  displayName: "Content",
-
-  getInitialState() {
-    return { textbook: '' };
-  },
+class Content extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { textbook: '' };
+    this.handleChange = this.handleChange.bind(this);
+  }
   handleChange(event) {
     console.log(event.target.value);
     this.setState({ textbook: event.target.value });
-  },
-  render: function () {
+  }
+  render() {
     return React.createElement(
       "div",
       null,
@@ -24,6 +24,4 @@ var Content = React.createClass({
       )
     );
   }
-});
-
-ReactDOM.render(React.createElement(Content, null), document.getElementById('content'));
+}
