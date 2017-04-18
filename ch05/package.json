@@ -1,5 +1,5 @@
 {
-  "name": "hello-world-class-jsx",
+  "name": "ch05",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,8 @@
     "build-did-mount": "./node_modules/.bin/babel did-mount/jsx -d did-mount/js -w",
     "build-logger": "./node_modules/.bin/babel logger/jsx -d logger/js -w",
     "build-note": "./node_modules/.bin/babel note/jsx -d note/js -w",
-    "build-users": "./node_modules/.bin/babel users/jsx -d users/js -w"
+    "build-users": "./node_modules/.bin/babel users/jsx -d users/js -w",
+    "build": "npm run build-did-mount & npm run build-logger & npm run build-note & npm run build-users"
   },
   "keywords": [
     "react.js"
@@ -16,10 +17,12 @@
   "author": "Azat Mardan",
   "license": "MIT",
   "babel": {
-    "presets": ["react"]
+    "presets": [
+      "react"
+    ]
   },
   "devDependencies": {
-    "babel-cli": "^6.9.0",
-    "babel-preset-react": "^6.5.0"
+    "babel-cli": "6.24.1",
+    "babel-preset-react": "6.24.1"
   }
 }
