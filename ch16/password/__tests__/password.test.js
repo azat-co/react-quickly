@@ -2,7 +2,8 @@ jest.autoMockOff()
 
 describe('Password', function() {
   it('changes after clicking the Generate button', (done)=>{
-    const TestUtils = require('react-addons-test-utils')
+    const TestUtils = require('react-dom/test-utils')
+    const { createRenderer } = require('react-test-renderer/shallow')
     const React = require('react')
     const ReactDOM = require('react-dom')
     const Password = require('../jsx/password.jsx')
@@ -25,7 +26,7 @@ describe('Password', function() {
 
     // SHALLOW RENDERING: No children
 
-    const passwordRenderer = TestUtils.createRenderer()
+    const passwordRenderer = createRenderer()
     passwordRenderer.render(<Password/>)
     let p = passwordRenderer.getRenderOutput()
     expect(p.type).toBe('div')
