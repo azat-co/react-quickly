@@ -1,5 +1,5 @@
 {
-  "name": "email-webpack",
+  "name": "email-webpack-lint-flow",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "lint": "./node_modules/.bin/eslint jsx/*",
     "flow": "flow check",
     "build": "./node_modules/.bin/webpack -w",
-    "wds-cli": "./node_modules/.bin/webpack-dev-server --inline --hot --module-bind 'css=style!css'  --module-bind 'jsx=react-hot!babel' --config webpack.dev-cli.config.js",
+    "wds-cli": "./node_modules/.bin/webpack-dev-server --inline --hot --module-bind 'css=style-loader!css-loader'  --module-bind 'jsx=react-hot-loader!babel-loader' --config webpack.dev-cli.config.js",
     "wds": "./node_modules/.bin/webpack-dev-server --config webpack.dev.config.js"
   },
   "author": "Azat Mardan",
@@ -28,9 +28,9 @@
     "flow-bin": "0.33.0",
     "react": "15.3.2",
     "react-dom": "15.3.2",
-    "react-hot-loader": "1.3.0",
+    "react-hot-loader": "1.3.1",
     "style-loader": "0.13.1",
     "webpack": "1.12.9",
-    "webpack-dev-server": "1.14.1"
+    "webpack-dev-server": "2.4.2"
   }
 }
