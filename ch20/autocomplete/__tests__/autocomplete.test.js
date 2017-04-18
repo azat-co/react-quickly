@@ -7,7 +7,7 @@ const rooms = [
     { "_id" : "5622eb1f105807ceb6ad868d", "name" : "backbone" },
     { "_id" : "5622eb1f105807ceb6ad868e", "name" : "angular" }
   ]
-const TestUtils = require('react-addons-test-utils'),
+const TestUtils = require('react-dom/test-utils'),
   React = require('react'),
   ReactDOM = require('react-dom'),
   Autocomplete = require('../src/autocomplete.jsx'),
