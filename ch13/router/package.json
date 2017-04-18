@@ -16,13 +16,13 @@
     ]
   },
   "devDependencies": {
-    "babel-core": "^6.11.4",
-    "babel-loader": "^6.2.4",
-    "babel-preset-react": "^6.5.0",
-    "history": "^2.1.2",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
-    "react-router": "^2.6.0",
+    "babel-core": "6.11.4",
+    "babel-loader": "6.2.4",
+    "babel-preset-react": "6.5.0",
+    "history": "2.1.2",
+    "react": "15.2.1",
+    "react-dom": "15.2.1",
+    "react-router": "2.6.0",
     "webpack": "1.12.9"
   }
 }
