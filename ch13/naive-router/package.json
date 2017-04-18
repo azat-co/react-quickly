@@ -18,10 +18,10 @@
     "babel-core": "6.18.2",
     "babel-loader": "6.4.1",
     "babel-preset-react": "6.5.0",
-    "webpack": "2.4.1"
-  },
-  "dependencies": {
+    "webpack": "2.4.1",
     "react": "15.5.4",
     "react-dom": "15.5.4"
+  },
+  "dependencies": {
   }
 }
