@@ -4,11 +4,11 @@ const FETCH_MOVIES = 'movies/FETCH_MOVIES'
 const FETCH_MOVIE = 'movies/FETCH_MOVIE'
 
 module.exports = {
-  fetchMovies: (movies) => ({
+  fetchMoviesActionCreator: (movies) => ({
     type: FETCH_MOVIES,
     movies
   }),
-  fetchMovie: (index) => ({
+  fetchMovieActionCreator: (index) => ({
     type: FETCH_MOVIE,
     index
   }),

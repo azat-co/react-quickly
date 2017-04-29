@@ -7,11 +7,11 @@ body {
   font-size: 16px;
 }
 
-.app__2oExz {
+.app__d47a_ {
   height: 100vh;
   width: 100vw;
 }
-.movies__3OpEd {
+.movies__aAZfj {
   height: 100%;
   width: 100%;
   padding: 0;
@@ -19,15 +19,15 @@ body {
   background-color: black;
 }
 
-.list__2a3aq {
+.list__M5T1N {
   width: 100%;
 }
 
-.listHidden__2aptA {
+.listHidden__1iV9- {
   display: none;
 }
 
-.movie__37UeZ {
+.movie__1J1je {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -41,7 +41,7 @@ body {
 }
 
 @media (min-width: 667px) {
-  .movies__3OpEd {
+  .movies__aAZfj {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -49,7 +49,7 @@ body {
     align-items: stretch;
   }
 
-  .list__2a3aq, .listHidden__2aptA {
+  .list__M5T1N, .listHidden__1iV9- {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -59,11 +59,11 @@ body {
     overflow-x: auto;
   }
 
-  .movie__37UeZ {
+  .movie__1J1je {
     margin: 10px;
   }
 }
-.movie__3Ry7w {
+.movie__VOWcO {
   padding: 10px;
   color: white;
   background-size: cover;
@@ -71,7 +71,7 @@ body {
   background-position: center center;
 }
 
-.cover__1xFmZ {
+.cover__Nly2p {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -88,36 +88,36 @@ body {
   background-repeat: no-repeat;
 }
 
-.description__3UyaW {
+.description__3yeoq {
   width: 100%;
   margin: 10px;
 }
 
-.title__2GhK8 {
+.title__2aBIx {
   font-size: 40px;
   font-weight: 600;
   line-height: 1.15;
   color: rgba(255, 255, 255, 0.825);
 }
 
-.year__DT3Gh {
+.year__35Bhg {
   font-size: 16px;
   font-style: italic;
   line-height: 1.565;
   color: rgba(255, 255, 255, 0.325);
 }
 
-.starring__1V7GN {
+.starring__3qkLG {
   margin: 20px 0 0;
 }
 
-.actor__3_SZ9 {
+.actor__2T0uT {
   margin: 10px 0 0;
   font-size: 16px;
   line-height: 1;
 }
 
-.closeButton__1ROrN {
+.closeButton__3-CaH {
   display: block;
   padding: 10px 25px 10px 35px;
   font-size: 20px;
@@ -128,7 +128,7 @@ body {
 }
 
 @media (min-width: 667px) {
-  .movie__3Ry7w {
+  .movie__VOWcO {
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: nowrap;

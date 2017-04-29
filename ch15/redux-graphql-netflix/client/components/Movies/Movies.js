@@ -4,9 +4,9 @@ const { Link } = require('react-router')
 const axios = require('axios')
 const clean = require('clean-tagged-string').default
 const {
-  fetchedMovies
-} = require('modules/movies')
-const styles = require('./Movies.css')
+  fetchMoviesActionCreator
+} = require('modules/movies.js')
+const styles = require('./movies.css')
 
 class Movies extends React.Component {
   componentWillMount() {
@@ -18,7 +18,7 @@ class Movies extends React.Component {
     }`
 
     axios.get(`/q?query=${query}`).then(response => {
-      this.props.fetchedMovies(response)
+      this.props.fetchMovies(response)
     })
   }
 
@@ -51,5 +51,5 @@ class Movies extends React.Component {
 module.exports = connect(({movies}) => ({
   movies: movies.all
 }), {
-  fetchedMovies
+  fetchMovies: fetchMoviesActionCreator
 })(Movies)

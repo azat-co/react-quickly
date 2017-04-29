@@ -2,9 +2,9 @@ const React = require('react')
 const { connect } = require('react-redux')
 const { Link } = require('react-router')
 const {
-  fetchMovie
-} = require('modules/movies')
-const styles = require('./Movie.css')
+  fetchMovieActionCreator
+} = require('modules/movies.js')
+const styles = require('./movie.css')
 
 class Movie extends React.Component {
   componentWillMount() {
@@ -57,5 +57,5 @@ class Movie extends React.Component {
 module.exports = connect(({movies}) => ({
   movie: movies.current
 }), {
-  fetchMovie
+  fetchMovie: fetchMovieActionCreator
 })(Movie)

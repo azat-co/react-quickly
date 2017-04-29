@@ -3,9 +3,9 @@ const { connect } = require('react-redux')
 const { Link } = require('react-router')
 const movies = require('../../movies.json')
 const {
-  fetchMovies
-} = require('modules/movies')
-const styles = require('./Movies.css')
+  fetchMoviesActionCreator
+} = require('modules/movies.js')
+const styles = require('./movies.css')
 
 class Movies extends React.Component {
   componentWillMount() {
@@ -49,5 +49,5 @@ class Movies extends React.Component {
 module.exports = connect(({movies}) => ({
   movies: movies.all
 }), {
-  fetchMovies
+  fetchMovies: fetchMoviesActionCreator
 })(Movies)

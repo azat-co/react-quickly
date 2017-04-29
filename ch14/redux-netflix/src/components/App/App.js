@@ -1,6 +1,6 @@
 const React = require('react')
 const { connect } = require('react-redux')
-const styles = require('./App.css')
+const styles = require('./app.css')
 
 class App extends React.Component {
   render() {

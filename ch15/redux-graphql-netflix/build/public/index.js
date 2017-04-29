@@ -30848,27 +30848,27 @@
 	var _require = __webpack_require__(499),
 	    handleActions = _require.handleActions;
 
-	var FETCHED_MOVIES = 'movies/FETCHED_MOVIES';
-	var FETCHED_MOVIE = 'movies/FETCHED_MOVIE';
+	var FETCH_MOVIES = 'movies/FETCH_MOVIES';
+	var FETCH_MOVIE = 'movies/FETCH_MOVIE';
 
 	module.exports = {
-	  fetchedMovies: function fetchedMovies(response) {
+	  fetchMoviesActionCreator: function fetchMoviesActionCreator(response) {
 	    return {
-	      type: FETCHED_MOVIES,
+	      type: FETCH_MOVIES,
 	      movies: response.data.data.movies
 	    };
 	  },
-	  fetchedMovie: function fetchedMovie(response) {
+	  fetchMovieActionCreator: function fetchMovieActionCreator(response) {
 	    return {
-	      type: FETCHED_MOVIE,
+	      type: FETCH_MOVIE,
 	      movie: response.data.data.movie
 	    };
 	  },
-	  reducer: handleActions((_handleActions = {}, _defineProperty(_handleActions, FETCHED_MOVIES, function (state, action) {
+	  reducer: handleActions((_handleActions = {}, _defineProperty(_handleActions, FETCH_MOVIES, function (state, action) {
 	    return _extends({}, state, {
 	      all: action.movies
 	    });
-	  }), _defineProperty(_handleActions, FETCHED_MOVIE, function (state, action) {
+	  }), _defineProperty(_handleActions, FETCH_MOVIE, function (state, action) {
 	    return _extends({}, state, {
 	      current: action.movie
 	    });
@@ -36705,7 +36705,7 @@
 	var clean = __webpack_require__(595).default;
 
 	var _require3 = __webpack_require__(498),
-	    fetchedMovies = _require3.fetchedMovies;
+	    fetchMoviesActionCreator = _require3.fetchMoviesActionCreator;
 
 	var styles = __webpack_require__(598);
 
@@ -36726,7 +36726,7 @@
 	      var query = clean(_templateObject);
 
 	      axios.get('/q?query=' + query).then(function (response) {
-	        _this2.props.fetchedMovies(response);
+	        _this2.props.fetchMovies(response);
 	      });
 	    }
 	  }, {
@@ -36772,7 +36772,7 @@
 	    movies: movies.all
 	  };
 	}, {
-	  fetchedMovies: fetchedMovies
+	  fetchMovies: fetchMoviesActionCreator
 	})(Movies);
 
 /***/ },
@@ -55273,7 +55273,7 @@
 	var clean = __webpack_require__(595).default;
 
 	var _require3 = __webpack_require__(498),
-	    fetchedMovie = _require3.fetchedMovie;
+	    fetchMovieActionCreator = _require3.fetchMovieActionCreator;
 
 	var styles = __webpack_require__(601);
 
@@ -55308,7 +55308,7 @@
 	      var query = clean(_templateObject, id);
 
 	      axios.get('/q?query=' + query).then(function (response) {
-	        _this2.props.fetchedMovie(response);
+	        _this2.props.fetchMovie(response);
 	      });
 	    }
 	  }, {
@@ -55377,7 +55377,7 @@
 	    movie: movies.current
 	  };
 	}, {
-	  fetchedMovie: fetchedMovie
+	  fetchMovie: fetchMovieActionCreator
 	})(Movie);
 
 /***/ },

@@ -31013,13 +31013,13 @@
 	var FETCH_MOVIE = 'movies/FETCH_MOVIE';
 
 	module.exports = {
-	  fetchMovies: function fetchMovies(movies) {
+	  fetchMoviesActionCreator: function fetchMoviesActionCreator(movies) {
 	    return {
 	      type: FETCH_MOVIES,
 	      movies: movies
 	    };
 	  },
-	  fetchMovie: function fetchMovie(index) {
+	  fetchMovieActionCreator: function fetchMovieActionCreator(index) {
 	    return {
 	      type: FETCH_MOVIE,
 	      index: index
@@ -31255,9 +31255,9 @@
 	    IndexRoute = _require.IndexRoute,
 	    browserHistory = _require.browserHistory;
 
-	var App = __webpack_require__(563);
-	var Movies = __webpack_require__(568);
-	var Movie = __webpack_require__(572);
+	var App = __webpack_require__(587);
+	var Movies = __webpack_require__(582);
+	var Movie = __webpack_require__(579);
 
 	module.exports = React.createElement(
 	  Router,
@@ -36813,171 +36813,19 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 563 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var React = __webpack_require__(299);
-
-	var _require = __webpack_require__(469),
-	    connect = _require.connect;
-
-	var styles = __webpack_require__(564);
-
-	var App = function (_React$Component) {
-	  _inherits(App, _React$Component);
-
-	  function App() {
-	    _classCallCheck(this, App);
-
-	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-	  }
-
-	  _createClass(App, [{
-	    key: 'render',
-	    value: function render() {
-	      var children = this.props.children;
-
-
-	      return React.createElement(
-	        'div',
-	        { className: styles.app },
-	        children
-	      );
-	    }
-	  }]);
-
-	  return App;
-	}(React.Component);
-
-	module.exports = connect()(App);
-
-/***/ },
-/* 564 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-	module.exports = {"app":"app__2oExz"};
-
-/***/ },
+/* 563 */,
+/* 564 */,
 /* 565 */,
 /* 566 */,
 /* 567 */,
-/* 568 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var React = __webpack_require__(299);
-
-	var _require = __webpack_require__(469),
-	    connect = _require.connect;
-
-	var _require2 = __webpack_require__(502),
-	    Link = _require2.Link;
-
-	var movies = __webpack_require__(569);
-
-	var _require3 = __webpack_require__(494),
-	    fetchMovies = _require3.fetchMovies;
-
-	var styles = __webpack_require__(570);
-
-	var Movies = function (_React$Component) {
-	  _inherits(Movies, _React$Component);
-
-	  function Movies() {
-	    _classCallCheck(this, Movies);
-
-	    return _possibleConstructorReturn(this, (Movies.__proto__ || Object.getPrototypeOf(Movies)).apply(this, arguments));
-	  }
-
-	  _createClass(Movies, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.props.fetchMovies(movies);
-	    }
-	    // Comment componentWillMount() and uncomment componentDidMount to use async fetch
-
-	    // componentDidMount() {
-	    //   fetch('/src/movies.json', {method: 'GET'})
-	    //     .then((response)=>{return response.json()})
-	    //     .then((movies)=>{
-	    //       this.props.fetchMovies(movies)
-	    //     })
-	    // }
-
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _props = this.props,
-	          children = _props.children,
-	          _props$movies = _props.movies,
-	          movies = _props$movies === undefined ? [] : _props$movies,
-	          _props$params = _props.params,
-	          params = _props$params === undefined ? {} : _props$params;
-
-
-	      return React.createElement(
-	        'div',
-	        { className: styles.movies },
-	        React.createElement(
-	          'div',
-	          { className: params.id ? styles.listHidden : styles.list },
-	          movies.map(function (movie, index) {
-	            return React.createElement(
-	              Link,
-	              {
-	                key: index,
-	                to: '/movies/' + (index + 1) },
-	              React.createElement('div', {
-	                className: styles.movie,
-	                style: { backgroundImage: 'url(' + movie.cover + ')' } })
-	            );
-	          })
-	        ),
-	        children
-	      );
-	    }
-	  }]);
-
-	  return Movies;
-	}(React.Component);
-
-	module.exports = connect(function (_ref) {
-	  var movies = _ref.movies;
-	  return {
-	    movies: movies.all
-	  };
-	}, {
-	  fetchMovies: fetchMovies
-	})(Movies);
-
-/***/ },
+/* 568 */,
 /* 569 */
 /***/ function(module, exports) {
 
 	module.exports = [
 		{
 			"title": "Pirates of the Caribbean: On Stranger Tides",
-			"cover": "https://upload.wikimedia.org/wikipedia/en/c/c6/On_Stranger_Tides_Poster.jpg",
+			"cover": "/images/On_Stranger_Tides_Poster.jpg",
 			"year": "2011",
 			"cost": 378.5,
 			"starring": [
@@ -37000,7 +36848,7 @@
 		},
 		{
 			"title": "Pirates of the Caribbean: At World's End",
-			"cover": "https://upload.wikimedia.org/wikipedia/en/5/5a/Pirates_AWE_Poster.jpg",
+			"cover": "/images/Pirates_AWE_Poster.jpg",
 			"year": "2007",
 			"cost": 300,
 			"starring": [
@@ -37023,7 +36871,7 @@
 		},
 		{
 			"title": "Avengers: Age of Ultron",
-			"cover": "https://upload.wikimedia.org/wikipedia/en/1/1b/Avengers_Age_of_Ultron.jpg",
+			"cover": "/images/Avengers_Age_of_Ultron.jpg",
 			"year": "2015",
 			"cost": 279.9,
 			"starring": [
@@ -37046,7 +36894,7 @@
 		},
 		{
 			"title": "John Carter",
-			"cover": "https://upload.wikimedia.org/wikipedia/en/a/aa/John_carter_poster.jpg",
+			"cover": "/images/John_carter_poster.jpg",
 			"year": "2012",
 			"cost": 263.7,
 			"starring": [
@@ -37069,7 +36917,7 @@
 		},
 		{
 			"title": "Tangled",
-			"cover": "https://upload.wikimedia.org/wikipedia/en/a/a8/Tangled_poster.jpg",
+			"cover": "/images/Tangled_poster.jpg",
 			"year": "2010",
 			"cost": 260,
 			"starring": [
@@ -37086,7 +36934,7 @@
 		},
 		{
 			"title": "Spider-Man 3",
-			"cover": "https://upload.wikimedia.org/wikipedia/en/7/7a/Spider-Man_3%2C_International_Poster.jpg",
+			"cover": "/images/Spider-Man_3%2C_International_Poster.jpg",
 			"year": "2007",
 			"cost": 258,
 			"starring": [
@@ -37109,7 +36957,7 @@
 		},
 		{
 			"title": "Harry Potter and the Half-Blood Prince",
-			"cover": "http://dramaindo.com/wp-content/uploads/2016/06/Harry-Potter-and-the-Half-Blood-Prince.jpg",
+			"cover": "/images/harry-potter-and-the-half-blood-prince.jpg",
 			"year": "2009",
 			"cost": 250,
 			"starring": [
@@ -37132,7 +36980,7 @@
 		},
 		{
 			"title": "Spectre",
-			"cover": "http://ia.media-imdb.com/images/M/MV5BMjIwNTA1MDA2Ml5BMl5BanBnXkFtZTgwNzIzMTA5NDE@._V1_SX640_SY720_.jpg",
+			"cover": "/images/MV5BMjIwNTA1MDA2Ml5BMl5BanBnXkFtZTgwNzIzMTA5NDE@._V1_SX640_SY720_.jpg",
 			"year": "2015",
 			"cost": 245,
 			"starring": [
@@ -37155,7 +37003,7 @@
 		},
 		{
 			"title": "Avatar",
-			"cover": "https://upload.wikimedia.org/wikipedia/en/b/b0/Avatar-Teaser-Poster.jpg",
+			"cover": "/images/Avatar-Teaser-Poster.jpg",
 			"year": "2009",
 			"cost": 237,
 			"starring": [
@@ -37178,7 +37026,7 @@
 		},
 		{
 			"title": "The Dark Knight Rises",
-			"cover": "https://upload.wikimedia.org/wikipedia/en/8/83/Dark_knight_rises_poster.jpg",
+			"cover": "/images/Dark_knight_rises_poster.jpg",
 			"year": "2012",
 			"cost": 230,
 			"starring": [
@@ -37202,15 +37050,16 @@
 	];
 
 /***/ },
-/* 570 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-	module.exports = {"movies":"movies__3OpEd","list":"list__2a3aq","listHidden":"listHidden__2aptA","movie":"movie__37UeZ"};
-
-/***/ },
+/* 570 */,
 /* 571 */,
-/* 572 */
+/* 572 */,
+/* 573 */,
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */,
+/* 578 */,
+/* 579 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37232,9 +37081,9 @@
 	    Link = _require2.Link;
 
 	var _require3 = __webpack_require__(494),
-	    fetchMovie = _require3.fetchMovie;
+	    fetchMovieActionCreator = _require3.fetchMovieActionCreator;
 
-	var styles = __webpack_require__(573);
+	var styles = __webpack_require__(580);
 
 	var Movie = function (_React$Component) {
 	  _inherits(Movie, _React$Component);
@@ -37323,15 +37172,181 @@
 	    movie: movies.current
 	  };
 	}, {
-	  fetchMovie: fetchMovie
+	  fetchMovie: fetchMovieActionCreator
 	})(Movie);
 
 /***/ },
-/* 573 */
+/* 580 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"movie":"movie__3Ry7w","cover":"cover__1xFmZ","description":"description__3UyaW","title":"title__2GhK8","year":"year__DT3Gh","starring":"starring__1V7GN","actor":"actor__3_SZ9","closeButton":"closeButton__1ROrN"};
+	module.exports = {"movie":"movie__VOWcO","cover":"cover__Nly2p","description":"description__3yeoq","title":"title__2aBIx","year":"year__35Bhg","starring":"starring__3qkLG","actor":"actor__2T0uT","closeButton":"closeButton__3-CaH"};
+
+/***/ },
+/* 581 */,
+/* 582 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(299);
+
+	var _require = __webpack_require__(469),
+	    connect = _require.connect;
+
+	var _require2 = __webpack_require__(502),
+	    Link = _require2.Link;
+
+	var movies = __webpack_require__(569);
+
+	var _require3 = __webpack_require__(494),
+	    fetchMoviesActionCreator = _require3.fetchMoviesActionCreator;
+
+	var styles = __webpack_require__(583);
+
+	var Movies = function (_React$Component) {
+	  _inherits(Movies, _React$Component);
+
+	  function Movies() {
+	    _classCallCheck(this, Movies);
+
+	    return _possibleConstructorReturn(this, (Movies.__proto__ || Object.getPrototypeOf(Movies)).apply(this, arguments));
+	  }
+
+	  _createClass(Movies, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.fetchMovies(movies);
+	    }
+	    // Comment componentWillMount() and uncomment componentDidMount to use async fetch
+
+	    // componentDidMount() {
+	    //   fetch('/src/movies.json', {method: 'GET'})
+	    //     .then((response)=>{return response.json()})
+	    //     .then((movies)=>{
+	    //       this.props.fetchMovies(movies)
+	    //     })
+	    // }
+
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          children = _props.children,
+	          _props$movies = _props.movies,
+	          movies = _props$movies === undefined ? [] : _props$movies,
+	          _props$params = _props.params,
+	          params = _props$params === undefined ? {} : _props$params;
+
+
+	      return React.createElement(
+	        'div',
+	        { className: styles.movies },
+	        React.createElement(
+	          'div',
+	          { className: params.id ? styles.listHidden : styles.list },
+	          movies.map(function (movie, index) {
+	            return React.createElement(
+	              Link,
+	              {
+	                key: index,
+	                to: '/movies/' + (index + 1) },
+	              React.createElement('div', {
+	                className: styles.movie,
+	                style: { backgroundImage: 'url(' + movie.cover + ')' } })
+	            );
+	          })
+	        ),
+	        children
+	      );
+	    }
+	  }]);
+
+	  return Movies;
+	}(React.Component);
+
+	module.exports = connect(function (_ref) {
+	  var movies = _ref.movies;
+	  return {
+	    movies: movies.all
+	  };
+	}, {
+	  fetchMovies: fetchMoviesActionCreator
+	})(Movies);
+
+/***/ },
+/* 583 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"movies":"movies__aAZfj","list":"list__M5T1N","listHidden":"listHidden__1iV9-","movie":"movie__1J1je"};
+
+/***/ },
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var React = __webpack_require__(299);
+
+	var _require = __webpack_require__(469),
+	    connect = _require.connect;
+
+	var styles = __webpack_require__(588);
+
+	var App = function (_React$Component) {
+	  _inherits(App, _React$Component);
+
+	  function App() {
+	    _classCallCheck(this, App);
+
+	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	  }
+
+	  _createClass(App, [{
+	    key: 'render',
+	    value: function render() {
+	      var children = this.props.children;
+
+
+	      return React.createElement(
+	        'div',
+	        { className: styles.app },
+	        children
+	      );
+	    }
+	  }]);
+
+	  return App;
+	}(React.Component);
+
+	module.exports = connect()(App);
+
+/***/ },
+/* 588 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"app":"app__d47a_"};
 
 /***/ }
 /******/ ]);
