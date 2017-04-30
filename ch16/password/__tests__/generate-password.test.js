@@ -1,4 +1,5 @@
-jest.dontMock('../js/generate-password.js')
+// For older version of Jest, turn automocking off by uncommenting the next line
+// jest.dontMock('../js/generate-password.js')
 const generatePassword = require('../js/generate-password.js')
 const pattern = /^[A-Za-z0-9\!\@\#\$\%\^\&\*\(\)\_\+\{\}\:\"\<\>\?\\|\[\]\/'\,\.\`\~]{8,16}$/
 

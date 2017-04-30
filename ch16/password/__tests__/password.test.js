@@ -1,4 +1,5 @@
-jest.autoMockOff()
+// For older version of Jest, turn automocking off by uncommenting the next line
+// jest.autoMockOff()
 
 describe('Password', function() {
   it('changes after clicking the Generate button', (done)=>{

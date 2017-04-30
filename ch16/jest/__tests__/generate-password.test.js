@@ -1,4 +1,5 @@
-jest.dontMock('../generate-password.js')
+// For older version of Jest, turn automocking off by uncommenting the next line
+// jest.dontMock('../generate-password.js')
 
 describe('method generatePassword', function(){
   var password

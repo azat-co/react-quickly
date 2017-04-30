@@ -1,5 +1,6 @@
-jest.dontMock('react')
-jest.dontMock('react-dom')
+// For older version of Jest, turn automocking off by uncommenting the next line
+// jest.dontMock('react')
+// jest.dontMock('react-dom')
 
 describe('HelloWorld', ()=>{
   const TestUtils = require('react-dom/test-utils')
