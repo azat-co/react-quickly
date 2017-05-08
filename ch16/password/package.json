@@ -18,7 +18,6 @@
   },
   "devDependencies": {
     "babel-core": "6.10.4",
-    "babel-jest": "13.2.2",
     "babel-loader": "6.4.1",
     "babel-preset-react": "6.5.0",
     "jest-cli": "19.0.2",
