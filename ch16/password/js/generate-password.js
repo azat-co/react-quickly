@@ -26,15 +26,15 @@ const shuffle = (set) => {
     let array = set.split('')
     let length = array.length
     // we reverse the iterable to get value from max to min.
-    let iterable = getIterable(length).reverse();
+    let iterable = getIterable(length).reverse()
 
     let shuffled = iterable.reduce((acc, value, index) => {
-        let randomIndex = Math.floor(Math.random() * value);
+        let randomIndex = Math.floor(Math.random() * value)
 
-        [acc[value -1], acc[randomIndex]] = [acc[randomIndex], acc[value - 1]];
+        [acc[value -1], acc[randomIndex]] = [acc[randomIndex], acc[value - 1]]
 
         return acc
-    }, [...array]);
+    }, [...array])
 
     return shuffled.join('')
 }
