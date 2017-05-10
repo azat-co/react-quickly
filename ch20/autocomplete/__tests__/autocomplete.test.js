@@ -1,5 +1,5 @@
 // jest.dontMock('../src/build/autocomplete.js')
-jest.autoMockOff()
+// jest.autoMockOff()
 
 const rooms = [
     { "_id" : "5622eb1f105807ceb6ad868b", "name" : "node" },
