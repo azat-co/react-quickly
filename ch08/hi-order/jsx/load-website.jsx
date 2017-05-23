@@ -9,7 +9,7 @@ const LoadWebsite = (Component) => {
       return 'https://facebook.github.io/react/docs/top-level-api.html'
     }
     handleClick(event) {
-      var iframe = document.getElementById('frame').src = this.getUrl()
+      document.getElementById('frame').src = getUrl()
     }
     componentDidMount() {
       console.log(ReactDOM.findDOMNode(this))
