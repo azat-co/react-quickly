@@ -1,5 +1,5 @@
 {
-  "name": "redux--graphql-netflix",
+  "name": "redux-graphql-netflix",
   "version": "1.0.0",
   "description": "A sample project in React, GraphQL, Express and Redux that copies Netflix's features and workflow",
   "main": "index.js",
