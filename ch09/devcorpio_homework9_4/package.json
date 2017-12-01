@@ -1,0 +1,22 @@
+{
+  "name": "menu-jsx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "build": "./node_modules/.bin/babel script.jsx -o script.js -w",
+    "start": "./node_modules/.bin/static"
+  },
+  "author": "Azat Mardan",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      "react"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "6.9.0",
+    "babel-preset-react": "6.5.0",
+    "node-static": "^0.7.10"
+  }
+}
