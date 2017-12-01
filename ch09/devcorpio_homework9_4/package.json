@@ -20,7 +20,7 @@
     "node-static": "^0.7.10"
   },
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
   }
 }
