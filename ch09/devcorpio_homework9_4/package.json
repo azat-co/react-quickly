@@ -18,5 +18,9 @@
     "babel-cli": "6.9.0",
     "babel-preset-react": "6.5.0",
     "node-static": "^0.7.10"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }
