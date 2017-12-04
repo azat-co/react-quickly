@@ -1,22 +1,27 @@
 const Timer = (props) => {
+  // get minutes and seconds from timeLeft in seconds
+  const minutes = Math.ceil(props.timeLeft / 60) -1;
+  const seconds = (props.timeLeft - minutes * 60) - 1;
+
   if (props.timeLeft == 0) {
     document.getElementById('end-of-time').play()
   }
   if (props.timeLeft == null || props.timeLeft == 0)
     return <div/>
-  return <h1>Time left: {props.timeLeft}</h1>
+  return <h1>Time left: {minutes}:{seconds < 10 ? '0' : ''}{seconds}</h1>
 };
 
 class Button extends React.Component {
   startTimer(event) {
     return this.props.startTimer(this.props.time)
   }
+
   render() {
     return <button
       type="button"
       className='btn-default btn'
       onClick={()=>{this.props.startTimer(this.props.time, this.props.time)}}>
-      {this.props.time} seconds
+      {this.props.time / 60} minutes
     </button>
   }
 }
@@ -68,9 +73,9 @@ class TimerWrapper extends React.Component {
       <div className="row-fluid">
         <h2>Timer</h2>
         <div className="btn-group" role="group" >
-          <Button time="5" startTimer={this.startTimer}/>
-          <Button time="10" startTimer={this.startTimer}/>
-          <Button time="15" startTimer={this.startTimer}/>
+          <Button time="300" startTimer={this.startTimer}/>
+          <Button time="600" startTimer={this.startTimer}/>
+          <Button time="900" startTimer={this.startTimer}/>
         </div>
         <Timer timeLeft={this.state.timeLeft}/>
         {this.state.timeLeft > 0 &&
