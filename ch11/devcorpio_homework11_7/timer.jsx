@@ -28,6 +28,7 @@ class TimerWrapper extends React.Component {
     this.startTimer = this.startTimer.bind(this)
     this.stopTimer = this.stopTimer.bind(this)
     this.resumeTimer = this.resumeTimer.bind(this)
+    this.cancelTimer = this.cancelTimer.bind(this)
   }
   startTimer(timeLeft) {
     clearInterval(this.state.timer)
@@ -51,6 +52,13 @@ class TimerWrapper extends React.Component {
       this.startTimer(this.state.timeLeft)
     }
   }
+  cancelTimer() {
+    clearInterval(this.state.timer)
+    this.setState({
+      timeLeft: null,
+      timer: null,
+    })
+  }
   render() {
     return (
       <div className="row-fluid">
@@ -69,6 +77,7 @@ class TimerWrapper extends React.Component {
             :
             <button className="btn-warning btn" onClick={this.stopTimer}>Pause</button>
           }
+          <button className="btn-danger btn" onClick={this.cancelTimer}>Cancel</button>
         </div>
         }
       <audio id="end-of-time" src="flute_c_long_01.wav" preload="auto"></audio>
