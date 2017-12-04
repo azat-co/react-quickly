@@ -15,7 +15,7 @@ class Button extends React.Component {
     return <button
       type="button"
       className='btn-default btn'
-      onClick={()=>{this.props.startTimer(this.props.time)}}>
+      onClick={()=>{this.props.startTimer(this.props.time, this.props.time)}}>
       {this.props.time} seconds
     </button>
   }
@@ -24,13 +24,14 @@ class Button extends React.Component {
 class TimerWrapper extends React.Component {
   constructor(props) {
     super(props)
-    this.state =  {timeLeft: null, timer: null}
+    this.state =  {timeLeft: null, timer: null, selectedTime: null}
     this.startTimer = this.startTimer.bind(this)
     this.stopTimer = this.stopTimer.bind(this)
     this.resumeTimer = this.resumeTimer.bind(this)
     this.cancelTimer = this.cancelTimer.bind(this)
+    this.resetTimer = this.resetTimer.bind(this)
   }
-  startTimer(timeLeft) {
+  startTimer(timeLeft, originalTime) {
     clearInterval(this.state.timer)
     let timer = setInterval(() => {
       console.log('2: Inside of setInterval')
@@ -38,8 +39,8 @@ class TimerWrapper extends React.Component {
       if (timeLeft == 0) clearInterval(timer)
       this.setState({timeLeft: timeLeft})
     }, 1000)
-    console.log('1: After setInterval')
-    return this.setState({timeLeft: timeLeft, timer: timer})
+    let selectedTime = originalTime ? originalTime : this.state.selectedTime
+    return this.setState({timeLeft: timeLeft, timer: timer, selectedTime: selectedTime})
   }
   stopTimer() {
     clearInterval(this.state.timer)
@@ -58,6 +59,9 @@ class TimerWrapper extends React.Component {
       timeLeft: null,
       timer: null,
     })
+  }
+  resetTimer() {
+    this.startTimer(this.state.selectedTime)
   }
   render() {
     return (
@@ -78,6 +82,7 @@ class TimerWrapper extends React.Component {
             <button className="btn-warning btn" onClick={this.stopTimer}>Pause</button>
           }
           <button className="btn-danger btn" onClick={this.cancelTimer}>Cancel</button>
+          <button className="btn-primary btn" onClick={this.resetTimer}>Reset</button>
         </div>
         }
       <audio id="end-of-time" src="flute_c_long_01.wav" preload="auto"></audio>
