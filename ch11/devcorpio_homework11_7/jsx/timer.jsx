@@ -1,32 +1,3 @@
-const Timer = (props) => {
-  // get minutes and seconds from timeLeft in seconds
-  const minutes = Math.ceil(props.timeLeft / 60) -1
-  const seconds = (props.timeLeft - minutes * 60) - 1
-
-  if (props.timeLeft == 0) {
-    const timerEndedEvent = new CustomEvent('timerEnded', {})
-    dispatchEvent(timerEndedEvent)
-  }
-  if (props.timeLeft == null || props.timeLeft == 0)
-    return <div/>
-  return <h1>Time left: {minutes}:{seconds < 10 ? '0' : ''}{seconds}</h1>
-}
-
-class Button extends React.Component {
-  startTimer(event) {
-    return this.props.startTimer(this.props.time)
-  }
-
-  render() {
-    return <button
-      type="button"
-      className='btn-default btn'
-      onClick={()=>{this.props.startTimer(this.props.time, this.props.time)}}>
-      {this.props.time / 60} minutes
-    </button>
-  }
-}
-
 class TimerWrapper extends React.Component {
   constructor(props) {
     super(props)
@@ -69,12 +40,7 @@ class TimerWrapper extends React.Component {
   resetTimer() {
     this.startTimer(this.state.selectedTime)
   }
-  handleTimerEnded() {
-    document.getElementById('end-of-time').play()
-  }
-  componentDidMount() {
-    window.addEventListener('timerEnded', this.handleTimerEnded)
-  }
+
   render() {
     return (
       <div className="row-fluid">
@@ -97,7 +63,7 @@ class TimerWrapper extends React.Component {
           <button className="btn-primary btn" onClick={this.resetTimer}>Reset</button>
         </div>
         }
-      <audio id="end-of-time" src="flute_c_long_01.wav" preload="auto"></audio>
+      <TimerSound />
       </div>
     )
   }

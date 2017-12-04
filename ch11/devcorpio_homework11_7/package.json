@@ -4,7 +4,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "build": "./node_modules/.bin/babel timer.jsx -o timer.js -w"
+    "build": "./node_modules/.bin/babel jsx -d js -w"
   },
   "author": "Azat Mardan",
   "license": "MIT",
