@@ -1,15 +1,16 @@
 const Timer = (props) => {
   // get minutes and seconds from timeLeft in seconds
-  const minutes = Math.ceil(props.timeLeft / 60) -1;
-  const seconds = (props.timeLeft - minutes * 60) - 1;
+  const minutes = Math.ceil(props.timeLeft / 60) -1
+  const seconds = (props.timeLeft - minutes * 60) - 1
 
   if (props.timeLeft == 0) {
-    document.getElementById('end-of-time').play()
+    const timerEndedEvent = new CustomEvent('timerEnded', {})
+    dispatchEvent(timerEndedEvent)
   }
   if (props.timeLeft == null || props.timeLeft == 0)
     return <div/>
   return <h1>Time left: {minutes}:{seconds < 10 ? '0' : ''}{seconds}</h1>
-};
+}
 
 class Button extends React.Component {
   startTimer(event) {
@@ -67,6 +68,12 @@ class TimerWrapper extends React.Component {
   }
   resetTimer() {
     this.startTimer(this.state.selectedTime)
+  }
+  handleTimerEnded() {
+    document.getElementById('end-of-time').play()
+  }
+  componentDidMount() {
+    window.addEventListener('timerEnded', this.handleTimerEnded)
   }
   render() {
     return (
