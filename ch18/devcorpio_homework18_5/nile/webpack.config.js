@@ -1,7 +1,7 @@
 module.exports = {
-  entry: "./jsx/app.jsx",
+  entry: "./client/jsx/app.jsx",
   output: {
-    path: __dirname + '/js',
+    path: __dirname + '/dist/js',
     filename: "bundle.js"
   },
   devtool: '#sourcemap',

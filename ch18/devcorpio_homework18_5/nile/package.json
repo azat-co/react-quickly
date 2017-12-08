@@ -32,5 +32,8 @@
     "react-router": "2.8.0",
     "webpack": "2.4.1",
     "webpack-dev-server": "1.14.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
   }
 }
