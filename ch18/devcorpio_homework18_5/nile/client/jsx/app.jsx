@@ -1,6 +1,6 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
-const { hashHistory,
+const { browserHistory,
   Router,
   Route,
   IndexRoute,
@@ -33,7 +33,7 @@ const addToCart = (id) => {
 }
 
 ReactDOM.render((
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={Layout}>
       <IndexRoute component={Index} products={PRODUCTS}/>
       <Route path="/products/:id" component={Product}
