@@ -7,14 +7,12 @@
   "license": "MIT",
   "scripts": {
     "build": "node ./node_modules/webpack/bin/webpack.js -w",
-    "start": "concurrently \"npm run build\" \"node server/index.js\""
+    "start": "concurrently \"npm run build\" \"node server/index.js\"",
+    "test": "jest"
   },
   "babel": {
-    "plugins": [
-      "transform-react-jsx"
-    ],
     "presets": [
-      "es2015"
+      "react","es2015"
     ],
     "ignore": [
       "js/bundle.js",
@@ -23,11 +21,13 @@
   },
   "devDependencies": {
     "babel-core": "6.3.21",
+    "babel-jest": "^21.2.0",
     "babel-loader": "6.4.1",
-    "babel-plugin-transform-react-jsx": "6.3.13",
     "babel-preset-es2015": "6.3.13",
+    "babel-preset-react": "^6.24.1",
     "concurrently": "^3.5.1",
     "history": "4.0.0",
+    "jest-cli": "^21.2.1",
     "node-mongo-seeds": "^2.3.2",
     "react": "15.5.4",
     "react-addons-test-utils": "15.2.1",
