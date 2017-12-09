@@ -26,6 +26,7 @@
     "babel-plugin-transform-react-jsx": "6.3.13",
     "babel-preset-es2015": "6.3.13",
     "history": "4.0.0",
+    "node-mongo-seeds": "^2.3.2",
     "react": "15.5.4",
     "react-addons-test-utils": "15.2.1",
     "react-dom": "15.5.4",
@@ -34,6 +35,7 @@
     "webpack-dev-server": "1.14.0"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33"
   }
 }
