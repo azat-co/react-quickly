@@ -1,6 +1,6 @@
 ### Getting started with express server
 
-`node server/index.js`
+`npm start`
 
 ### Inserting products in mongodb
 

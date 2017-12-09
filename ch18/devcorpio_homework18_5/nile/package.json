@@ -6,7 +6,8 @@
   "author": "Azat Mardan",
   "license": "MIT",
   "scripts": {
-    "build": "node ./node_modules/webpack/bin/webpack.js -w"
+    "build": "node ./node_modules/webpack/bin/webpack.js -w",
+    "start": "concurrently \"npm run build\" \"node server/index.js\""
   },
   "babel": {
     "plugins": [
@@ -25,6 +26,7 @@
     "babel-loader": "6.4.1",
     "babel-plugin-transform-react-jsx": "6.3.13",
     "babel-preset-es2015": "6.3.13",
+    "concurrently": "^3.5.1",
     "history": "4.0.0",
     "node-mongo-seeds": "^2.3.2",
     "react": "15.5.4",
@@ -35,6 +37,7 @@
     "webpack-dev-server": "1.14.0"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "express": "^4.16.2",
     "mongodb": "^2.2.33"
   }
