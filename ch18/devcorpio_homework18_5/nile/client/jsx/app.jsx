@@ -1,15 +1,13 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
 const request = require('axios')
-const { browserHistory,
-  Router,
-  Route,
-  IndexRoute,
-  Link,
-  IndexLink
-} = require('react-router')
+const ReactRouterDom = require('react-router-dom')
+const withRouter = require('react-router').withRouter
+const BrowserRouter = ReactRouterDom.BrowserRouter
+const Route = ReactRouterDom.Route
+const Switch = ReactRouterDom.Switch
 
-const Layout = require('./layout.jsx')
+const Layout = withRouter(require('./layout.jsx'))
 const Index = require('./index.jsx')
 const Cart = require('./cart.jsx')
 const Checkout = require('./checkout.jsx')
@@ -27,18 +25,26 @@ request.get('http://localhost:3000/api/products')
     }
 
     ReactDOM.render((
-      <Router history={browserHistory}>
-        <Route path="/" component={Layout}>
-          <IndexRoute component={Index} products={products}/>
-          <Route path="/products/:id" component={Product}
-                 addToCart={addToCart}
-                 products={products} />
-          <Route path="/cart" component={Cart}
-                 cartItems={cartItems} products={products}/>
-        </Route>
-        <Route path="/checkout" component={Checkout}
-               cartItems={cartItems} products={products}/>
-      </Router>
+      <BrowserRouter>
+          <div>
+            <Layout>
+              <Switch>
+                <Route path="/" exact render={(props) => (<Index products={products} {...props}/>)} />
+                <Route
+                  path="/products/:id"
+                  render={(props) => (<Product addToCart={addToCart} products={products} {...props}/>)} />
+                <Route
+                  path="/cart"
+                  render={(props) => (<Cart cartItems={cartItems} products={products} {...props} />)} />
+              </Switch>
+            </Layout>
+            <Switch>
+              <Route
+                path="/checkout"
+                render={(props) => (<Checkout cartItems={cartItems} products={products} {...props} />)} />
+            </Switch>
+          </div>
+      </BrowserRouter>
     ), document.getElementById('content'))
   })
   .catch((err) => {

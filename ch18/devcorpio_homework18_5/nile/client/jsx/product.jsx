@@ -1,7 +1,5 @@
 const React = require('react')
-const {
-  Link
-} = require('react-router')
+const Link = require('react-router-dom').Link
 
 class Product extends React.Component {
   constructor(props) {
@@ -9,17 +7,18 @@ class Product extends React.Component {
     this.handleBuy = this.handleBuy.bind(this)
   }
   handleBuy (event) {
-    this.props.route.addToCart(this.props.params.id)
+    this.props.addToCart(this.props.match.params.id)
   }
   render() {
+    const productId = this.props.match.params.id
     return (
       <div>
-        <img src={this.props.route.products[this.props.params.id].src} style={{ height: '80%' }} />
-        <p>{this.props.route.products[this.props.params.id].title}</p>
+        <img src={this.props.products[productId].src} style={{ height: '80%' }} />
+        <p>{this.props.products[productId].title}</p>
         <Link
           to={{
             pathname: `/cart`,
-            state: { productId: this.props.params.id}
+            state: { productId: productId}
           }}
           onClick={this.handleBuy}
           className="btn btn-primary">

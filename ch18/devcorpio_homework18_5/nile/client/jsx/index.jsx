@@ -1,6 +1,6 @@
 const React = require('react')
 const Copy = require('./copy')
-const { Link } = require('react-router')
+const Link = require('react-router-dom').Link
 
 class Index extends React.Component {
   render() {
@@ -9,7 +9,7 @@ class Index extends React.Component {
         <Copy/>
         <p><Link to="/cart" className="btn btn-danger">Cart</Link></p>
         <div>
-          {this.props.route.products.map(picture => (
+          {this.props.products.map(picture => (
             <Link key={picture.id}
                   to={{pathname: `/products/${picture.id}`,
                     state: { modal: true,

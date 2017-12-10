@@ -12,7 +12,8 @@
   },
   "babel": {
     "presets": [
-      "react","es2015"
+      "react",
+      "es2015"
     ],
     "ignore": [
       "js/bundle.js",
@@ -26,19 +27,22 @@
     "babel-preset-es2015": "6.3.13",
     "babel-preset-react": "^6.24.1",
     "concurrently": "^3.5.1",
-    "history": "4.0.0",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-15": "^1.0.5",
     "jest-cli": "^21.2.1",
     "node-mongo-seeds": "^2.3.2",
     "react": "15.5.4",
     "react-addons-test-utils": "15.2.1",
     "react-dom": "15.5.4",
-    "react-router": "2.8.0",
+    "react-test-renderer": "^15.5.4",
     "webpack": "2.4.1",
     "webpack-dev-server": "1.14.0"
   },
   "dependencies": {
     "axios": "^0.17.1",
     "express": "^4.16.2",
-    "mongodb": "^2.2.33"
+    "mongodb": "^2.2.33",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2"
   }
 }
