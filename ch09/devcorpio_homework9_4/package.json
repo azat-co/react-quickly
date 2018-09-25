@@ -1,0 +1,30 @@
+{
+  "name": "menu-jsx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "build": "./node_modules/.bin/babel script.jsx -o script.js -w",
+    "copy-react": "./node_modules/.bin/copyfiles -f ./node_modules/react/dist/react.js ./",
+    "copy-react-dom": "./node_modules/.bin/copyfiles -f ./node_modules/react-dom/dist/react-dom.js ./",
+    "copy": "npm run copy-react && npm run copy-react-dom",
+    "start": "npm run copy && ./node_modules/.bin/static"
+  },
+  "author": "Azat Mardan",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      "react"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "6.9.0",
+    "babel-preset-react": "6.5.0",
+    "copyfiles": "^1.2.0",
+    "node-static": "^0.7.10"
+  },
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
+}
