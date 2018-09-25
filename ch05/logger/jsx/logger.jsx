@@ -27,14 +27,14 @@ class Logger extends React.Component {
   }
   componentDidUpdate(oldProps, oldState) {
     console.log('componentDidUpdate is triggered')
-    console.log('new props: ', oldProps)
-    console.log('old props: ', oldState)
+    console.log('old props: ', oldProps)
+    console.log('old state: ', oldState)
   }
   componentWillUnmount() {
     console.log('componentWillUnmount')
   }
   render() {
-    // console.log('rendering... Display')
+    console.log('rendering... Display')
     return (
       <div>{this.props.time}</div>
     )
