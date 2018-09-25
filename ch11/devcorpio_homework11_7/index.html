@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Timer</title>
+    <script src="js/react.js" type="text/javascript"></script>
+    <script src="js/react-dom.js" type="text/javascript"></script>
+    <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="js/jquery-ui.js" type="text/javascript"></script>
+    <link href="bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="jquery-ui.css" rel="stylesheet" type="text/css"/>
+  </head>
+  <body class="container-fluid">
+    <div id="timer-app"></div>
+    <br><br>
+    <div id="slider"></div>
+  </body>
+  <script src="js/timer-button.js" type="text/javascript"></script>
+  <script src="js/timer-label.js" type="text/javascript"></script>
+  <script src="js/timer-sound.js" type="text/javascript"></script>
+  <script src="js/timer.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      $(document).ready(() => {
+        let sliderElement = $('#slider')
+        sliderElement.on('slide', (event) => {
+          event.preventDefault();
+        })
+        sliderElement.hide()
+
+        window.addEventListener('timerStarted', (event) => {
+          sliderElement.slider({
+              min: 0,
+              max: event.detail.selectedTime,
+              step: 1,
+          })
+
+          sliderElement.slider('value', (event.detail.selectedTime - event.detail.timeLeft))
+          sliderElement.show()
+        })
+
+        window.addEventListener('timeIncremented', () => {
+          sliderElement.slider('value', sliderElement.slider('value') + 1)
+        })
+
+        window.addEventListener('timerFinished', () => {
+          sliderElement.slider('value', 0)
+          sliderElement.hide()
+        })
+      })
+  </script>
+</html>
