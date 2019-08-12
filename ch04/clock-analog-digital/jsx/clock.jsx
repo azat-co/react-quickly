@@ -9,7 +9,7 @@ class Clock extends React.Component {
   launchClock() {
     setInterval(()=> {
       console.log('Updating...')
-      this.setState({currentTime: (new Date()).toLocaleString()})
+      this.setState({currentTime: (new Date()).toLocaleString('en')})
     }, 1000)
   }
   render() {
