@@ -22,7 +22,7 @@
     "express": "^4.13.1",
     "express-handlebars": "^2.0.1",
     "express-validator": "^2.13.0",
-    "mongodb": "^2.0.36",
+    "mongodb": "^3.6.1",
     "morgan": "^1.6.1",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
